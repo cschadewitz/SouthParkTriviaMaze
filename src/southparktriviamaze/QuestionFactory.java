@@ -19,6 +19,7 @@ public abstract class QuestionFactory {
 	//Throws:
 	//SQLException
 	protected abstract Question generateQuestion() throws SQLException;
+	//
 	protected abstract Question generateQuestion(String category) throws SQLException;
 	protected SQLProxy dbProxy;
 	protected ResultSet randomQuestion;
