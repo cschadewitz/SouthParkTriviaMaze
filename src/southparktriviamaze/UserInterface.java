@@ -44,12 +44,32 @@ import java.awt.Button;
 public class UserInterface {
 
 	private JFrame frame;
-	
+	private GameCore core;
+	private static String[] cheats;
+	/**
+	 * Launch the application.
+	 */
+	public static void main(String[] args) {
+		cheats = args;
+		EventQueue.invokeLater(new Runnable() {
+			public void run() {
+				try {
+					UserInterface window = new UserInterface();
+					window.frame.setVisible(true);
+				} catch (Exception e) {
+					e.printStackTrace();
+				}
+			}
+		});
+	}
+
 	/**
 	 * Create the application.
 	 */
 	public UserInterface() {
 		initialize();
+		this.frame.setVisible(true);
+		this.core = new GameCore(this, cheats);
 	}
 	/**
 	 * Initialize the contents of the frame.

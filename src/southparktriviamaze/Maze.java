@@ -232,5 +232,10 @@ public class Maze
 		return null;
 	}//end printMaze
 
+	public CellType getNeighborType(Direction direction) {
+		// TODO Auto-generated method stub
+		return CellType.Room;
+	}
+
 }//end Maze class
 
