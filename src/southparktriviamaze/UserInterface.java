@@ -36,7 +36,9 @@ import java.awt.Color;
 import java.awt.Graphics;
 import java.awt.image.BufferedImage;
 import java.io.File;
+import java.io.FileInputStream;
 import java.io.IOException;
+import java.io.InputStream;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
@@ -65,6 +67,7 @@ public class UserInterface {
 		try {		
 			
 			window = new UserInterface();
+			
 			
 			//upDateMazeData = new UpdateMaze(window);
 			
@@ -180,24 +183,27 @@ public class UserInterface {
 		 //setup font=============================================================
 		 try
 		 {
-		 Font mazeFont = Font.createFont(Font.TRUETYPE_FONT, getClass().getResource("/MazeCells.TTF").openStream());
+			// File fontFile = new File("/mazeCells");
+			 InputStream mazeF = new FileInputStream("Resources//MazeCells.TTF");
+			 
+		 Font mazeFont = Font.createFont(Font.TRUETYPE_FONT, mazeF);
 		 GraphicsEnvironment genv = GraphicsEnvironment.getLocalGraphicsEnvironment();
 		 genv.registerFont(mazeFont);
 		 // makesure to derive the size
-		 mazeFont = mazeFont.deriveFont(12f);
+		 mazeFont = mazeFont.deriveFont(50f);
 		 
 		 txtrTest.setFont((mazeFont));
 		 
 		 }
 		 catch(Exception e)
 		 {
-			 System.out.println("The font was not found");
+			 System.out.println("The font was nott found");
 			 txtrTest.setFont(new Font("Monospaced", Font.BOLD, 22));
 		 }
 		 
 		 //=======================================================================
 		 
-		 txtrTest.setFont(new Font("Monospaced", Font.BOLD, 22));
+		// txtrTest.setFont(new Font("Monospaced", Font.BOLD, 22));
 		 
 		 txtrTest.setEditable(false);
 		 txtrTest.setBounds(37, 31, 555, 324);
@@ -312,9 +318,9 @@ public class UserInterface {
 				System.out.println("test button still works!!!");	
 				
 				
-				txtrTest.setText("1110100101101001\n"
-								+"0011111000101010\n"
-								+"1010010010101000\n"
+				txtrTest.setText("5103030111011101\n"
+								+"2141114111411141\n"
+								+"0303030111030301\n"
 								+"0000011110000000\n"
 								+"0001110011100011\n"
 								+"0011000001000000\n"
@@ -381,28 +387,28 @@ public class UserInterface {
 			}
 		});
 		//=====================================================================
-		//MOVE UP
+		//MOVE North
 		btnMoveUp.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
 				txtrTest.setText(txtrTest.getText() + "\nMove UP");
 			}
 		});
 		//=====================================================================
-		//MOVE LEFT
+		//MOVE West
 		btnMoveLeft.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				txtrTest.setText(txtrTest.getText() + "\nMove LEFT");
 			}
 		});
 		//=====================================================================
-		//MOVE RIGHT
+		//MOVE East
 		btnMoveRight.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				txtrTest.setText(txtrTest.getText() + "\nMove RIGHT");
 			}
 		});
 		//====================================================================
-		//MOVE DOWN
+		//MOVE South
 		btnMoveDown.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				txtrTest.setText(txtrTest.getText() + "\nMove DOWN");
