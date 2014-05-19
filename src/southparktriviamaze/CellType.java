@@ -3,5 +3,8 @@ package southparktriviamaze;
 public enum CellType {
 	Room,
 	Wall,
-	Door;
+	Door,
+	UnlockedDoorHorz,
+	UnlockedDoorVert,
+	Player;
 }
