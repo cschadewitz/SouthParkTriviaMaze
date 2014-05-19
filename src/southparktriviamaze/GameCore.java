@@ -16,12 +16,11 @@ public class GameCore {
 		questionFactory = new RandomQuestionFactory();
 	}
 	
-	public char[][] StartGame()
+	public void StartGame()
 	{
 		map = new Maze();
-		return new char[][]();
+		window.mazeupdate(map.getMaze());
 	}
-	
 	public void Move(Direction direction)
 	{
 		Location destination;

@@ -1,4 +1,4 @@
-package maze;
+package southparktriviamaze;
 
 import java.util.ArrayList;
 import java.util.Random;
@@ -231,7 +231,24 @@ public class Maze
 		
 		return null;
 	}//end printMaze
-
+	public CellType[][] getMaze()
+	{
+		CellType[][] map = new CellType[][]{
+				{ CellType.Wall,CellType.Wall,CellType.Wall,CellType.Wall,CellType.Wall,CellType.Wall,CellType.Wall,CellType.Wall,CellType.Wall },
+				{ CellType.Wall,CellType.Room,CellType.Wall,CellType.Room,CellType.Door,CellType.Room,CellType.Wall,CellType.Room,CellType.Wall },
+				{ CellType.Wall,CellType.UnlockedDoorVert,CellType.Wall,CellType.Wall,CellType.Wall,CellType.Wall,CellType.Wall,CellType.Wall,CellType.Wall},
+				{ CellType.Wall,CellType.Room,CellType.Wall,CellType.Room,CellType.Door,CellType.Room,CellType.Wall,CellType.Room,CellType.Wall },
+				{ CellType.Wall,CellType.UnlockedDoorVert,CellType.Wall,CellType.Wall,CellType.Wall,CellType.Wall,CellType.Wall,CellType.Wall,CellType.Wall},
+				{ CellType.Wall,CellType.Room,CellType.UnlockedDoorHorz,CellType.Room,CellType.Door,CellType.Room,CellType.Wall,CellType.Room,CellType.Wall },
+				{ CellType.Wall,CellType.UnlockedDoorVert,CellType.Wall,CellType.Wall,CellType.Wall,CellType.Wall,CellType.Wall,CellType.Wall,CellType.Wall},
+				{ CellType.Wall,CellType.Room,CellType.Wall,CellType.Room,CellType.Door,CellType.Room,CellType.Wall,CellType.Room,CellType.Wall },
+				{ CellType.Wall,CellType.UnlockedDoorVert,CellType.Wall,CellType.Wall,CellType.Wall,CellType.Wall,CellType.Wall,CellType.Wall,CellType.Wall},
+				{ CellType.Wall,CellType.Wall,CellType.Wall,CellType.Wall,CellType.Wall,CellType.Wall,CellType.Wall,CellType.Wall,CellType.Wall }
+		};
+		return map;
+		
+		
+	}
 	public CellType getNeighborType(Direction direction) {
 		// TODO Auto-generated method stub
 		return CellType.Room;
