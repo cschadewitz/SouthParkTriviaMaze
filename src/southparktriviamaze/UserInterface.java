@@ -55,7 +55,6 @@ public class UserInterface {
 			public void run() {
 				try {
 					UserInterface window = new UserInterface();
-					window.frame.setVisible(true);
 				} catch (Exception e) {
 					e.printStackTrace();
 				}
