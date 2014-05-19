@@ -1,4 +1,4 @@
-package maze;
+package southparktriviamaze;
 
 /*
  * @author Chris Purta
@@ -17,23 +17,20 @@ package maze;
 public class Door {
 	
 	private boolean unlocked;
-	private boolean exists;
 	
 	public Door()
 	{
 		this.unlocked = false;
-		this.exists = false;
 	}
 	
-	public Door(boolean l, boolean e)
+	public Door(boolean l)
 	{
 		this.unlocked = l;
-		this.exists = e;
 	}
 
 	public void unlock()
 	{
-		//Need to set up a TriviaItem that tells whether or not 
+		//Need to set up a Question that tells whether or not 
 		//the question was answered correctly or incorrectly
 		this.unlocked = true;
 	}
@@ -46,13 +43,5 @@ public class Door {
 		this.unlocked = unlocked;
 	}
 
-	public boolean isExists() {
-		return exists;
-	}
-
-	public void setExists(boolean exists) {
-		this.exists = exists;
-	}
-
-}
+}//end class
 

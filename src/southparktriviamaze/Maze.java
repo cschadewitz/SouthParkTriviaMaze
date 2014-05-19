@@ -1,4 +1,4 @@
-package maze;
+package southparktriviamaze;
 
 import java.util.ArrayList;
 import java.util.Random;
@@ -20,40 +20,42 @@ public class Maze
 {
 	private Cell[][] cellMaze;
 	private int startX, startY, endX, endY;
-	private static final int rows = 10;
-	private static final int cols = 10;
+	private int rows;
+	private int cols;
 	
-	//Cell class 
+	/*
+	 * Cell class that holds the coordinates of the Cell tells whether or not 
+	 * the Cell has been visited and contains four walls that will tear down
+	 * certain walls upon creation of the maze.  
+	 */
 	private class Cell
 	{
 		private int x, y;
-		private boolean visited, northWall, southWall, eastWall, westWall;
+		private boolean visited;
+		private Room room;
 		
 		public Cell(int i, int j, boolean v)
 		{
 			this.x = i;
 			this.y = j;
 			this.visited = v;
-			this.northWall = true;
-			this.southWall = true;
-			this.eastWall = true;
-			this.westWall = true;
+			this.room = new Room();
 		}
 
-		public void setNorthWall(boolean northWall) {
-			this.northWall = northWall;
+		public void setNorthDoor() {
+			this.room.setUpperDoor(new Door());
 		}
 
-		public void setSouthWall(boolean southWall) {
-			this.southWall = southWall;
+		public void setSouthDoor() {
+			this.room.setLowerDoor(new Door());;
 		}
 
-		public void setEastWall(boolean eastWall) {
-			this.eastWall = eastWall;
+		public void setEastDoor() {
+			this.room.setRightDoor(new Door());;
 		}
 
-		public void setWestWall(boolean westWall) {
-			this.westWall = westWall;
+		public void setWestDoor() {
+			this.room.setLeftDoor(new Door());;
 		}
 
 		public int getX() {
@@ -77,13 +79,42 @@ public class Maze
 	
 	public Maze()
 	{
+		this.rows = 10;
+		this.cols = 10;
+		this.startX = 0;
+		this.startY = 0;
+		this.endX = this.rows - 1;
+		this.endY = this.cols - 1;
+		
+		this.cellMaze = new Cell[this.rows][this.cols];
+		
+		mazeGenerator();
+	}
+	
+	public Maze(int x, int y) throws Exception
+	{
+		if(x <= 1 || y <= 1)
+			throw new Exception("Row or column dimension must be larger than 1.");
+		
+		this.rows = x;
+		this.cols = y;
 		this.startX = 0;
 		this.startY = 0;
 		this.endX = rows - 1;
 		this.endY = cols - 1;
 		
-		this.cellMaze = new Cell[rows][cols];
+		this.cellMaze = new Cell[this.rows][this.cols];
+		
 		mazeGenerator();
+		
+	}
+	
+	public int getRows() {
+		return this.rows;
+	}
+	
+	public int getCols() {
+		return this.cols;
 	}
 	
 	private void mazeGenerator()
@@ -93,13 +124,13 @@ public class Maze
 		 */
 		
 		Cell curCell;
-		int totalCells = rows * cols;
+		int totalCells = this.rows * this.cols;
 		int visitedCells = 0;
 		Stack<Cell> cellStack = new Stack<Cell>();
 		Random rand = new Random();
 		ArrayList<Cell> visitedNeighbors;
 		
-		//Initialize each cell with the co-orodinates and 
+		//Initialize each cell with the co-ordinates and visited to be false 
 		for(int i = 0; i < rows; i++)
 			for(int j = 0; j < cols; j++)
 				cellMaze[i][j] = new Cell(i, j, false);
@@ -129,10 +160,10 @@ public class Maze
 			
 			else
 			{
-				curCell = cellMaze[rand.nextInt(rows)][rand.nextInt(cols)];
+				curCell = cellMaze[rand.nextInt(this.rows)][rand.nextInt(this.cols)];
 				
 				while(curCell.isVisited())
-					curCell = cellMaze[rand.nextInt(rows)][rand.nextInt(cols)];
+					curCell = cellMaze[rand.nextInt(this.rows)][rand.nextInt(this.cols)];
 				visitedCells++;
 			}//end else
 			
@@ -165,29 +196,29 @@ public class Maze
 		//Rand: Top
 		if(randCell.getY() == curCell.getY() && randCell.getX() == curCell.getX() - 1)
 		{
-			randCell.setSouthWall(false);
-			curCell.setNorthWall(false);
+			randCell.setSouthDoor();
+			curCell.setNorthDoor();
 		}//end if
 		
 		//Rand: Bottom
 		if(randCell.getY() == curCell.getY() && randCell.getX() == curCell.getX() + 1)
 		{
-			randCell.setNorthWall(false);
-			curCell.setSouthWall(false);
+			randCell.setNorthDoor();
+			curCell.setSouthDoor();
 		}//end if
 		
 		//Rand: Right
 		if(randCell.getX() == curCell.getX() && randCell.getY() == curCell.getY() + 1)
 		{
-			randCell.setWestWall(false);
-			curCell.setEastWall(false);
+			randCell.setWestDoor();
+			curCell.setEastDoor();
 		}//end if
 		
 		//Rand: Left
 		if(randCell.getX() == curCell.getX() && randCell.getY() == curCell.getY() - 1)
 		{
-			randCell.setEastWall(false);
-			curCell.setWestWall(false);
+			randCell.setEastDoor();
+			curCell.setWestDoor();
 		}//end if
 	}//end removeWalls
 
@@ -216,21 +247,6 @@ public class Maze
 		return neighbors;
 	}//end getVisitedNeighbors
 
-	public String toString()
-	{
-		/*Need to implement a toString that shows the maze in this fashion:
-		 *
-		 *	+---+---+---+
-		 *	|       |   |
-		 *	+---+   +   +
-		 *	|   |   |   |
-		 *	+   +   +   +
-		 *	|           |
-		 *	+---+---+---+ 
-		 */
-		
-		return null;
-	}//end printMaze
 
 }//end Maze class
 

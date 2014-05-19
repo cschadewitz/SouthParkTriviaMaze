@@ -1,4 +1,4 @@
-package maze;
+package southparktriviamaze;
 
 /*
  * @author Chris Purta
@@ -15,18 +15,10 @@ public class Room {
 	private Door lowerDoor;
 
 	public Room() {
-		this.leftDoor = new Door(false, false);
-		this.rightDoor = new Door(false, false);
-		this.upperDoor = new Door(false, false);
-		this.lowerDoor = new Door(false, false);
-	}
-	
-	public Room(boolean top, boolean right, boolean bottom, boolean left)
-	{
-		this.upperDoor = new Door(false, top);
-		this.rightDoor = new Door(false, right);
-		this.lowerDoor = new Door(false, bottom);
-		this.leftDoor = new Door(false, left);
+		this.leftDoor = new NullDoor();
+		this.rightDoor = new NullDoor();
+		this.upperDoor = new NullDoor();
+		this.lowerDoor = new NullDoor();
 	}
 
 	public Door getLeftDoor() {
