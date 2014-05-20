@@ -26,10 +26,7 @@ public class Door {
 
 	public void unlock()
 	{
-		//Need to set up a Question that tells whether or not 
-		//the question was answered correctly or incorrectly
-		this.unlocked = true;
-		
+		this.unlocked = true;	
 	}
 
 	public boolean isUnlocked() {

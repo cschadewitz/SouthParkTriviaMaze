@@ -151,7 +151,34 @@ public class Maze implements MazeInterface
 		else if(door.getClass().getSimpleName().equals("Door") && door.unlocked && direction == North || direction == South)
 			return UnlockedDoorHorz;
 		else 
-			return 0;
+			return Room;
+	}
+	
+	public void unlockDoor(Location location, Direction direction)
+	{
+		int x = location.getX();
+		int y = location.getY();
+		
+		Room curRoom = this.roomMaze[x][y];
+		
+		switch(direction)
+		{
+			case North: curRoom.upperDoor.unlock();
+						this.roomMaze[x - 1][y].lowerDoor.unlock();
+				break;
+				
+			case South: curRoom.lowerDoor.unlock();
+						this.roomMaze[x + 1][y].upperDoor.unlock();
+				break;
+				
+			case East:	curRoom.rightDoor.unlock();
+						this.roomMaze[x][y + 1].leftDoor.unlock();
+				break;
+			
+			case West:	curRoom.leftDoor.unlock();
+						this.roomMaze[x][y - 1].rightDoor.unlock();
+				break;
+		}//end switch
 	}
 	
 	private void mazeGenerator()
