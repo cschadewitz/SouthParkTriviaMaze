@@ -221,7 +221,7 @@ public class UserInterface {
 		// txtrTest.setFont(new Font("Monospaced", Font.BOLD, 22));
 		 
 		 txtrTest.setEditable(false);
-		 txtrTest.setBounds(37, 31, 555, 324);
+		 txtrTest.setBounds(37, 31, 800, 800);
 		 //txtrTest.set
 		 panel.add(txtrTest);
 		 

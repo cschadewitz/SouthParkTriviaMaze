@@ -6,7 +6,7 @@ public interface MazeInterface {
 	
 	public int getCols();
 	
-	public CellType getNeighborType(Location location, Direction direction);
+	public CellType getNeighborType(Location location, Direction direction) throws Exception;
 	
 	public void unlockDoor(Location location, Direction direction);
 
