@@ -144,11 +144,11 @@ public class Maze implements MazeInterface
 	{
 		if(door.getClass().getSimpleName().equals("NullDoor"))
 			return Wall;
-		else if(door.getClass().getSimpleName().equals("Door") && !door.unlocked)
+		else if(isDoor(door) && !door.unlocked)
 			return Door;
-		else if(door.getClass().getSimpleName().equals("Door") && door.unlocked && direction == West || direction == East)
+		else if(isDoor(door) && door.unlocked && direction == West || direction == East)
 			return UnlockedDoorVert;
-		else if(door.getClass().getSimpleName().equals("Door") && door.unlocked && direction == North || direction == South)
+		else if(isDoor(door) && door.unlocked && direction == North || direction == South)
 			return UnlockedDoorHorz;
 		else 
 			return Room;
@@ -179,6 +179,29 @@ public class Maze implements MazeInterface
 						this.roomMaze[x][y - 1].rightDoor.unlock();
 				break;
 		}//end switch
+	}
+	
+	public boolean[] getNeighboringRooms(int i, int j)
+	{
+		Room curRoom = this.roomMaze[i][j];
+		
+		boolean [] rooms = {false, false, false, false}; //North, South, East, West
+		
+		if(isDoor(curRoom.upperDoor))
+			rooms[0] = true;
+		else if(isDoor(curRoom.lowerDoor))
+			rooms[1] = true;
+		else if(isDoor(curRoom.rightDoor))
+			rooms[2] = true;
+		else if(isDoor(curRoom.leftDoor))
+			rooms[3] = true;
+		
+		return rooms;
+	}
+	
+	private boolean isDoor(Door door)
+	{
+		return door.getClass().getSimpleName().equals("Door");
 	}
 	
 	private void mazeGenerator()
