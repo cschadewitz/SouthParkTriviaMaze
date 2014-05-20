@@ -2,12 +2,15 @@ package southparktriviamaze;
 
 public class MazeConversion {
 	
+<<<<<<< HEAD
 	private static final char CORNER = 'C';
 	private static final char ROOM = 'R';
 	private static final char WALL = 'W';
 	private static final char LOCKEDDOOR = 'D';
 	private static final char UNLOCKEDDOOR = 'U';
 	
+=======
+>>>>>>> parent of 9ca365d... obsolete
 	private Maze maze;
 	private char[][] array;
 	
@@ -21,7 +24,11 @@ public class MazeConversion {
 		
 		this.array = initializeCharArray();
 		
+<<<<<<< HEAD
 		tearDownWallsToDoors();
+=======
+		//tearDownWallsToDoors();
+>>>>>>> parent of 9ca365d... obsolete
 				
 	}
 
@@ -31,6 +38,7 @@ public class MazeConversion {
 			{
 				if(i % 2 == 1 && j % 2 == 1)
 				{
+<<<<<<< HEAD
 					boolean neighboringRooms = this.maze.getNeighboringRooms(i/2, j/2);
 					
 					if(neighboringRooms[0])//North
@@ -44,6 +52,9 @@ public class MazeConversion {
 					
 					else if(neighboringRooms[3])//West
 						this.array[i][j - 1] = LOCKEDDOOR;
+=======
+					//removeWallsOfRoom();
+>>>>>>> parent of 9ca365d... obsolete
 				}
 				
 			}//end for j
@@ -58,17 +69,29 @@ public class MazeConversion {
 				if(i % 2 == 0)
 				{
 					if(j % 2 == 0)
+<<<<<<< HEAD
 						temp[i][j] = CORNER;
 					else
 						temp[i][j] = WALL;
+=======
+						temp[i][j] = 'C';
+					else
+						temp[i][j] = 'W';
+>>>>>>> parent of 9ca365d... obsolete
 				}//end if
 				
 				else
 				{
 					if(j % 2 == 0)
+<<<<<<< HEAD
 						temp[i][j] = WALL;
 					else
 						temp[i][j] = ROOM;
+=======
+						temp[i][j] = 'W';
+					else
+						temp[i][j] = 'R';
+>>>>>>> parent of 9ca365d... obsolete
 				}//end else
 				
 			}//end for j
