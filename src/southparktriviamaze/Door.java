@@ -8,10 +8,6 @@ package southparktriviamaze;
  * door exists. This could be potentially re-factored to a null-Door pattern by inheritance. Door will
  * set to be unlocked based upon a question that is attached to an SQLite database.
  * 
- * Work that could be done:
- * 
- * Potentially re-factor code to the null-door pattern.
- * 
  */
 
 public class Door {
@@ -33,6 +29,7 @@ public class Door {
 		//Need to set up a Question that tells whether or not 
 		//the question was answered correctly or incorrectly
 		this.unlocked = true;
+		
 	}
 
 	public boolean isUnlocked() {

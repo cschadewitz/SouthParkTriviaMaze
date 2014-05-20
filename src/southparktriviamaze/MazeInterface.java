@@ -6,6 +6,6 @@ public interface MazeInterface {
 	
 	public int getCols();
 	
-	public CellType getNeighborType(Direction direction);
+	public CellType getNeighborType(Location location, Direction direction);
 
 }

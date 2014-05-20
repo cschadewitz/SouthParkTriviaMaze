@@ -120,9 +120,38 @@ public class Maze implements MazeInterface
 		return this.cols;
 	}
 	
-	public CellType getNeighborType(Direction direction)
+	public CellType getNeighborType(Location location, Direction direction) throws new Exception
 	{
-		return 0;
+		if(location.getX() < 1 || location.getX() >= rows || location.getY() < 1 || location.getY() >= cols)
+			throw new Exception("Location out of bounds of the maze.");
+		
+		Room curRoom = roomMaze[location.getX()][location.getY()];
+		
+		switch(direction)
+		{
+			case North: return determineType(North, curRoom.upperDoor);
+				break;
+			case South: return determineType(South, curRoom.lowerDoor);
+				break;
+			case East: return determineTypr(East, curRoom.rightDoor);
+				break;
+			case West: return determineType(East, curRoom.leftDoor);
+				break;
+		}//end switch
+	}
+	
+	public CellType determineType(Direction direction, Door door)
+	{
+		if(door.getClass().getSimpleName().equals("NullDoor"))
+			return Wall;
+		else if(door.getClass().getSimpleName().equals("Door") && !door.unlocked)
+			return Door;
+		else if(door.getClass().getSimpleName().equals("Door") && door.unlocked && direction == West || direction == East)
+			return UnlockedDoorVert;
+		else if(door.getClass().getSimpleName().equals("Door") && door.unlocked && direction == North || direction == South)
+			return UnlockedDoorHorz;
+		else 
+			return 0;
 	}
 	
 	private void mazeGenerator()
@@ -172,6 +201,7 @@ public class Maze implements MazeInterface
 				
 				while(curRoom.isVisited())
 					curRoom = roomMaze[rand.nextInt(this.rows)][rand.nextInt(this.cols)];
+				
 				visitedCells++;
 			}//end else
 			
