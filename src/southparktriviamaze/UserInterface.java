@@ -58,15 +58,26 @@ import java.awt.GridBagLayout;
 //=============================
 
 public class UserInterface {
+	private GameCore core;
 	
 	public static void main(String[] args) {
 		// TODO Auto-generated method stub
 		//System.out.println("HELLO WORLD");
 		UserInterface window;
-		UpdateMaze upDateMazeData;
-		try {		
+		//UpdateMaze upDateMazeData;
+		try {	
+			
 			
 			window = new UserInterface();
+			GameCore core = new GameCore(window, args);
+			
+
+			
+			//QuestionDisplay question = new QuestionDisplay();
+			//System.out.println(question.askQuestion("I am Flying!!!!", "T", "F", null, null));
+			
+			boolean TF = QuestionDisplay.askQuestion();
+			System.out.println(TF);
 			
 			
 			//upDateMazeData = new UpdateMaze(window);
@@ -96,6 +107,7 @@ public class UserInterface {
 
 	private JFrame frame;
 	private JTextArea txtrTest;
+	//private GameCore core;
 	/**
 	 * Create the application.
 	 */
@@ -118,7 +130,9 @@ public class UserInterface {
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		frame.setVisible(true);
 		
+		//===========================================================================
 		
+
 		//==========================================================================
 		//Background picture needs to be resized
 		//JLabel temp;
@@ -210,8 +224,8 @@ public class UserInterface {
 		 //txtrTest.set
 		 panel.add(txtrTest);
 		 
-		UpdateMaze upDateMazeData = new UpdateMaze(this);
-		upDateMazeData.paintMaze(txtrTest);
+	//	UpdateMaze upDateMazeData = new UpdateMaze(this);
+	//	upDateMazeData.paintMaze(txtrTest);
 		
 		
 //		public void upMaze(int[][] maze)
@@ -355,6 +369,7 @@ public class UserInterface {
 				btnMoveDown.setVisible(true);
 				btnMoveLeft.setVisible(true);
 				btnMoveRight.setVisible(true);
+				core.startGame();
 				}
 				else if(btnNewGame.getText().compareTo("Resume") == 0)
 				{
@@ -391,6 +406,7 @@ public class UserInterface {
 		btnMoveUp.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
 				txtrTest.setText(txtrTest.getText() + "\nMove UP");
+				core.move(Direction.North);
 			}
 		});
 		//=====================================================================
@@ -398,6 +414,7 @@ public class UserInterface {
 		btnMoveLeft.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				txtrTest.setText(txtrTest.getText() + "\nMove LEFT");
+				core.move(Direction.West);
 			}
 		});
 		//=====================================================================
@@ -405,6 +422,7 @@ public class UserInterface {
 		btnMoveRight.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				txtrTest.setText(txtrTest.getText() + "\nMove RIGHT");
+				core.move(Direction.East);
 			}
 		});
 		//====================================================================
@@ -412,6 +430,7 @@ public class UserInterface {
 		btnMoveDown.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				txtrTest.setText(txtrTest.getText() + "\nMove DOWN");
+				core.move(Direction.South);
 			}
 		});
 	}
@@ -439,47 +458,47 @@ public class UserInterface {
 	
 	
 
-	class UpdateMaze
-	{
-		
-		private UserInterface mazeDisplay;
-		private int[][] maze;// = new int[2][2];
-		
-		public UpdateMaze(UserInterface mazeDisplay)
-		{
-			this.mazeDisplay = mazeDisplay;
-		}
-		
-		public void mazeData(int[][] maze)
-		{
-			this.maze = maze;
-		}
-		
-		
-		
-		public void paintMaze(final JTextArea txtrTest)
-		{
-			try
-			{
-			txtrTest.setText("");
-			for(int i=0; i<maze.length; i++)
-			{
-				for(int j=0; j<maze[i].length; j++)
-				{
-					txtrTest.setText(txtrTest.getText() + maze[i][j]);
-				}
-				txtrTest.setText(txtrTest.getText() + "\n");
-			}
-			}
-			catch(Exception e)
-			{
-				txtrTest.setText("No maze yet\n ");
-			}
-		}
-	}
-	
-
-	
+//	class UpdateMaze
+//	{
+//		
+//		private UserInterface mazeDisplay;
+//		private int[][] maze;// = new int[2][2];
+//		
+//		public UpdateMaze(UserInterface mazeDisplay)
+//		{
+//			this.mazeDisplay = mazeDisplay;
+//		}
+//		
+//		public void mazeData(int[][] maze)
+//		{
+//			this.maze = maze;
+//		}
+//		
+//		
+//		
+//		public void paintMaze(final JTextArea txtrTest)
+//		{
+//			try
+//			{
+//			txtrTest.setText("");
+//			for(int i=0; i<maze.length; i++)
+//			{
+//				for(int j=0; j<maze[i].length; j++)
+//				{
+//					txtrTest.setText(txtrTest.getText() + maze[i][j]);
+//				}
+//				txtrTest.setText(txtrTest.getText() + "\n");
+//			}
+//			}
+//			catch(Exception e)
+//			{
+//				txtrTest.setText("No maze yet\n ");
+//			}
+//		}
+//	}
+//	
+//
+//	
 }
 
 
