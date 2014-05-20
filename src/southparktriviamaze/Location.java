@@ -16,6 +16,12 @@ public class Location {
 	{
 		return y;
 	}
+	public Location convertToCondensed()
+	{
+		Location temp = new Location(
+		this.x/2 + 1, this.y/2 + 1);
+		return temp;
+	}
 	public Location add(Location vectorEndPoint)
 	{
 		Location temp = new Location(
@@ -31,10 +37,10 @@ public class Location {
 	{
 		switch(direction)
 		{
-			case North: return new Location(-1, 0);						
-			case East: return new Location(0, 1);
-			case South: return new Location(1, 0);
-			case West: return new Location(0, -1);
+			case North: return new Location(-2, 0);						
+			case East: return new Location(0, 2);
+			case South: return new Location(2, 0);
+			case West: return new Location(0, -2);
 			default: return vectorZero();
 			
 		}

@@ -1,6 +1,6 @@
 package southparktriviamaze;
 
-public class QuestionDisplay implements DisplayQuestion{
+public class QuestionDisplay /*implements DisplayQuestion*/{
 	
 
 	public static Boolean askQuestion()

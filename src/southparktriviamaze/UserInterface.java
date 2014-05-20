@@ -59,6 +59,7 @@ import java.awt.GridBagLayout;
 
 public class UserInterface {
 	private GameCore core;
+	private static String[] cheats;
 	
 	public static void main(String[] args) {
 		// TODO Auto-generated method stub
@@ -69,15 +70,14 @@ public class UserInterface {
 			
 			
 			window = new UserInterface();
-			GameCore core = new GameCore(window, args);
+			cheats = args;
 			
 
 			
 			//QuestionDisplay question = new QuestionDisplay();
 			//System.out.println(question.askQuestion("I am Flying!!!!", "T", "F", null, null));
 			
-			boolean TF = QuestionDisplay.askQuestion();
-			System.out.println(TF);
+			
 			
 			
 			//upDateMazeData = new UpdateMaze(window);
@@ -113,6 +113,7 @@ public class UserInterface {
 	 */
 	public UserInterface() {
 		initialize();
+		core = new GameCore(this, cheats);
 	}
 	
 

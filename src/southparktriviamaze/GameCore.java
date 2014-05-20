@@ -9,6 +9,7 @@ public class GameCore {
 	private Maze map;
 	private Location player;
 	private String[] cheats;
+	private MazeConversion mapConverter;
 	
 	public GameCore(UserInterface userWindow, String[] cheats)
 	{
@@ -16,29 +17,37 @@ public class GameCore {
 		questionFactory = new RandomQuestionFactory();
 	}
 	
-	public void StartGame()
+	public void startGame()
 	{
 		map = new Maze();
-		window.mazeupdate(map.getMaze());
+		mapConverter = new MazeConversion(map);
+		window.mazeupdate(mapConverter.printCharMaze());
 	}
-	public void Move(Direction direction)
+	public void move(Direction direction)
 	{
 		Location destination;
 		destination = player.neighbor(direction);
-		switch(map.getNeighborType(direction))
+		switch(map.getNeighborType(player.convertToCondensed(), direction))
 		{
 			case Room: player = destination;
 				//Update map display
 				break;
 			case Wall: //Display message
 				break;
-			case Door: if(true/*Display Question answered correctly*/)
+			case Door: if(QuestionDisplay.askQuestion())
 						{
+							map.unlockDoor(player.convertToCondensed(), direction);
 							player = destination;
-							//Update map display
+							window.mazeupdate(maze);
 							
 						}
-				break;					
+				break;	
+			case UnlockedDoorHorz: player = destination;
+				break;
+			case UnlockedDoorVert: player = destination;
+				break;
+			case Player://Impossible
+				break;
 		}
 	}
 
