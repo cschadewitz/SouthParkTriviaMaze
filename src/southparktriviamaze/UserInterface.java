@@ -205,7 +205,7 @@ public class UserInterface {
 		 GraphicsEnvironment genv = GraphicsEnvironment.getLocalGraphicsEnvironment();
 		 genv.registerFont(mazeFont);
 		 // makesure to derive the size
-		 mazeFont = mazeFont.deriveFont(50f);
+		 mazeFont = mazeFont.deriveFont(65f);
 		 
 		 txtrTest.setFont((mazeFont));
 		 
@@ -213,7 +213,7 @@ public class UserInterface {
 		 catch(Exception e)
 		 {
 			 System.out.println("The font was nott found");
-			 txtrTest.setFont(new Font("Monospaced", Font.BOLD, 22));
+			 txtrTest.setFont(new Font("Monospaced", Font.BOLD, 75));
 		 }
 		 
 		 //=======================================================================
@@ -221,7 +221,7 @@ public class UserInterface {
 		// txtrTest.setFont(new Font("Monospaced", Font.BOLD, 22));
 		 
 		 txtrTest.setEditable(false);
-		 txtrTest.setBounds(37, 31, 800, 800);
+		 txtrTest.setBounds(37, 31, 1000, 1000);
 		 //txtrTest.set
 		 panel.add(txtrTest);
 		 
