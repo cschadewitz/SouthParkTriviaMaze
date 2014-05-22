@@ -20,11 +20,16 @@ public class GameCore {
 	
 	public void startGame()
 	{
-		map = new Maze();
+		try {
+			map = new Maze(3, 3);
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 		player = new Location(1, 1);
 		mapConverter = new MazeConversion(map);
 		int[][] array = mapConverter.convertedMaze();
-		array[player.getX()][ player.getY()] = 5;
+		array[player.getRow()][ player.getColumn()] = 5;
 		window.mazeupdate(array);
 	}
 	public void move(Direction direction)
@@ -45,7 +50,7 @@ public class GameCore {
 
 							mapConverter = new MazeConversion(map);
 							int[][] array = mapConverter.convertedMaze();
-							array[player.getX()][ player.getY()] = 5;
+							array[player.getRow()][ player.getColumn()] = 5;
 							window.mazeupdate(array);
 							
 						}
@@ -53,13 +58,13 @@ public class GameCore {
 			case UnlockedDoorHorz: player = destination;
 				mapConverter = new MazeConversion(map);
 				int[][] array = mapConverter.convertedMaze();
-				array[player.getX()][ player.getY()] = 5;
+				array[player.getRow()][ player.getColumn()] = 5;
 				window.mazeupdate(array);
 				break;
 			case UnlockedDoorVert: player = destination;
 				mapConverter = new MazeConversion(map);
 				int[][] array1 = mapConverter.convertedMaze();
-				array1[player.getX()][ player.getY()] = 5;
+				array1[player.getRow()][ player.getColumn()] = 5;
 				window.mazeupdate(array1);
 				break;
 			case Player://Impossible

@@ -1,32 +1,33 @@
 package southparktriviamaze;
 
 public class Location {
-	private int x;
-	private int y;
-	public Location(int x, int y)
+	private int column;
+	private int row;
+	public Location(int row, int column)
 	{
-		this.x = x;
-		this.y = y;
+		this.column = column;
+		this.row = row;
 	}
-	public int getX()
+	public int getColumn()
 	{
-		return x;
+		return column;
 	}
-	public int getY()
+	public int getRow()
 	{
-		return y;
+		return row;
 	}
 	public Location convertToCondensed()
 	{
 		Location temp = new Location(
-		this.x/2 + 1, this.y/2 + 1);
+		this.row/2 + 1, this.column/2 + 1);
 		return temp;
 	}
 	public Location add(Location vectorEndPoint)
 	{
-		Location temp = new Location(
-		this.x + vectorEndPoint.x, 
-		this.y + vectorEndPoint.y);
+		Location temp = new Location( 
+				this.row + vectorEndPoint.row,
+				this.column + vectorEndPoint.column
+		);
 		return temp;
 	}
 	public Location neighbor(Direction direction)
