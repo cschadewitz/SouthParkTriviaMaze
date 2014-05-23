@@ -120,38 +120,35 @@ public class Maze implements MazeInterface
 		return this.cols;
 	}
 	
-	public CellType getNeighborType(Location location, Direction direction) throws new Exception
+	public CellType getNeighborType(Location location, Direction direction)
 	{
-		if(location.getX() < 1 || location.getX() >= rows || location.getY() < 1 || location.getY() >= cols)
-			throw new Exception("Location out of bounds of the maze.");
+		//if(location.getX() < 1 || location.getX() >= rows || location.getY() < 1 || location.getY() >= cols)
+			//throw new Exception("Location out of bounds of the maze.");
 		
 		Room curRoom = roomMaze[location.getX()][location.getY()];
 		
 		switch(direction)
 		{
-			case North: return determineType(North, curRoom.upperDoor);
-				break;
-			case South: return determineType(South, curRoom.lowerDoor);
-				break;
-			case East: return determineTypr(East, curRoom.rightDoor);
-				break;
-			case West: return determineType(East, curRoom.leftDoor);
-				break;
+			case North: return determineType(direction, curRoom.upperDoor);
+			case South: return determineType(direction, curRoom.lowerDoor);
+			case East: return determineType(direction, curRoom.rightDoor);
+			case West: return determineType(direction, curRoom.leftDoor);
+			default: return CellType.Wall;
 		}//end switch
 	}
 	
 	public CellType determineType(Direction direction, Door door)
 	{
 		if(door.getClass().getSimpleName().equals("NullDoor"))
-			return Wall;
-		else if(isDoor(door) && !door.unlocked)
-			return Door;
-		else if(isDoor(door) && door.unlocked && direction == West || direction == East)
-			return UnlockedDoorVert;
-		else if(isDoor(door) && door.unlocked && direction == North || direction == South)
-			return UnlockedDoorHorz;
+			return CellType.Wall;
+		else if(isDoor(door) && !door.isUnlocked())
+			return CellType.Door;
+		else if(isDoor(door) && door.isUnlocked() && direction == Direction.West || direction == Direction.East)
+			return CellType.UnlockedDoorVert;
+		else if(isDoor(door) && door.isUnlocked() && direction == Direction.North || direction == Direction.South)
+			return CellType.UnlockedDoorHorz;
 		else 
-			return Room;
+			return CellType.Room;
 	}
 	
 	public void unlockDoor(Location location, Direction direction)
