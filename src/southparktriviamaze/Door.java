@@ -23,6 +23,11 @@ public class Door {
 	{
 		this.unlocked = l;
 	}
+	
+	public boolean isDoor()
+	{
+		return true;
+	}
 
 	public void unlock()
 	{

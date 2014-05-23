@@ -184,21 +184,16 @@ public class Maze implements MazeInterface
 		
 		boolean [] rooms = {false, false, false, false}; //North, South, East, West
 		
-		if(isDoor(curRoom.upperDoor))
-			rooms[0] = true;
-		else if(isDoor(curRoom.lowerDoor))
-			rooms[1] = true;
-		else if(isDoor(curRoom.rightDoor))
-			rooms[2] = true;
-		else if(isDoor(curRoom.leftDoor))
-			rooms[3] = true;
+		rooms[0] = curRoom.upperDoor.isDoor();
+		
+		rooms[1] = curRoom.lowerDoor.isDoor();
+		
+		rooms[2] = curRoom.rightDoor.isDoor();
+		
+		
+		rooms[3] = curRoom.leftDoor.isDoor();
 		
 		return rooms;
-	}
-	
-	private boolean isDoor(Door door)
-	{
-		return door.getClass().getSimpleName().equals("Door");
 	}
 	
 	private void mazeGenerator()

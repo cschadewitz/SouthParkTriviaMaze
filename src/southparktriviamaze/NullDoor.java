@@ -6,6 +6,11 @@ public class NullDoor extends Door {
 	{
 		super();
 	}
+	
+	public boolean isDoor()
+	{
+		return false;
+	}
 
 	public void unlock()
 	{

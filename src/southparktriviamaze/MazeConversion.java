@@ -36,7 +36,7 @@
 				{
 					if(i % 2 == 1 && j % 2 == 1)
 					{
-						boolean[] neighboringRooms = this.maze.getNeighboringRooms(i/2, j/2);
+						boolean[] neighboringRooms = this.maze.getNeighboringRooms(i/2, j/2);//North, South, East, West
 						
 						if(neighboringRooms[0])//North
 							this.array[i - 1][j] = LOCKEDDOOR;
