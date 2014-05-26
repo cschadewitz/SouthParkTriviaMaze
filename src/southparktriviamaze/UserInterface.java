@@ -6,16 +6,23 @@ import java.awt.EventQueue;
 
 import javax.swing.JFrame;
 import javax.swing.JButton;
+
 import java.awt.BorderLayout;
+
 import javax.swing.GroupLayout;
 import javax.swing.GroupLayout.Alignment;
 import javax.swing.LayoutStyle.ComponentPlacement;
+
 import java.awt.Component;
+
 import javax.swing.Box;
+
 import java.awt.Dimension;
+
 import javax.swing.SpringLayout;
 import javax.swing.JPanel;
 import javax.swing.JLabel;
+
 import java.awt.Font;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
@@ -29,7 +36,9 @@ import java.awt.Color;
 import java.awt.Graphics;
 import java.awt.image.BufferedImage;
 import java.io.File;
+import java.io.FileInputStream;
 import java.io.IOException;
+import java.io.InputStream;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
@@ -41,43 +50,109 @@ import javax.swing.JTextArea;
 
 import java.awt.Button;
 
+//===========================
+import java.awt.Graphics;
+import java.awt.Graphics2D;
+import java.awt.GraphicsEnvironment;
+import java.awt.GridBagLayout;
+//=============================
+
 public class UserInterface {
+	private GameCore core;
+	
+	public static void main(String[] args) {
+		// TODO Auto-generated method stub
+		//System.out.println("HELLO WORLD");
+		UserInterface window;
+		//UpdateMaze upDateMazeData;
+		try {	
+			
+			
+			window = new UserInterface();
+///			GameCore core = new GameCore(window, args);
+			
+
+			
+			//QuestionDisplay question = new QuestionDisplay();
+			//System.out.println(question.askQuestion("I am Flying!!!!", "T", "F", null, null));
+			
+//			window.toggleButttonsOff();
+//			boolean TF = QuestionDisplay.askQuestion();
+//			window.toggleButtonsOn();
+			
+//			System.out.println(TF);
+			
+			
+			//upDateMazeData = new UpdateMaze(window);
+			
+			
+			int[][] maze = new int[4][3];
+			
+			for(int i=0; i<maze.length; i++)
+			{
+				for(int j=0; j<maze[i].length; j++)
+				{
+					maze[i][j] = i+j;
+				}
+			}
+			
+			window.mazeupdate(maze);
+			                
+			
+			//upDateMazeData.mazeData(maze);
+			//window.frame.setVisible(true);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		
+	}
+	
 
 	private JFrame frame;
-	
+	private JTextArea txtrTest;
+	private JButton btnMoveDown;
+	private JButton btnMoveRight;
+	private JButton btnMoveLeft;
+	private JButton btnMoveUp;
+	private JButton btnSave;
+	private JButton btnHelp;
+	private JButton btnQuit;
+	private JButton btnTest;
+	//private GameCore core;
 	/**
 	 * Create the application.
 	 */
 	public UserInterface() {
 		initialize();
+		//QuestionDisplay.askQuestion();
 	}
+	
+
+	
 	/**
 	 * Initialize the contents of the frame.
 	 */
 	private void initialize() {
 		frame = new JFrame("Kenny's Quest");
 		frame.getContentPane().setBackground(new Color(100, 149, 237));
-		
 		frame.setBounds(0, 0, 772, 508);	//default size
 		frame.setExtendedState(JFrame.MAXIMIZED_BOTH); //sets window to full screen
 		frame.setUndecorated(true);	//removes the title bar
-		
 		frame.setResizable(false);	//prevents resizing the screen
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		
-		
 		frame.setVisible(true);
 		
-		
+		//===========================================================================
+
 		//==========================================================================
 		//Background picture needs to be resized
-		JLabel temp;
+		//JLabel temp;
 		try{
 			
 		ImageIcon image = new ImageIcon(ImageIO.read(new File("Resources/testpic1.jpg")));//the backgound picture
 		JLabel imag = new JLabel(image);
 		imag.setText("Menu");
-		temp = imag;
+		//temp = imag;
 		frame.setContentPane(imag);
 		//===========================================================================
 		}
@@ -91,10 +166,10 @@ public class UserInterface {
 		
 		//=====================================================================
 		final JButton btnNewGame = new JButton("New Game");
-		final JButton btnSave = new JButton("Save/Load");
-		final JButton btnHelp = new JButton("HELP");
+		btnSave = new JButton("Save/Load");
+		btnHelp = new JButton("HELP");
 		final JButton btnQuitGame = new JButton("Quit Game");
-		JButton btnTest = new JButton("TEST");
+		btnTest = new JButton("TEST");
 				
 		SpringLayout springLayout = new SpringLayout();
 		springLayout.putConstraint(SpringLayout.WEST, btnNewGame, 0, SpringLayout.WEST, frame.getContentPane());
@@ -122,16 +197,67 @@ public class UserInterface {
 		final JPanel panel = new JPanel();
 		panel.setVisible(false);
 		
+
+		
+		
+		
 		//========================================================================
 		// panel.add(picLabel);
 		 
-		 final JTextArea txtrTest = new JTextArea();
-		 txtrTest.setFont(new Font("Monospaced", Font.BOLD, 22));
+		 txtrTest = new JTextArea();
+		 //setup font=============================================================
+		 try
+		 {
+			// File fontFile = new File("/mazeCells");
+			 InputStream mazeF = new FileInputStream("Resources//MazeCells.TTF");
+			 
+		 Font mazeFont = Font.createFont(Font.TRUETYPE_FONT, mazeF);
+		 GraphicsEnvironment genv = GraphicsEnvironment.getLocalGraphicsEnvironment();
+		 genv.registerFont(mazeFont);
+		 // makesure to derive the size
+		 mazeFont = mazeFont.deriveFont(50f);
+		 
+		 txtrTest.setFont((mazeFont));
+		 
+		 }
+		 catch(Exception e)
+		 {
+			 System.out.println("The font was nott found");
+			 txtrTest.setFont(new Font("Monospaced", Font.BOLD, 22));
+		 }
+		 
+		 //=======================================================================
+		 
+		// txtrTest.setFont(new Font("Monospaced", Font.BOLD, 22));
 		 
 		 txtrTest.setEditable(false);
 		 txtrTest.setBounds(37, 31, 555, 324);
 		 //txtrTest.set
 		 panel.add(txtrTest);
+		 
+	//	UpdateMaze upDateMazeData = new UpdateMaze(this);
+	//	upDateMazeData.paintMaze(txtrTest);
+		
+		
+//		public void upMaze(int[][] maze)
+//		{
+//			try
+//			{
+//			txtrTest.setText("");
+//			for(int i=0; i<maze.length; i++)
+//			{
+//				for(int j=0; j<maze[i].length; j++)
+//				{
+//					txtrTest.setText(txtrTest.getText() + maze[i][j]);
+//				}
+//				txtrTest.setText(txtrTest.getText() + "\n");
+//			}
+//			}
+//			catch(Exception e)
+//			{
+//				txtrTest.setText("No maze yet\n ");
+//			}
+//		}
 		
 		
 		//========================================================================
@@ -189,27 +315,27 @@ public class UserInterface {
 		frame.getContentPane().add(lblKennysQuest);
 		
 		//=======================================================
-		try//working on loading a picture here for startup 
-		{
-		BufferedImage image = ImageIO.read(new File("Resources/testpic.jpg"));
-		JLabel picLabel = new JLabel(new ImageIcon(image));
-//		 panel.add(picLabel);
-//		 
-//		 JTextArea txtrTest = new JTextArea();
-//		 
-//		 txtrTest.setEditable(false);
-//		 txtrTest.setText("test");
-//		 txtrTest.setBounds(37, 31, 555, 302);
-//		 panel.add(txtrTest);
-		//panel.repaint();
-
-		}
-		catch(Exception e)
-		{
-			System.out.println("Failed to load picture");
-			panel.setBackground(new Color(103, 245, 34));
-		}
-		panel.repaint();
+//		try//working on loading a picture here for startup 
+//		{
+//		BufferedImage image = ImageIO.read(new File("Resources/testpic.jpg"));
+//		JLabel picLabel = new JLabel(new ImageIcon(image));
+////		 panel.add(picLabel);
+////		 
+////		 JTextArea txtrTest = new JTextArea();
+////		 
+////		 txtrTest.setEditable(false);
+////		 txtrTest.setText("test");
+////		 txtrTest.setBounds(37, 31, 555, 302);
+////		 panel.add(txtrTest);
+//		//panel.repaint();
+//
+//		}
+//		catch(Exception e)
+//		{
+//			System.out.println("Failed to load picture");
+//			panel.setBackground(new Color(103, 245, 34));
+//		}
+//		panel.repaint();
 		//=======================================================
 		//--------------Test-------------------------------------
 		btnTest.addActionListener(new ActionListener() {
@@ -217,9 +343,9 @@ public class UserInterface {
 				System.out.println("test button still works!!!");	
 				
 				
-				txtrTest.setText("1110100101101001\n"
-								+"0011111000101010\n"
-								+"1010010010101000\n"
+				txtrTest.setText("5103030111011101\n"
+								+"2141114111411141\n"
+								+"0303030111030301\n"
 								+"0000011110000000\n"
 								+"0001110011100011\n"
 								+"0011000001000000\n"
@@ -227,6 +353,8 @@ public class UserInterface {
 				
 				}
 		});
+		
+
 		//========================================================
 		//--------------Quit Game---------------------------------
 		btnQuitGame.addActionListener(new ActionListener() {
@@ -252,13 +380,14 @@ public class UserInterface {
 				btnMoveDown.setVisible(true);
 				btnMoveLeft.setVisible(true);
 				btnMoveRight.setVisible(true);
+//				core.startGame();
 				}
 				else if(btnNewGame.getText().compareTo("Resume") == 0)
 				{
 					btnNewGame.setText("Menu");
 					btnSave.setVisible(false);
 					btnHelp.setVisible(false);
-					
+				
 					btnMoveUp.setVisible(true);
 					btnMoveDown.setVisible(true);
 					btnMoveLeft.setVisible(true);
@@ -284,33 +413,136 @@ public class UserInterface {
 			}
 		});
 		//=====================================================================
-		//MOVE UP
-		btnMoveUp.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent arg0) {
+		//MOVE North
+		btnMoveUp.addActionListener(new ActionListener() 
+		{
+			public void actionPerformed(ActionEvent arg0) 
+			{
 				txtrTest.setText(txtrTest.getText() + "\nMove UP");
+//				core.move(Direction.North);
 			}
 		});
 		//=====================================================================
-		//MOVE LEFT
-		btnMoveLeft.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
+		//MOVE West
+		btnMoveLeft.addActionListener(new ActionListener()
+		{
+			public void actionPerformed(ActionEvent e) 
+			{
 				txtrTest.setText(txtrTest.getText() + "\nMove LEFT");
+//				core.move(Direction.West);
 			}
 		});
 		//=====================================================================
-		//MOVE RIGHT
-		btnMoveRight.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
+		//MOVE East
+		btnMoveRight.addActionListener(new ActionListener() 
+		{
+			public void actionPerformed(ActionEvent e)
+			{
 				txtrTest.setText(txtrTest.getText() + "\nMove RIGHT");
+				
+				boolean TF = QuestionDisplay.askQuestion();
+				
+				System.out.println(TF);
+//				core.move(Direction.East);
 			}
 		});
 		//====================================================================
-		//MOVE DOWN
-		btnMoveDown.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
+		//MOVE South
+		btnMoveDown.addActionListener(new ActionListener() 
+		{
+			public void actionPerformed(ActionEvent e) 
+			{
 				txtrTest.setText(txtrTest.getText() + "\nMove DOWN");
+//				core.move(Direction.South);
 			}
 		});
 	}
+		public void toggleButttonsOff()
+		{
+			btnMoveDown.setVisible(false);;
+			btnMoveRight.setVisible(false);;
+			btnMoveLeft.setVisible(false);;
+			btnMoveUp.setVisible(false);
+			return;
+		}
+		
+		public void toggleButtonsOn()
+		{
+			btnMoveDown.setVisible(true);;
+			btnMoveRight.setVisible(true);;
+			btnMoveLeft.setVisible(true);;
+			btnMoveUp.setVisible(true);
+			return;
+		}
+		
+		
+		public void mazeupdate(int[][] maze)
+		{
+		try
+		{
+		txtrTest.setText("");
+		for(int i=0; i<maze.length; i++)
+		{
+			for(int j=0; j<maze[i].length; j++)
+			{
+				txtrTest.setText(txtrTest.getText() + maze[i][j]);
+			}
+			txtrTest.setText(txtrTest.getText() + "\n");
+		}
+		}
+		catch(Exception e)
+		{
+			txtrTest.setText("No maze yet\n ");
+		}
+		}
+
+	
+	
+
+//	class UpdateMaze
+//	{
+//		
+//		private UserInterface mazeDisplay;
+//		private int[][] maze;// = new int[2][2];
+//		
+//		public UpdateMaze(UserInterface mazeDisplay)
+//		{
+//			this.mazeDisplay = mazeDisplay;
+//		}
+//		
+//		public void mazeData(int[][] maze)
+//		{
+//			this.maze = maze;
+//		}
+//		
+//		
+//		
+//		public void paintMaze(final JTextArea txtrTest)
+//		{
+//			try
+//			{
+//			txtrTest.setText("");
+//			for(int i=0; i<maze.length; i++)
+//			{
+//				for(int j=0; j<maze[i].length; j++)
+//				{
+//					txtrTest.setText(txtrTest.getText() + maze[i][j]);
+//				}
+//				txtrTest.setText(txtrTest.getText() + "\n");
+//			}
+//			}
+//			catch(Exception e)
+//			{
+//				txtrTest.setText("No maze yet\n ");
+//			}
+//		}
+//	}
+//	
+//
+//	
 }
 
+
+/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
