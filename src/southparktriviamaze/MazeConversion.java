@@ -24,7 +24,7 @@
 		private void convertMazeToChar() {
 			this.array = new int[2 * maze.getRows() + 1][2 * maze.getCols() + 1];
 			
-			this.array = initializeCharArray();
+			this.array = initializeIntArray();
 			
 			tearDownWallsToDoors();
 					
@@ -41,20 +41,20 @@
 						if(neighboringRooms[0])//North
 							this.array[i - 1][j] = LOCKEDDOOR;
 						
-						else if(neighboringRooms[1])//South
+						if(neighboringRooms[1])//South
 							this.array[i + 1][j] = LOCKEDDOOR;
 						
-						else if(neighboringRooms[2])//East
+						if(neighboringRooms[2])//East
 							this.array[i][j + 1] = LOCKEDDOOR;
 						
-						else if(neighboringRooms[3])//West
+						if(neighboringRooms[3])//West
 							this.array[i][j - 1] = LOCKEDDOOR;
 					}
 					
 				}//end for j
 		}
 	
-		private int[][] initializeCharArray() {
+		private int[][] initializeIntArray() {
 			int [][] temp = new int[2 * maze.getRows() + 1][2 * maze.getCols() + 1];
 			
 			for(int i = 0; i < temp.length; i++)
