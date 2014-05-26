@@ -23,7 +23,7 @@ public class GameCore {
 	public void startGame()
 	{
 		try {
-			map = new Maze(3, 3);
+			map = new Maze(4, 4);
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();

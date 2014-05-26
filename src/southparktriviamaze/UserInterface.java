@@ -58,7 +58,7 @@ import java.awt.GridBagLayout;
 //=============================
 
 public class UserInterface {
-	private GameCore core;
+	private static GameCore core;
 	
 	public static void main(String[] args) {
 		// TODO Auto-generated method stub
@@ -69,8 +69,8 @@ public class UserInterface {
 			
 			
 			window = new UserInterface();
-			GameCore core = new GameCore(window, args);
-			
+
+			core = new GameCore(window, args);
 
 			
 			//QuestionDisplay question = new QuestionDisplay();
@@ -86,18 +86,7 @@ public class UserInterface {
 			//upDateMazeData = new UpdateMaze(window);
 			
 			
-			int[][] maze = new int[4][3];
 			
-			for(int i=0; i<maze.length; i++)
-			{
-				for(int j=0; j<maze[i].length; j++)
-				{
-					maze[i][j] = i+j;
-				}
-			}
-			
-			window.mazeupdate(maze);
-			                
 			
 			//upDateMazeData.mazeData(maze);
 			//window.frame.setVisible(true);
@@ -192,7 +181,6 @@ public class UserInterface {
 		frame.getContentPane().add(btnHelp);
 		frame.getContentPane().add(btnQuitGame);
 		frame.getContentPane().add(btnTest);
-		
 		//=========================Panel start up================================
 		final JPanel panel = new JPanel();
 		panel.setVisible(false);
@@ -369,6 +357,7 @@ public class UserInterface {
 			public void actionPerformed(ActionEvent arg0)
 			{
 				System.out.println("NEW GAME!!!");
+				
 				if(btnNewGame.getText().compareTo("New Game") == 0)
 				{
 				btnNewGame.setText("Menu");
@@ -380,7 +369,7 @@ public class UserInterface {
 				btnMoveDown.setVisible(true);
 				btnMoveLeft.setVisible(true);
 				btnMoveRight.setVisible(true);
-//				core.startGame();
+				core.startGame();
 				}
 				else if(btnNewGame.getText().compareTo("Resume") == 0)
 				{
@@ -419,7 +408,7 @@ public class UserInterface {
 			public void actionPerformed(ActionEvent arg0) 
 			{
 				txtrTest.setText(txtrTest.getText() + "\nMove UP");
-//				core.move(Direction.North);
+				core.move(Direction.North);
 			}
 		});
 		//=====================================================================
@@ -429,7 +418,7 @@ public class UserInterface {
 			public void actionPerformed(ActionEvent e) 
 			{
 				txtrTest.setText(txtrTest.getText() + "\nMove LEFT");
-//				core.move(Direction.West);
+				core.move(Direction.West);
 			}
 		});
 		//=====================================================================
@@ -440,10 +429,10 @@ public class UserInterface {
 			{
 				txtrTest.setText(txtrTest.getText() + "\nMove RIGHT");
 				
-				boolean TF = QuestionDisplay.askQuestion();
+				//boolean TF = QuestionDisplay.askQuestion();
 				
 				System.out.println(TF);
-//				core.move(Direction.East);
+				core.move(Direction.East);
 			}
 		});
 		//====================================================================
@@ -453,7 +442,7 @@ public class UserInterface {
 			public void actionPerformed(ActionEvent e) 
 			{
 				txtrTest.setText(txtrTest.getText() + "\nMove DOWN");
-//				core.move(Direction.South);
+				core.move(Direction.South);
 			}
 		});
 	}
