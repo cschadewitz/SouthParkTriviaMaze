@@ -139,14 +139,14 @@ public class Maze implements MazeInterface
 	
 	public CellType determineType(Direction direction, Door door)
 	{
-		if(door.getClass().getSimpleName().equals("NullDoor"))
+		if(!door.isDoor())
 			return CellType.Wall;
 		else if(door.isDoor() && !door.isUnlocked())
 			return CellType.Door;
 		else if(door.isDoor() && door.isUnlocked() && direction == Direction.West || direction == Direction.East)
-			return CellType.UnlockedDoorVert;
-		else if(door.isDoor() && door.isUnlocked() && direction == Direction.North || direction == Direction.South)
 			return CellType.UnlockedDoorHorz;
+		else if(door.isDoor() && door.isUnlocked() && direction == Direction.North || direction == Direction.South)
+			return CellType.UnlockedDoorVert;
 		else 
 			return CellType.Room;
 	}
