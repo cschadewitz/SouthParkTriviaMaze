@@ -10,13 +10,17 @@ public class MCQuestion implements Question {
 	private String answerText;
 	private List<String> choices;
 	
-	public MCQuestion(ResultSet randomQuestion) throws SQLException{
-		this.questionText = randomQuestion.getString("QuestionText");
-		this.answerText = randomQuestion.getString("Answer");
-		this.choices.add(randomQuestion.getString("ChoiceA"));
-		this.choices.add(randomQuestion.getString("ChoiceB"));
-		this.choices.add(randomQuestion.getString("ChoiceC"));
-		this.choices.add(randomQuestion.getString("ChoiceD"));
+	public MCQuestion()
+	{
+	
+	}
+	public MCQuestion(String columnQuestionText, String columnAnswer, String columnChoiceA, String columnChoiceB, String columnChoiceC, String columnChoiceD){
+		this.questionText = columnQuestionText;
+		this.answerText = columnAnswer;
+		this.choices.add(columnChoiceA);
+		this.choices.add(columnChoiceB);
+		this.choices.add(columnChoiceC);
+		this.choices.add(columnChoiceD);
 	}	
 	@Override
 	public String getQuestionText() {
@@ -35,7 +39,3 @@ public class MCQuestion implements Question {
 		else
 			throw new IllegalArgumentException("Answer cannot be blank");		
 	}
-
-	
-
-}
