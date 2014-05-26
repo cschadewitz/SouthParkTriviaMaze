@@ -38,7 +38,7 @@ public class GameCore {
 	{
 		Location destination;
 		destination = player.neighbor(direction);
-		Question quest = new MCQuestion();
+		Question quest = new MCQuestion(questionFactory.randomQuestion);
 		switch(map.getNeighborType(player.convertToCondensed(), direction))
 		{
 			case Room: player = destination;
