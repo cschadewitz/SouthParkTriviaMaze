@@ -69,7 +69,7 @@ public class UserInterface {
 			
 			
 			window = new UserInterface();
-///			GameCore core = new GameCore(window, args);
+			GameCore core = new GameCore(window, args);
 			
 
 			
