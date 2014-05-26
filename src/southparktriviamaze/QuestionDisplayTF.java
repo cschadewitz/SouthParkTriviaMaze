@@ -1,11 +1,11 @@
 package southparktriviamaze;
 
-import java.awt.BorderLayout;
-import java.awt.EventQueue;
+//import java.awt.BorderLayout;
+//import java.awt.EventQueue;
 
 import javax.swing.JFrame;
 import javax.swing.JPanel;
-import javax.swing.border.EmptyBorder;
+//import javax.swing.border.EmptyBorder;
 import javax.swing.JTextField;
 import javax.swing.GroupLayout;
 import javax.swing.GroupLayout.Alignment;
@@ -16,6 +16,10 @@ import java.awt.event.ActionEvent;
 
 public class QuestionDisplayTF extends JFrame {
 
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
 	private JPanel contentPane;
 	private JTextField textField;
 	private JButton btnTrue;
@@ -32,6 +36,9 @@ public class QuestionDisplayTF extends JFrame {
 		contentPane = new JPanel();
 		//contentPane.setResizable(false);
 		//contentPane.setUndecorated(true);
+		this.setResizable(false);
+		this.setUndecorated(true);
+		this.setLocation(null);
 		
 		//contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		setContentPane(contentPane);
@@ -86,4 +93,10 @@ public class QuestionDisplayTF extends JFrame {
 		return answer;
 	}
 
-}
+	public static void ansReset()
+	{
+		answer = null;
+	}
+	}
+
+

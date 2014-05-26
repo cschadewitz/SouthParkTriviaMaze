@@ -69,15 +69,17 @@ public class UserInterface {
 			
 			
 			window = new UserInterface();
-			GameCore core = new GameCore(window, args);
+///			GameCore core = new GameCore(window, args);
 			
 
 			
-			//QuestionDisplay question = new QuestionDisplay();
-			//System.out.println(question.askQuestion("I am Flying!!!!", "T", "F", null, null));
 			
-			boolean TF = QuestionDisplay.askQuestion();
-			System.out.println(TF);
+//			window.toggleButttonsOff();
+			//boolean TF = QuestionDisplay.askQuestion();
+			//TF = QuestionDisplay.askQuestion();
+//			window.toggleButtonsOn();
+			
+			//System.out.println(TF);
 			
 			
 			//upDateMazeData = new UpdateMaze(window);
@@ -107,12 +109,21 @@ public class UserInterface {
 
 	private JFrame frame;
 	private JTextArea txtrTest;
+	private JButton btnMoveDown;
+	private JButton btnMoveRight;
+	private JButton btnMoveLeft;
+	private JButton btnMoveUp;
+	private JButton btnSave;
+	private JButton btnHelp;
+	private JButton btnQuit;
+	private JButton btnTest;
 	//private GameCore core;
 	/**
 	 * Create the application.
 	 */
 	public UserInterface() {
 		initialize();
+		//QuestionDisplay.askQuestion();
 	}
 	
 
@@ -131,7 +142,7 @@ public class UserInterface {
 		frame.setVisible(true);
 		
 		//===========================================================================
-		
+		//QuestionDisplay.askQuestion();
 
 		//==========================================================================
 		//Background picture needs to be resized
@@ -155,10 +166,10 @@ public class UserInterface {
 		
 		//=====================================================================
 		final JButton btnNewGame = new JButton("New Game");
-		final JButton btnSave = new JButton("Save/Load");
-		final JButton btnHelp = new JButton("HELP");
+		btnSave = new JButton("Save/Load");
+		btnHelp = new JButton("HELP");
 		final JButton btnQuitGame = new JButton("Quit Game");
-		JButton btnTest = new JButton("TEST");
+		btnTest = new JButton("TEST");
 				
 		SpringLayout springLayout = new SpringLayout();
 		springLayout.putConstraint(SpringLayout.WEST, btnNewGame, 0, SpringLayout.WEST, frame.getContentPane());
@@ -369,14 +380,14 @@ public class UserInterface {
 				btnMoveDown.setVisible(true);
 				btnMoveLeft.setVisible(true);
 				btnMoveRight.setVisible(true);
-				core.startGame();
+//				core.startGame();
 				}
 				else if(btnNewGame.getText().compareTo("Resume") == 0)
 				{
 					btnNewGame.setText("Menu");
 					btnSave.setVisible(false);
 					btnHelp.setVisible(false);
-					
+				
 					btnMoveUp.setVisible(true);
 					btnMoveDown.setVisible(true);
 					btnMoveLeft.setVisible(true);
@@ -403,37 +414,65 @@ public class UserInterface {
 		});
 		//=====================================================================
 		//MOVE North
-		btnMoveUp.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent arg0) {
+		btnMoveUp.addActionListener(new ActionListener() 
+		{
+			public void actionPerformed(ActionEvent arg0) 
+			{
 				txtrTest.setText(txtrTest.getText() + "\nMove UP");
-				core.move(Direction.North);
+//				core.move(Direction.North);
 			}
 		});
 		//=====================================================================
 		//MOVE West
-		btnMoveLeft.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
+		btnMoveLeft.addActionListener(new ActionListener()
+		{
+			public void actionPerformed(ActionEvent e) 
+			{
 				txtrTest.setText(txtrTest.getText() + "\nMove LEFT");
-				core.move(Direction.West);
+//				core.move(Direction.West);
 			}
 		});
 		//=====================================================================
 		//MOVE East
-		btnMoveRight.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
+		btnMoveRight.addActionListener(new ActionListener() 
+		{
+			public void actionPerformed(ActionEvent e)
+			{
 				txtrTest.setText(txtrTest.getText() + "\nMove RIGHT");
-				core.move(Direction.East);
+				
+				QuestionDisplayTest.question();
+//				core.move(Direction.East);
 			}
 		});
 		//====================================================================
 		//MOVE South
-		btnMoveDown.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
+		btnMoveDown.addActionListener(new ActionListener() 
+		{
+			public void actionPerformed(ActionEvent e) 
+			{
 				txtrTest.setText(txtrTest.getText() + "\nMove DOWN");
-				core.move(Direction.South);
+//				core.move(Direction.South);
 			}
 		});
 	}
+		public void toggleButttonsOff()
+		{
+			btnMoveDown.setVisible(false);;
+			btnMoveRight.setVisible(false);;
+			btnMoveLeft.setVisible(false);;
+			btnMoveUp.setVisible(false);
+			return;
+		}
+		
+		public void toggleButtonsOn()
+		{
+			btnMoveDown.setVisible(true);;
+			btnMoveRight.setVisible(true);;
+			btnMoveLeft.setVisible(true);;
+			btnMoveUp.setVisible(true);
+			return;
+		}
+		
 		
 		public void mazeupdate(int[][] maze)
 		{
