@@ -7,51 +7,20 @@ import java.util.List;
 
 public class RandomQuestionFactory extends QuestionFactory {
 	
-	protected static List<Integer> usedQuestions;
+	public RandomQuestionFactory()
+	{
+		super.dbProxy = new SQLiteDBHandler();
+	}
 	
 	@Override
 	protected Question generateQuestion() throws SQLException {
-		ResultSet randomQuestion;
-		Question returnQuestion;
-		
-		do
-		{
-			randomQuestion = super.dbProxy.getRandomQuestion();
-		}while(usedQuestions.contains(randomQuestion.getInt("QuestionID")));
-		switch(randomQuestion.getInt("Type"))
-		{
-			case 1: returnQuestion = new MCQuestion(randomQuestion);
-			break;
-			case 2: returnQuestion = new TFQuestion(randomQuestion);
-			break;
-			case 3: returnQuestion = new SAQuestion(randomQuestion);
-			break;
-			default: return null;
-		}
-		return returnQuestion;
+		return super.dbProxy.getRandomQuestion();
 	}
 
 	@Override
 	protected Question generateQuestion(String category) throws SQLException {
-		ResultSet randomQuestion;
-		Question returnQuestion;
+		return super.dbProxy.getRandomQuestion(category);
 		
-		do
-		{
-			randomQuestion = super.dbProxy.getRandomQuestion(category);
-		}while(usedQuestions.contains(randomQuestion.getInt("QuestionID")));
-
-		switch(randomQuestion.getInt("Type"))
-		{
-			case 1: returnQuestion = new MCQuestion(randomQuestion);
-			break;
-			case 2: returnQuestion = new TFQuestion(randomQuestion);
-			break;
-			case 3: returnQuestion = new SAQuestion(randomQuestion);
-			break;
-			default: return null;
-		}
-		return returnQuestion;
 	}
 
 }

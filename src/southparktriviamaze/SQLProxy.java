@@ -1,12 +1,13 @@
 package southparktriviamaze;
 
-import java.sql.ResultSet;
+
+import southparktriviamaze.Question;
 
 
 public interface SQLProxy {
 
-	public ResultSet getRandomQuestion();
-	public ResultSet getRandomQuestion(String category);
+	public Question getRandomQuestion();
+	public Question getRandomQuestion(String category);
 	
 }
 

@@ -16,10 +16,18 @@ public class Location {
 	{
 		return row;
 	}
+	public void setRow(int row)
+	{
+		this.row = row;
+	}
+	public void setColumn(int column)
+	{
+		this.column = column;
+	}
 	public Location convertToCondensed()
 	{
 		Location temp = new Location(
-		this.row/2 + 1, this.column/2 + 1);
+		this.row/2, this.column/2);
 		return temp;
 	}
 	public Location add(Location vectorEndPoint)

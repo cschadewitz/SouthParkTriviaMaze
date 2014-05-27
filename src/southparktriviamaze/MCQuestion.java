@@ -39,3 +39,4 @@ public class MCQuestion implements Question {
 		else
 			throw new IllegalArgumentException("Answer cannot be blank");		
 	}
+}

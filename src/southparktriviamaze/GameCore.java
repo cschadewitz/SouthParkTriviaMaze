@@ -2,6 +2,7 @@ package southparktriviamaze;
 
 import java.awt.EventQueue;
 import java.sql.ResultSet;
+import java.sql.SQLException;
 
 public class GameCore {
 	
@@ -23,7 +24,7 @@ public class GameCore {
 	public void startGame()
 	{
 		try {
-			map = new Maze(4, 4);
+			map = new Maze(10, 10);
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -36,39 +37,51 @@ public class GameCore {
 	}
 	public void move(Direction direction)
 	{
-		Location destination;
-		destination = player.neighbor(direction);
-		Question quest = new MCQuestion(questionFactory.randomQuestion);
+		Location destination = player.neighbor(direction);
+		CellType Q = map.getNeighborType(player.convertToCondensed(), direction);
+		
+		
 		switch(map.getNeighborType(player.convertToCondensed(), direction))
 		{
-			case Room: player = destination;
-				//Update map display
-				break;
 			case Wall: //Display message
 				break;
 			case Door: 
-						//if(QuestionDisplay.askQuestion())
-						//{
-							//map.unlockDoor(player.convertToCondensed(), direction);
-							player = destination;
-
-							mapConverter = new MazeConversion(map);
-							array = mapConverter.convertedMaze();
-							array[player.getRow()][ player.getColumn()] = 5;
-							window.mazeupdate(array);
-							
-						//}
-				break;	
-			case UnlockedDoorHorz: player = destination;
+				/*@SuppressWarnings("unused")
+				Question quest = null;
+				try {
+					quest = questionFactory.getQuestion();
+					QuestionDisplay QDB = new QuestionDisplay();
+					if( (QDB.askQuestion()))
+						return;
+				} catch (SQLException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+					return;
+				}
+				*/
 				mapConverter = new MazeConversion(map);
 				array = mapConverter.convertedMaze();
-				array[player.getRow()][ player.getColumn()] = 5;
+				array[player.getRow()][ player.getColumn()] = 0;
+				array[destination.getRow()][destination.getColumn()] =5;
+				player = destination;
+				window.mazeupdate(array);
+				break;	
+				
+			case UnlockedDoorHorz: 	
+				mapConverter = new MazeConversion(map);
+				array = mapConverter.convertedMaze();
+				array[player.getRow()][ player.getColumn()] = 0;
+				array[destination.getRow()][destination.getColumn()] =5;
+				player = destination;
 				window.mazeupdate(array);
 				break;
-			case UnlockedDoorVert: player = destination;
+				
+			case UnlockedDoorVert: 
 				mapConverter = new MazeConversion(map);
 				array = mapConverter.convertedMaze();
-				array[player.getRow()][ player.getColumn()] = 5;
+				array[player.getRow()][ player.getColumn()] = 0;
+				array[destination.getRow()][destination.getColumn()] =5;
+				player = destination;
 				window.mazeupdate(array);
 				break;
 			case Player://Impossible

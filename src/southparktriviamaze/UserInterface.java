@@ -72,6 +72,10 @@ public class UserInterface {
 
 			core = new GameCore(window, args);
 
+			core.startGame();
+			
+			txtrTest.invalidate();
+
 			
 			//QuestionDisplay question = new QuestionDisplay();
 			//System.out.println(question.askQuestion("I am Flying!!!!", "T", "F", null, null));
@@ -98,7 +102,7 @@ public class UserInterface {
 	
 
 	private JFrame frame;
-	private JTextArea txtrTest;
+	private static JTextArea txtrTest;
 	private JButton btnMoveDown;
 	private JButton btnMoveRight;
 	private JButton btnMoveLeft;
@@ -219,7 +223,7 @@ public class UserInterface {
 		// txtrTest.setFont(new Font("Monospaced", Font.BOLD, 22));
 		 
 		 txtrTest.setEditable(false);
-		 txtrTest.setBounds(37, 31, 555, 324);
+		 txtrTest.setBounds(30, 30, 850, 850);
 		 //txtrTest.set
 		 panel.add(txtrTest);
 		 
@@ -301,7 +305,6 @@ public class UserInterface {
 		springLayout.putConstraint(SpringLayout.SOUTH, lblKennysQuest, -1, SpringLayout.NORTH, btnNewGame);
 		lblKennysQuest.setFont(new Font("Pristina", Font.BOLD, 24));
 		frame.getContentPane().add(lblKennysQuest);
-		
 		//=======================================================
 //		try//working on loading a picture here for startup 
 //		{
@@ -369,7 +372,7 @@ public class UserInterface {
 				btnMoveDown.setVisible(true);
 				btnMoveLeft.setVisible(true);
 				btnMoveRight.setVisible(true);
-				core.startGame();
+				//core.startGame();
 				}
 				else if(btnNewGame.getText().compareTo("Resume") == 0)
 				{
@@ -407,7 +410,6 @@ public class UserInterface {
 		{
 			public void actionPerformed(ActionEvent arg0) 
 			{
-				txtrTest.setText(txtrTest.getText() + "\nMove UP");
 				core.move(Direction.North);
 			}
 		});
@@ -417,7 +419,6 @@ public class UserInterface {
 		{
 			public void actionPerformed(ActionEvent e) 
 			{
-				txtrTest.setText(txtrTest.getText() + "\nMove LEFT");
 				core.move(Direction.West);
 			}
 		});
@@ -427,11 +428,7 @@ public class UserInterface {
 		{
 			public void actionPerformed(ActionEvent e)
 			{
-				txtrTest.setText(txtrTest.getText() + "\nMove RIGHT");
 				
-				//boolean TF = QuestionDisplay.askQuestion();
-				
-				System.out.println(TF);
 				core.move(Direction.East);
 			}
 		});
@@ -441,7 +438,6 @@ public class UserInterface {
 		{
 			public void actionPerformed(ActionEvent e) 
 			{
-				txtrTest.setText(txtrTest.getText() + "\nMove DOWN");
 				core.move(Direction.South);
 			}
 		});
@@ -470,19 +466,22 @@ public class UserInterface {
 		try
 		{
 		txtrTest.setText("");
+		String board = "";
 		for(int i=0; i<maze.length; i++)
 		{
 			for(int j=0; j<maze[i].length; j++)
 			{
-				txtrTest.setText(txtrTest.getText() + maze[i][j]);
+				board += txtrTest.getText() + maze[i][j];
 			}
-			txtrTest.setText(txtrTest.getText() + "\n");
+			board += (txtrTest.getText() + "\n");
 		}
+		txtrTest.setText(board);
 		}
 		catch(Exception e)
 		{
 			txtrTest.setText("No maze yet\n ");
 		}
+		txtrTest.invalidate();
 		}
 
 	

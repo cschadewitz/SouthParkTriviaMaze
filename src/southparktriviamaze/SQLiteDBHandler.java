@@ -21,9 +21,9 @@ public class SQLiteDBHandler implements SQLProxy {
 	{
 		Connection conn = null;
 		Statement command = null;
-		Maze m = new Maze();
 		try {
-			Class jdbc = Class.forName("org.sqlite.JDBC");
+			Class.forName("org.sqlite.JDBC");
+			
 			conn = DriverManager.getConnection("jdbc:sqlite:Questions.sqlite");
 			conn.setAutoCommit(false);
 			System.out.println("DB opened successfully");
@@ -44,10 +44,10 @@ public class SQLiteDBHandler implements SQLProxy {
 		Connection conn = null;
 		Statement command = null;
 		ResultSet randomQuestion;
-		Question returnQuestion;
+		Question returnQuestion = null;
 		//returnQuestion = new MCQuestion(randomQuestion.getString("QuestionText"), randomQuestion.getString("Answer"), randomQuestion.getString("ChoiceA"), randomQuestion.getString("ChoiceB"), randomQuestion.getString("ChoiceC"), randomQuestion.getString("ChoiceD"));
 		try {
-			Class jdbc = Class.forName("org.sqlite.JDBC");
+			Class.forName("org.sqlite.JDBC");
 			conn = DriverManager.getConnection("jdbc:sqlite:Questions.sqlite");
 			conn.setAutoCommit(false);
 			System.out.println("DB opened successfully");
@@ -58,7 +58,7 @@ public class SQLiteDBHandler implements SQLProxy {
 			String QuestionText = randomQuestion.getString("QuestionText");
 			//while(randomQuestion.next())
 			Maze m = new Maze();
-				returnQuestion = new MCQuestion(randomQuestion.getString("QuestionText"), randomQuestion.getString("Answer"), randomQuestion.getString("ChoiceA"), randomQuestion.getString("ChoiceB"), randomQuestion.getString("ChoiceC"), randomQuestion.getString("ChoiceD"));
+			returnQuestion = new MCQuestion(randomQuestion.getString("QuestionText"), randomQuestion.getString("Answer"), randomQuestion.getString("ChoiceA"), randomQuestion.getString("ChoiceB"), randomQuestion.getString("ChoiceC"), randomQuestion.getString("ChoiceD"));
 			switch(randomQuestion.getInt("Type"))
 			{
 				case 1: //return new MCQuestion(randomQuestion);
@@ -70,7 +70,7 @@ public class SQLiteDBHandler implements SQLProxy {
 			System.err.println(e.getClass().getName() + ":" + e.getMessage());
 			System.exit(0);
 		}
-		return null;
+		return returnQuestion;
 	}
 
 	@Override
