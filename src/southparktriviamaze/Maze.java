@@ -125,7 +125,7 @@ public class Maze implements MazeInterface
 		//if(location.getX() < 1 || location.getX() >= rows || location.getY() < 1 || location.getY() >= cols)
 			//throw new Exception("Location out of bounds of the maze.");
 		
-		Room curRoom = roomMaze[location.getX()][location.getY()];
+		Room curRoom = roomMaze[location.getRow()][location.getColumn()];
 		
 		switch(direction)
 		{
@@ -153,8 +153,8 @@ public class Maze implements MazeInterface
 	
 	public void unlockDoor(Location location, Direction direction)
 	{
-		int x = location.getX();
-		int y = location.getY();
+		int x = location.getRow();
+		int y = location.getColumn();
 		
 		Room curRoom = this.roomMaze[x][y];
 		
