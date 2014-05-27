@@ -39,6 +39,7 @@ import java.io.File;
 import java.io.FileInputStream;
 import java.io.IOException;
 import java.io.InputStream;
+import java.util.concurrent.CountDownLatch;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
@@ -66,8 +67,7 @@ public class UserInterface {
 		UserInterface window;
 		//UpdateMaze upDateMazeData;
 		try {	
-			
-			
+		
 			window = new UserInterface();
 ///			GameCore core = new GameCore(window, args);
 			
@@ -76,7 +76,6 @@ public class UserInterface {
 			
 //			window.toggleButttonsOff();
 			//boolean TF = QuestionDisplay.askQuestion();
-			//TF = QuestionDisplay.askQuestion();
 //			window.toggleButtonsOn();
 			
 			//System.out.println(TF);
@@ -195,7 +194,7 @@ public class UserInterface {
 		
 		//=========================Panel start up================================
 		final JPanel panel = new JPanel();
-		panel.setVisible(false);
+		panel.setBackground(new Color(107, 142, 35));
 		
 
 		
@@ -231,9 +230,6 @@ public class UserInterface {
 		// txtrTest.setFont(new Font("Monospaced", Font.BOLD, 22));
 		 
 		 txtrTest.setEditable(false);
-		 txtrTest.setBounds(37, 31, 555, 324);
-		 //txtrTest.set
-		 panel.add(txtrTest);
 		 
 	//	UpdateMaze upDateMazeData = new UpdateMaze(this);
 	//	upDateMazeData.paintMaze(txtrTest);
@@ -271,10 +267,25 @@ public class UserInterface {
 		springLayout.putConstraint(SpringLayout.WEST, panel, 119, SpringLayout.WEST, frame.getContentPane());
 		springLayout.putConstraint(SpringLayout.EAST, panel, -26, SpringLayout.EAST, frame.getContentPane());
 		frame.getContentPane().add(panel);
-		panel.setLayout(null);
 		
 		final JButton btnMoveUp = new JButton("UP");
 		springLayout.putConstraint(SpringLayout.SOUTH, panel, -17, SpringLayout.NORTH, btnMoveUp);
+		GroupLayout gl_panel = new GroupLayout(panel);
+		gl_panel.setHorizontalGroup(
+			gl_panel.createParallelGroup(Alignment.LEADING)
+				.addGroup(gl_panel.createSequentialGroup()
+					.addGap(37)
+					.addComponent(txtrTest, GroupLayout.PREFERRED_SIZE, 412, GroupLayout.PREFERRED_SIZE)
+					.addContainerGap(178, Short.MAX_VALUE))
+		);
+		gl_panel.setVerticalGroup(
+			gl_panel.createParallelGroup(Alignment.LEADING)
+				.addGroup(gl_panel.createSequentialGroup()
+					.addGap(31)
+					.addComponent(txtrTest, GroupLayout.PREFERRED_SIZE, 335, GroupLayout.PREFERRED_SIZE)
+					.addContainerGap(GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+		);
+		panel.setLayout(gl_panel);
 		springLayout.putConstraint(SpringLayout.EAST, btnMoveUp, -97, SpringLayout.EAST, frame.getContentPane());
 		springLayout.putConstraint(SpringLayout.WEST, btnMoveUp, -182, SpringLayout.EAST, frame.getContentPane());
 		springLayout.putConstraint(SpringLayout.SOUTH, btnMoveUp, -67, SpringLayout.SOUTH, frame.getContentPane());
@@ -363,7 +374,7 @@ public class UserInterface {
 			}
 		});
 		//========================================================
-		//-------------New GAme----------------------------------
+		//-------------New Game----------------------------------
 		btnNewGame.addActionListener(new ActionListener()
 		{
 			public void actionPerformed(ActionEvent arg0)
@@ -440,7 +451,8 @@ public class UserInterface {
 			{
 				txtrTest.setText(txtrTest.getText() + "\nMove RIGHT");
 				
-				QuestionDisplayTest.question();
+				//QuestionDisplayTest.question();
+				QuestionDisplay.askQuestion();
 //				core.move(Direction.East);
 			}
 		});
@@ -455,7 +467,7 @@ public class UserInterface {
 			}
 		});
 	}
-		public void toggleButttonsOff()
+		public void toggleMoveButttonsOff()
 		{
 			btnMoveDown.setVisible(false);;
 			btnMoveRight.setVisible(false);;
@@ -464,7 +476,7 @@ public class UserInterface {
 			return;
 		}
 		
-		public void toggleButtonsOn()
+		public void toggleMoveButtonsOn()
 		{
 			btnMoveDown.setVisible(true);;
 			btnMoveRight.setVisible(true);;
@@ -472,7 +484,6 @@ public class UserInterface {
 			btnMoveUp.setVisible(true);
 			return;
 		}
-		
 		
 		public void mazeupdate(int[][] maze)
 		{

@@ -2,7 +2,7 @@ package southparktriviamaze;
 
 //import java.awt.BorderLayout;
 //import java.awt.EventQueue;
-
+ 
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 //import javax.swing.border.EmptyBorder;
@@ -38,7 +38,7 @@ public class QuestionDisplayTF extends JFrame {
 		//contentPane.setUndecorated(true);
 		this.setResizable(false);
 		this.setUndecorated(true);
-		this.setLocation(null);
+		this.setLocationRelativeTo(null);
 		
 		//contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		setContentPane(contentPane);

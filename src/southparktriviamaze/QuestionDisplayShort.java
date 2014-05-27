@@ -11,8 +11,10 @@ import javax.swing.GroupLayout;
 import javax.swing.GroupLayout.Alignment;
 import javax.swing.JButton;
 import javax.swing.LayoutStyle.ComponentPlacement;
+
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
+import java.util.concurrent.CountDownLatch;
 
 public class QuestionDisplayShort extends JFrame {
 
@@ -45,7 +47,7 @@ public class QuestionDisplayShort extends JFrame {
 	/**
 	 * Create the frame.
 	 */
-	public QuestionDisplayShort(String questionString) {
+	public QuestionDisplayShort(String questionString, final CountDownLatch latch) {
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 450, 300);
 		contentPane = new JPanel();
@@ -53,6 +55,7 @@ public class QuestionDisplayShort extends JFrame {
 		setContentPane(contentPane);
 		this.setResizable(false);
 		this.setUndecorated(true);
+		this.setLocationRelativeTo(null);
 		
 		answerField = new JTextField();
 		answerField.setColumns(10);
@@ -62,6 +65,7 @@ public class QuestionDisplayShort extends JFrame {
 			public void actionPerformed(ActionEvent e) {
 				
 				answer = answerField.getText();
+				latch.countDown();
 			}
 		});
 		
@@ -93,14 +97,27 @@ public class QuestionDisplayShort extends JFrame {
 		);
 		contentPane.setLayout(gl_contentPane);
 	}
-	public static String getans()
+	public String getans()
 	{
-		while(answer == null);
-		return answer;
+//		while(answer == null);
+		String temp = answer;
+//		answer = null;
+//		return temp;
+//		btnSubmit.addActionListener(new ActionListener() {
+//			public void actionPerformed(ActionEvent e) {
+//				
+//				answer = answerField.getText();
+//				//String temp = answer;
+//				//answer = null;
+//
+//			}
+//		});
+		//while(answer == null);
+		
+		
+		//temp = answer;
+		answer = null;
+		return temp;
 	}
 	
-	public static void ansReset()
-	{
-		answer = null;
-	}
 	}

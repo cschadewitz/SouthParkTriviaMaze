@@ -53,6 +53,7 @@ public class QuestionDisplayMult extends JFrame {
 		setContentPane(contentPane);
 		this.setResizable(false);
 		this.setUndecorated(true);
+		this.setLocationRelativeTo(null);
 		
 		this.setFocusable(true);
 		this.setFocusableWindowState(true);
