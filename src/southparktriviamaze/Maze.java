@@ -120,6 +120,26 @@ public class Maze implements MazeInterface
 		return this.cols;
 	}
 	
+	public boolean northDoorUnlocked(int i, int j)
+	{
+		return this.roomMaze[i][j].upperDoor.isUnlocked();
+	}
+	
+	public boolean southDoorUnlocked(int i, int j)
+	{
+		return this.roomMaze[i][j].lowerDoor.isUnlocked();
+	}
+	
+	public boolean eastDoorUnlocked(int i, int j)
+	{
+		return this.roomMaze[i][j].rightDoor.isUnlocked();
+	}
+	
+	public boolean westDoorUnlocked(int i, int j)
+	{
+		return this.roomMaze[i][j].leftDoor.isUnlocked();
+	}
+	
 	public CellType getNeighborType(Location location, Direction direction)
 	{
 		//if(location.getX() < 1 || location.getX() >= rows || location.getY() < 1 || location.getY() >= cols)
