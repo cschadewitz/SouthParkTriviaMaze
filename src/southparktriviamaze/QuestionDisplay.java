@@ -1,12 +1,18 @@
+//Olin L. Anderson
 package southparktriviamaze;
 
+import java.awt.Dialog;
 import java.awt.EventQueue;
 import java.util.concurrent.CountDownLatch;
 
+import javax.swing.JDialog;
+
+
 public class QuestionDisplay implements DisplayQuestion{
+
 	
  String ans=null;
-	public static Boolean askQuestion()
+	public static boolean askQuestion()
 	{
 		
 //		QuestionFactory questionFactory =new RandomQuestionFactory();
@@ -17,92 +23,82 @@ public class QuestionDisplay implements DisplayQuestion{
 //		return question.isCorrect(answer);	
 		
 		//=============================================================================
-		CountDownLatch latch = new CountDownLatch(1);
-		
-		String answer = doQuestion("WHAT IS UP BUD?", null, null, null, null, latch);
+		//DUMMY QUESTIONS
+		Question question = new Question();
+		//String answer = doQuestion("WHAT IS UP BUD?", null, null, null, null);
+		//String answer = doQuestion("WHAT is your name?", "true", "false", "BO", "BOB");
+		String answer =  doQuestion("am i flying now, how about now", "T", "F", null, null);
 
-		///////////////////============================================================
-		//String answer = doQuestion("WHAT is your name?", "TRUE", "FALSE", "BO", "BOB");
-		//String answer =  doQuestion("am i flying now, how about now", "T", "F", null, null);
 		//System.out.println(answer);
-		if(answer.compareTo("TRUE") == 0)
+		
+		///////////////////============================================================
+
+		System.out.println(answer);
+		
+		//return(question.isCorrect(answer));
+		
+		if(answer.compareTo("ture") == 0)
 		{
 			return true;
-		} 
-		else
-		{
-			return false;
 		}
+		return false;
 	}
 	
 
 	
-	private static String doQuestion(String ques, String ans1, String ans2, String ans3, String ans4, CountDownLatch latch)
+	private static String doQuestion(String ques, String ans1, String ans2, String ans3, String ans4)
 	{
-	final String question = ques;
 	String answer = null;
-	String answer1 = ans1;
-	String answer2 = ans2;
-	String answer3 = ans3;
-	String answer4 = ans4;
-	
-	latch = new CountDownLatch(1);
-	
-	if(answer1 == null)
+
+	if(ans1 == null)
 	{
-		try 
-		{
-			QuestionDisplayShort frame = new QuestionDisplayShort(question, latch);
-			frame.setVisible(true);
-			
-			//latch.await();
-			answer = frame.getans();
-			
-			//QuestionDisplayShort.ansReset();
-			frame.setVisible(false);
-			frame.removeAll();
-			return answer;
-			
-		} 
-		catch (Exception e) 
-		{
-			e.printStackTrace();
-		}		
+			try 
+			{
+				QuestionDispShort dialog = new QuestionDispShort(ques);
+				dialog.setDefaultCloseOperation(JDialog.DISPOSE_ON_CLOSE);
+				dialog.setModalityType(Dialog.ModalityType.DOCUMENT_MODAL);
+				dialog.setModal(true);
+				dialog.setVisible(true);
+				answer = dialog.getAns();
+				dialog.dispose();
+			} 
+			catch (Exception e)	
+			{
+				e.printStackTrace();
+			}
+
 	}
 	
-	else if(answer3 == null)
+	else if(ans3 == null)
 	{
+		
 		try {
-			QuestionDisplayTF frame = new QuestionDisplayTF(question);
-			frame.setVisible(true);
-			answer = QuestionDisplayTF.getAns();
-			QuestionDisplayTF.ansReset();
-			
-			frame.setVisible(false);
-			frame.removeAll();
-			return answer;
-			
+			QuestionDispTF dialog = new QuestionDispTF(ques);
+			dialog.setDefaultCloseOperation(JDialog.DISPOSE_ON_CLOSE);
+			dialog.setModalityType(Dialog.ModalityType.DOCUMENT_MODAL);
+			dialog.setModal(true);
+			dialog.setVisible(true);
+			answer = dialog.getAns();
+			dialog.dispose();
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
+		
 	}
 	else
 	{
-		try 
-		{
-			QuestionDisplayMult frame = new QuestionDisplayMult(question, answer1, answer2, answer3, answer4);
-			frame.setVisible(true);
-			answer = QuestionDisplayMult.getans();
-			QuestionDisplayMult.ansReset();
-			frame.setVisible(false);
-			frame.removeAll();
-			return answer;
-			
-		}
-		catch (Exception e)
-		{
+		try {
+			QuestionDispMult dialog = new QuestionDispMult(ques, ans1, ans2, ans3, ans4);
+			dialog.setDefaultCloseOperation(JDialog.DISPOSE_ON_CLOSE);
+			dialog.setModalityType(Dialog.ModalityType.DOCUMENT_MODAL);
+			dialog.setModal(true);
+			dialog.setVisible(true);
+			answer = dialog.getAns();
+			dialog.dispose();
+		} catch (Exception e) {
 			e.printStackTrace();
 		}
+
 	}
 	return answer;
 	}
