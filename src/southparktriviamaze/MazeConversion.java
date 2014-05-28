@@ -6,7 +6,8 @@
 		private static final int ROOM = 0;
 		private static final int WALL = 1;
 		private static final int LOCKEDDOOR = 2;
-		private static final int UNLOCKEDDOOR = 3;
+		private static final int UNLOCKEDDOORHORZ = 4;
+		private static final int UNLOCKEDDOORVERT = 3;
 		
 		private Maze maze;
 		private int[][] array;
@@ -42,25 +43,25 @@
 							this.array[i - 1][j] = LOCKEDDOOR;
 						
 						if(neighboringRooms[0] && this.maze.northDoorUnlocked(i/2, j/2))//North unlocked
-							this.array[i - 1][j] = UNLOCKEDDOOR;
+							this.array[i - 1][j] = UNLOCKEDDOORHORZ;
 						
 						if(neighboringRooms[1] && !this.maze.southDoorUnlocked(i/2, j/2))//South locked
 							this.array[i + 1][j] = LOCKEDDOOR;
 						
 						if(neighboringRooms[1] && this.maze.southDoorUnlocked(i/2, j/2))//South unlocked
-							this.array[i + 1][j] = UNLOCKEDDOOR;
+							this.array[i + 1][j] = UNLOCKEDDOORHORZ;
 						
 						if(neighboringRooms[2] && !this.maze.eastDoorUnlocked(i/2, j/2))//East locked
 							this.array[i][j + 1] = LOCKEDDOOR;
 						
 						if(neighboringRooms[2] && this.maze.eastDoorUnlocked(i/2, j/2))//East unlocked
-							this.array[i][j + 1] = UNLOCKEDDOOR;
+							this.array[i][j + 1] = UNLOCKEDDOORVERT;
 						
 						if(neighboringRooms[3] && !this.maze.westDoorUnlocked(i/2, j/2))//West locked
 							this.array[i][j - 1] = LOCKEDDOOR;
 						
 						if(neighboringRooms[3] && this.maze.westDoorUnlocked(i/2, j/2))//West unlocked
-							this.array[i][j - 1] = UNLOCKEDDOOR;
+							this.array[i][j - 1] = UNLOCKEDDOORVERT;
 					}
 					
 				}//end for j
