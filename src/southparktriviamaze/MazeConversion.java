@@ -38,17 +38,29 @@
 					{
 						boolean[] neighboringRooms = this.maze.getNeighboringRooms(i/2, j/2);//North, South, East, West
 						
-						if(neighboringRooms[0])//North
+						if(neighboringRooms[0] && !this.maze.northDoorUnlocked(i/2, j/2))//North locked
 							this.array[i - 1][j] = LOCKEDDOOR;
 						
-						if(neighboringRooms[1])//South
+						if(neighboringRooms[0] && this.maze.northDoorUnlocked(i/2, j/2))//North unlocked
+							this.array[i - 1][j] = UNLOCKEDDOOR;
+						
+						if(neighboringRooms[1] && !this.maze.southDoorUnlocked(i/2, j/2))//South locked
 							this.array[i + 1][j] = LOCKEDDOOR;
 						
-						if(neighboringRooms[2])//East
+						if(neighboringRooms[1] && this.maze.southDoorUnlocked(i/2, j/2))//South unlocked
+							this.array[i + 1][j] = UNLOCKEDDOOR;
+						
+						if(neighboringRooms[2] && !this.maze.eastDoorUnlocked(i/2, j/2))//East locked
 							this.array[i][j + 1] = LOCKEDDOOR;
 						
-						if(neighboringRooms[3])//West
+						if(neighboringRooms[2] && this.maze.eastDoorUnlocked(i/2, j/2))//East unlocked
+							this.array[i][j + 1] = UNLOCKEDDOOR;
+						
+						if(neighboringRooms[3] && !this.maze.westDoorUnlocked(i/2, j/2))//West locked
 							this.array[i][j - 1] = LOCKEDDOOR;
+						
+						if(neighboringRooms[3] && this.maze.westDoorUnlocked(i/2, j/2))//West unlocked
+							this.array[i][j - 1] = UNLOCKEDDOOR;
 					}
 					
 				}//end for j

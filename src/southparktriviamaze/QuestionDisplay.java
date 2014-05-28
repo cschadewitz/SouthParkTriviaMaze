@@ -27,7 +27,7 @@ public class QuestionDisplay implements DisplayQuestion{
 	}
 	
 	
-	private String doQuestion(String ques, String ans1, String ans2, String ans3, String ans4)
+	public String doQuestion(String ques, String ans1, String ans2, String ans3, String ans4)
 	{
 	String question = ques;
 	String answer = null;
