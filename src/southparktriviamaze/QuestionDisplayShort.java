@@ -47,7 +47,7 @@ public class QuestionDisplayShort extends JFrame {
 	/**
 	 * Create the frame.
 	 */
-	public QuestionDisplayShort(String questionString, final CountDownLatch latch) {
+	public QuestionDisplayShort(String questionString, final Question question) {
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 450, 300);
 		contentPane = new JPanel();
@@ -65,7 +65,11 @@ public class QuestionDisplayShort extends JFrame {
 			public void actionPerformed(ActionEvent e) {
 				
 				answer = answerField.getText();
-				latch.countDown();
+				Boolean finalAnswer = question.isCorrect(answer);
+				System.out.println(finalAnswer);
+				contentPane.removeAll();
+				contentPane.setVisible(false);
+				
 			}
 		});
 		
@@ -97,27 +101,27 @@ public class QuestionDisplayShort extends JFrame {
 		);
 		contentPane.setLayout(gl_contentPane);
 	}
-	public String getans()
-	{
-//		while(answer == null);
-		String temp = answer;
+//	public String getans()
+//	{
+////		while(answer == null);
+//		String temp = answer;
+////		answer = null;
+////		return temp;
+////		btnSubmit.addActionListener(new ActionListener() {
+////			public void actionPerformed(ActionEvent e) {
+////				
+////				answer = answerField.getText();
+////				//String temp = answer;
+////				//answer = null;
+////
+////			}
+////		});
+//		//while(answer == null);
+//		
+//		
+//		//temp = answer;
 //		answer = null;
 //		return temp;
-//		btnSubmit.addActionListener(new ActionListener() {
-//			public void actionPerformed(ActionEvent e) {
-//				
-//				answer = answerField.getText();
-//				//String temp = answer;
-//				//answer = null;
-//
-//			}
-//		});
-		//while(answer == null);
-		
-		
-		//temp = answer;
-		answer = null;
-		return temp;
-	}
+//	}
 	
 	}

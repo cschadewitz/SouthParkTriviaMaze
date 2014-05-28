@@ -1,3 +1,4 @@
+//Olin L. Anderson
 package southparktriviamaze;
 
 
@@ -56,10 +57,14 @@ import java.awt.Graphics;
 import java.awt.Graphics2D;
 import java.awt.GraphicsEnvironment;
 import java.awt.GridBagLayout;
+import java.awt.Window;
+
+import javax.swing.JTextField;
 //=============================
 
 public class UserInterface {
 	private GameCore core;
+	
 	
 	public static void main(String[] args) {
 		// TODO Auto-generated method stub
@@ -69,7 +74,10 @@ public class UserInterface {
 		try {	
 		
 			window = new UserInterface();
-///			GameCore core = new GameCore(window, args);
+			
+			//System.out.println(window.askAQuestion());
+			
+			//GameCore core = new GameCore(window, args);
 			
 
 			
@@ -116,6 +124,15 @@ public class UserInterface {
 	private JButton btnHelp;
 	private JButton btnQuit;
 	private JButton btnTest;
+	private JPanel panel_Question;
+	private JTextField textField_Answer;
+	private JTextField textField_Question;
+	private JButton btnChoice1;
+	private JButton btnChoice2;
+	private JButton btnChoice3;
+	private JButton btnChoice4;
+	private JButton btnSubmit;
+	private String finalAnswer = null;
 	//private GameCore core;
 	/**
 	 * Create the application.
@@ -124,9 +141,7 @@ public class UserInterface {
 		initialize();
 		//QuestionDisplay.askQuestion();
 	}
-	
 
-	
 	/**
 	 * Initialize the contents of the frame.
 	 */
@@ -204,6 +219,8 @@ public class UserInterface {
 		// panel.add(picLabel);
 		 
 		 txtrTest = new JTextArea();
+		 txtrTest.setBackground(new Color(0, 0, 0));
+		 txtrTest.setForeground(new Color(128, 128, 0));
 		 //setup font=============================================================
 		 try
 		 {
@@ -268,36 +285,130 @@ public class UserInterface {
 		springLayout.putConstraint(SpringLayout.EAST, panel, -26, SpringLayout.EAST, frame.getContentPane());
 		frame.getContentPane().add(panel);
 		
-		final JButton btnMoveUp = new JButton("UP");
+		btnMoveUp = new JButton("UP");
 		springLayout.putConstraint(SpringLayout.SOUTH, panel, -17, SpringLayout.NORTH, btnMoveUp);
+		
+		panel_Question = new JPanel();
 		GroupLayout gl_panel = new GroupLayout(panel);
 		gl_panel.setHorizontalGroup(
 			gl_panel.createParallelGroup(Alignment.LEADING)
 				.addGroup(gl_panel.createSequentialGroup()
-					.addGap(37)
-					.addComponent(txtrTest, GroupLayout.PREFERRED_SIZE, 412, GroupLayout.PREFERRED_SIZE)
-					.addContainerGap(178, Short.MAX_VALUE))
+					.addContainerGap()
+					.addComponent(txtrTest, GroupLayout.PREFERRED_SIZE, 310, GroupLayout.PREFERRED_SIZE)
+					.addPreferredGap(ComponentPlacement.RELATED, 10, Short.MAX_VALUE)
+					.addComponent(panel_Question, GroupLayout.PREFERRED_SIZE, 287, GroupLayout.PREFERRED_SIZE)
+					.addContainerGap())
 		);
 		gl_panel.setVerticalGroup(
 			gl_panel.createParallelGroup(Alignment.LEADING)
 				.addGroup(gl_panel.createSequentialGroup()
 					.addGap(31)
-					.addComponent(txtrTest, GroupLayout.PREFERRED_SIZE, 335, GroupLayout.PREFERRED_SIZE)
-					.addContainerGap(GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+					.addGroup(gl_panel.createParallelGroup(Alignment.LEADING)
+						.addComponent(panel_Question, GroupLayout.PREFERRED_SIZE, 301, GroupLayout.PREFERRED_SIZE)
+						.addComponent(txtrTest, GroupLayout.DEFAULT_SIZE, 324, Short.MAX_VALUE))
+					.addContainerGap())
 		);
+		
+		btnChoice1 = new JButton("A");
+		
+		btnChoice2 = new JButton("B");
+		
+		btnChoice3 = new JButton("C");
+		
+		btnChoice4 = new JButton("D");
+		
+		textField_Answer = new JTextField();
+		textField_Answer.setColumns(10);
+		
+		btnSubmit = new JButton("Submit");
+		btnSubmit.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				finalAnswer = "HELLO";
+			}
+		});
+		
+		textField_Question = new JTextField();
+		textField_Question.setEditable(false);
+		textField_Question.setColumns(10);
+		
+		JLabel lblChoice1 = new JLabel("New label");
+		
+		JLabel lblChoice2 = new JLabel("New label");
+		
+		JLabel lblChoice3 = new JLabel("New label");
+		
+		JLabel lblChoice4 = new JLabel("New label");
+		GroupLayout gl_panel_Question = new GroupLayout(panel_Question);
+		gl_panel_Question.setHorizontalGroup(
+			gl_panel_Question.createParallelGroup(Alignment.LEADING)
+				.addGroup(Alignment.TRAILING, gl_panel_Question.createSequentialGroup()
+					.addContainerGap()
+					.addGroup(gl_panel_Question.createParallelGroup(Alignment.TRAILING)
+						.addComponent(textField_Question, Alignment.LEADING, GroupLayout.DEFAULT_SIZE, 267, Short.MAX_VALUE)
+						.addComponent(textField_Answer, Alignment.LEADING, GroupLayout.DEFAULT_SIZE, 267, Short.MAX_VALUE)
+						.addGroup(Alignment.LEADING, gl_panel_Question.createSequentialGroup()
+							.addComponent(btnChoice1)
+							.addPreferredGap(ComponentPlacement.RELATED)
+							.addComponent(lblChoice1))
+						.addGroup(Alignment.LEADING, gl_panel_Question.createSequentialGroup()
+							.addComponent(btnChoice2)
+							.addPreferredGap(ComponentPlacement.RELATED)
+							.addComponent(lblChoice2))
+						.addGroup(Alignment.LEADING, gl_panel_Question.createSequentialGroup()
+							.addComponent(btnChoice3)
+							.addPreferredGap(ComponentPlacement.RELATED)
+							.addComponent(lblChoice3))
+						.addGroup(Alignment.LEADING, gl_panel_Question.createSequentialGroup()
+							.addComponent(btnChoice4)
+							.addPreferredGap(ComponentPlacement.RELATED)
+							.addComponent(lblChoice4))
+						.addComponent(btnSubmit, Alignment.LEADING))
+					.addContainerGap())
+		);
+		gl_panel_Question.setVerticalGroup(
+			gl_panel_Question.createParallelGroup(Alignment.LEADING)
+				.addGroup(gl_panel_Question.createSequentialGroup()
+					.addContainerGap()
+					.addComponent(textField_Question, GroupLayout.PREFERRED_SIZE, 51, GroupLayout.PREFERRED_SIZE)
+					.addGap(18)
+					.addGroup(gl_panel_Question.createParallelGroup(Alignment.BASELINE)
+						.addComponent(btnChoice1)
+						.addComponent(lblChoice1))
+					.addPreferredGap(ComponentPlacement.RELATED)
+					.addGroup(gl_panel_Question.createParallelGroup(Alignment.BASELINE)
+						.addComponent(btnChoice2)
+						.addComponent(lblChoice2))
+					.addPreferredGap(ComponentPlacement.RELATED)
+					.addGroup(gl_panel_Question.createParallelGroup(Alignment.BASELINE)
+						.addComponent(btnChoice3)
+						.addComponent(lblChoice3))
+					.addPreferredGap(ComponentPlacement.RELATED)
+					.addGroup(gl_panel_Question.createParallelGroup(Alignment.BASELINE)
+						.addComponent(btnChoice4)
+						.addComponent(lblChoice4))
+					.addPreferredGap(ComponentPlacement.RELATED)
+					.addComponent(textField_Answer, GroupLayout.PREFERRED_SIZE, 48, GroupLayout.PREFERRED_SIZE)
+					.addPreferredGap(ComponentPlacement.RELATED)
+					.addComponent(btnSubmit)
+					.addContainerGap(51, Short.MAX_VALUE))
+		);
+		panel_Question.setLayout(gl_panel_Question);
 		panel.setLayout(gl_panel);
 		springLayout.putConstraint(SpringLayout.EAST, btnMoveUp, -97, SpringLayout.EAST, frame.getContentPane());
 		springLayout.putConstraint(SpringLayout.WEST, btnMoveUp, -182, SpringLayout.EAST, frame.getContentPane());
 		springLayout.putConstraint(SpringLayout.SOUTH, btnMoveUp, -67, SpringLayout.SOUTH, frame.getContentPane());
+		panel_Question.setVerifyInputWhenFocusTarget(false);
+		panel_Question.setVisible(false);
+		
 		frame.getContentPane().add(btnMoveUp);
 		btnMoveUp.setVisible(false);
 		
-		final JButton btnMoveLeft = new JButton("LEFT");
+		btnMoveLeft = new JButton("LEFT");
 
 		frame.getContentPane().add(btnMoveLeft);
 		btnMoveLeft.setVisible(false);
 		
-		final JButton btnMoveRight = new JButton("RIGHT");
+		btnMoveRight = new JButton("RIGHT");
 		
 		springLayout.putConstraint(SpringLayout.WEST, btnMoveLeft, -93, SpringLayout.WEST, btnMoveRight);
 		springLayout.putConstraint(SpringLayout.EAST, btnMoveLeft, -8, SpringLayout.WEST, btnMoveRight);
@@ -307,7 +418,7 @@ public class UserInterface {
 		btnMoveRight.setVisible(false);
 		
 		
-		final JButton btnMoveDown = new JButton("DOWN");
+		btnMoveDown = new JButton("DOWN");
 
 		springLayout.putConstraint(SpringLayout.SOUTH, btnMoveRight, -5, SpringLayout.NORTH, btnMoveDown);
 		springLayout.putConstraint(SpringLayout.SOUTH, btnMoveLeft, -5, SpringLayout.NORTH, btnMoveDown);
@@ -423,6 +534,8 @@ public class UserInterface {
 				
 			}
 		});
+		
+		
 		//=====================================================================
 		//MOVE North
 		btnMoveUp.addActionListener(new ActionListener() 
@@ -452,6 +565,7 @@ public class UserInterface {
 				txtrTest.setText(txtrTest.getText() + "\nMove RIGHT");
 				
 				//QuestionDisplayTest.question();
+				//QuestionDisplay.askQuestion();
 				QuestionDisplay.askQuestion();
 //				core.move(Direction.East);
 			}
@@ -467,23 +581,66 @@ public class UserInterface {
 			}
 		});
 	}
-		public void toggleMoveButttonsOff()
+		public void toggleMoveButtonsOff()
 		{
-			btnMoveDown.setVisible(false);;
-			btnMoveRight.setVisible(false);;
-			btnMoveLeft.setVisible(false);;
+			try
+			{
+			btnMoveDown.setVisible(false);
+			btnMoveRight.setVisible(false);
+			btnMoveLeft.setVisible(false);
 			btnMoveUp.setVisible(false);
 			return;
+			}
+			catch(Exception e)
+			{
+				System.out.println("ToggleMoveButtonOff error");
+			}
 		}
 		
 		public void toggleMoveButtonsOn()
 		{
-			btnMoveDown.setVisible(true);;
-			btnMoveRight.setVisible(true);;
-			btnMoveLeft.setVisible(true);;
+			try
+			{
+			btnMoveDown.setVisible(true);
+			btnMoveRight.setVisible(true);
+			btnMoveLeft.setVisible(true);
 			btnMoveUp.setVisible(true);
 			return;
+			}
+			catch(Exception e)
+			{
+				System.out.println("toggleMoveButtonOn error");
+			}
 		}
+		
+		public boolean askAQuestion()
+		{
+			this.toggleMoveButtonsOff();
+			panel_Question.setVisible(true);
+			
+			System.out.println("QUESTION RAN");
+			//=====================================================
+//			QuestionFactory questionFactory =new RandomQuestionFactory();
+//			Question question = questionFactory.getQuestion();
+//			String[] answers = new String[4];
+//			question.questions.toString(answers);
+//			String answer = doQuestion(question.question, answers[0], answers[1], answers[2], answers[3]);
+//			return question.isCorrect(answer);	
+			//=====================================================
+			while(finalAnswer == null);
+				System.out.println("Question Test");
+				
+			finalAnswer = null;
+			
+			
+			panel_Question.setVisible(false);
+			toggleMoveButtonsOn();
+			return true;
+		}
+//		private String doQuestion(String question,String ans1, String ans2, String ans3, String ans4)
+//		{
+//			
+//		}
 		
 		public void mazeupdate(int[][] maze)
 		{
@@ -504,51 +661,16 @@ public class UserInterface {
 			txtrTest.setText("No maze yet\n ");
 		}
 		}
+}
 
+class QuestionPanelListener
+{
+	JPanel Qpanel;
+	public QuestionPanelListener(JPanel Qpanel)
+	{
+		this.Qpanel = Qpanel;
+	}
 	
-	
-
-//	class UpdateMaze
-//	{
-//		
-//		private UserInterface mazeDisplay;
-//		private int[][] maze;// = new int[2][2];
-//		
-//		public UpdateMaze(UserInterface mazeDisplay)
-//		{
-//			this.mazeDisplay = mazeDisplay;
-//		}
-//		
-//		public void mazeData(int[][] maze)
-//		{
-//			this.maze = maze;
-//		}
-//		
-//		
-//		
-//		public void paintMaze(final JTextArea txtrTest)
-//		{
-//			try
-//			{
-//			txtrTest.setText("");
-//			for(int i=0; i<maze.length; i++)
-//			{
-//				for(int j=0; j<maze[i].length; j++)
-//				{
-//					txtrTest.setText(txtrTest.getText() + maze[i][j]);
-//				}
-//				txtrTest.setText(txtrTest.getText() + "\n");
-//			}
-//			}
-//			catch(Exception e)
-//			{
-//				txtrTest.setText("No maze yet\n ");
-//			}
-//		}
-//	}
-//	
-//
-//	
 }
 
 
