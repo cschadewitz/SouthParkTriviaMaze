@@ -13,11 +13,12 @@ public class GameCore {
 	private String[] cheats;
 	private MazeConversion mapConverter;
 	private int[][] array;
+	private QuestionDisplay qd = new QuestionDisplay();
 	
 	public GameCore(UserInterface userWindow, String[] cheats)
 	{
 		window = userWindow;
-		questionFactory = new RandomQuestionFactory();
+		//questionFactory = new RandomQuestionFactory();
 		
 	}
 	
@@ -46,21 +47,32 @@ public class GameCore {
 			case Wall: //Display message
 				break;
 			case Door: 
-				/*@SuppressWarnings("unused")
-				Question quest = null;
-				try {
-					quest = questionFactory.getQuestion();
-					QuestionDisplay QDB = new QuestionDisplay();
-					if( (QDB.askQuestion()))
+				//Question quest = null;
+				//try {
+					//quest = questionFactory.getQuestion();
+					if( !(qd.askQuestion()))
 						return;
-				} catch (SQLException e) {
+				//} catch (SQLException e) {
 					// TODO Auto-generated catch block
-					e.printStackTrace();
-					return;
-				}
-				*/
+				//	e.printStackTrace();
+				//	return;
+				//}
+				
+
 				mapConverter = new MazeConversion(map);
 				array = mapConverter.convertedMaze();
+				map.unlockDoor(player.convertToCondensed(), direction);
+				switch(direction)
+				{
+					case North: array[player.getRow()- 1][player.getColumn()] = 4;
+						break;
+					case South: array[player.getRow()+ 1][player.getColumn()] = 4;
+						break;
+					case East: array[player.getRow()][player.getColumn() + 1] = 3;
+						break;
+					case West: array[player.getRow()][player.getColumn() - 1] = 3;
+						break;
+				}
 				array[player.getRow()][ player.getColumn()] = 0;
 				array[destination.getRow()][destination.getColumn()] =5;
 				player = destination;
@@ -86,6 +98,9 @@ public class GameCore {
 				break;
 			case Player://Impossible
 				break;
+		default:
+			//Error
+			break;
 		}
 	}
 

@@ -127,7 +127,7 @@ public class UserInterface {
 	 */
 	private void initialize() {
 		frame = new JFrame("Kenny's Quest");
-		frame.getContentPane().setBackground(new Color(100, 149, 237));
+		frame.getContentPane().setBackground(Color.DARK_GRAY);
 		frame.setBounds(0, 0, 772, 508);	//default size
 		frame.setExtendedState(JFrame.MAXIMIZED_BOTH); //sets window to full screen
 		frame.setUndecorated(true);	//removes the title bar
@@ -208,7 +208,6 @@ public class UserInterface {
 		 genv.registerFont(mazeFont);
 		 // makesure to derive the size
 		 mazeFont = mazeFont.deriveFont(50f);
-		 
 		 txtrTest.setFont((mazeFont));
 		 
 		 }

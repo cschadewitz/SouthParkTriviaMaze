@@ -4,7 +4,6 @@ import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
-import org.sqlite.*;
 
 public class SQLiteDBHandler implements SQLProxy {
 
@@ -21,23 +20,25 @@ public class SQLiteDBHandler implements SQLProxy {
 	{
 		Connection conn = null;
 		Statement command = null;
+		ResultSet count = null;
 		try {
-			Class.forName("org.sqlite.JDBC");
-			
-			conn = DriverManager.getConnection("jdbc:sqlite:Questions.sqlite");
-			conn.setAutoCommit(false);
+			conn = getConnection();
 			System.out.println("DB opened successfully");
 			
 			command = conn.createStatement();
-			ResultSet count = command.executeQuery("SELECT QuestionID AS total FROM QUESTIONS;");
+			count = command.executeQuery("SELECT QuestionID AS total FROM QUESTIONS;");
 			while (count.next())
 			{
 				questionIDs.add(count.getInt("total"));
 			}
-		} catch ( Exception e ) {
+			count.close();
+			command.close();
+			conn.close();
+			} catch ( Exception e ) {
 			System.err.println(e.getClass().getName() + ":" + e.getMessage());
 			System.exit(0);
-		}
+		} 
+		
 	}
 	@Override
 	public Question getRandomQuestion() {
@@ -47,17 +48,12 @@ public class SQLiteDBHandler implements SQLProxy {
 		Question returnQuestion = null;
 		//returnQuestion = new MCQuestion(randomQuestion.getString("QuestionText"), randomQuestion.getString("Answer"), randomQuestion.getString("ChoiceA"), randomQuestion.getString("ChoiceB"), randomQuestion.getString("ChoiceC"), randomQuestion.getString("ChoiceD"));
 		try {
-			Class.forName("org.sqlite.JDBC");
-			conn = DriverManager.getConnection("jdbc:sqlite:Questions.sqlite");
-			conn.setAutoCommit(false);
+			conn = getConnection();
 			System.out.println("DB opened successfully");
-			
 			command = conn.createStatement();
 			int questionIDListIndex = rand.nextInt(questionIDs.size());
 			randomQuestion = command.executeQuery("SELECT * FROM QUESTIONS WHERE QuestionID = " + questionIDs.get(questionIDListIndex));
-			String QuestionText = randomQuestion.getString("QuestionText");
-			//while(randomQuestion.next())
-			Maze m = new Maze();
+			
 			returnQuestion = new MCQuestion(randomQuestion.getString("QuestionText"), randomQuestion.getString("Answer"), randomQuestion.getString("ChoiceA"), randomQuestion.getString("ChoiceB"), randomQuestion.getString("ChoiceC"), randomQuestion.getString("ChoiceD"));
 			switch(randomQuestion.getInt("Type"))
 			{
@@ -71,6 +67,14 @@ public class SQLiteDBHandler implements SQLProxy {
 			System.exit(0);
 		}
 		return returnQuestion;
+	}
+	private Connection getConnection() throws ClassNotFoundException,
+			SQLException {
+		Connection conn;
+		Class.forName("org.sqlite.JDBC");
+		conn = DriverManager.getConnection("jdbc:sqlite:Questions.sqlite");
+		conn.setAutoCommit(false);
+		return conn;
 	}
 
 	@Override

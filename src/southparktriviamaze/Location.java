@@ -42,7 +42,7 @@ public class Location {
 	{
 		return this.add(Location.vector(direction));
 	}
-	public static Location vector(Direction direction)
+	private static Location vector(Direction direction)
 	{
 		switch(direction)
 		{
@@ -56,7 +56,7 @@ public class Location {
 		
 	}
 	
-	public static Location vectorZero()
+	private static Location vectorZero()
 	{
 		return new Location(0, 0); 
 	}
