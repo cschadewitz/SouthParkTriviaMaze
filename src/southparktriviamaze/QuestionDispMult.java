@@ -5,14 +5,18 @@ import java.awt.EventQueue;
 
 import javax.swing.JDialog;
 import javax.swing.JTextField;
+
 import java.awt.BorderLayout;
+
 import javax.swing.GroupLayout;
 import javax.swing.GroupLayout.Alignment;
 import javax.swing.JButton;
 import javax.swing.LayoutStyle.ComponentPlacement;
 import javax.swing.JLabel;
+
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
+import java.util.Random;
 
 public class QuestionDispMult extends JDialog {
 
@@ -27,7 +31,7 @@ public class QuestionDispMult extends JDialog {
 	/**
 	 * Create the dialog.
 	 */
-	public QuestionDispMult(String question, String answer1, String answer2, String answer3, String answer4) {
+	public QuestionDispMult(String question, String ans1, String ans2, String ans3, String ans4) {
 		setBounds(100, 100, 450, 300);
 		
 		questionTextField = new JTextField();
@@ -35,14 +39,21 @@ public class QuestionDispMult extends JDialog {
 		questionTextField.setText(question);
 		questionTextField.setEditable(false);
 		setUndecorated(true);
+		setLocationRelativeTo(null);
+		String[] answers = {ans1, ans2, ans3, ans4};
+		String[] mixedAnswers = mix(answers);
 		
-		lblAnsA = new JLabel(answer1);
+		double num = Math.random();
+		System.out.println(num);
 		
-		lblAnsB = new JLabel(answer2);
 		
-		lblAnsC = new JLabel(answer3);
+		lblAnsA = new JLabel(mixedAnswers[0]);
 		
-		lblAnsD = new JLabel(answer4);
+		lblAnsB = new JLabel(mixedAnswers[1]);
+		
+		lblAnsC = new JLabel(mixedAnswers[2]);
+		
+		lblAnsD = new JLabel(mixedAnswers[3]);
 		
 		JButton btnAnsA = new JButton("A");
 		btnAnsA.addActionListener(new ActionListener() {
@@ -133,4 +144,36 @@ public class QuestionDispMult extends JDialog {
 		return finalAnswer;
 	}
 
+private String[] mix(String[] org)
+{
+
+
+Random generator = new Random(); 
+int ran = generator.nextInt(4);
+String[] mixed= new String[4];
+int[] nums = new int[4];
+nums[0] = generator.nextInt(4);
+nums[1] = nums[0];
+nums[2] = nums[0];
+nums[3] = nums[0];
+while(nums[0] == nums[1])
+{
+	nums[1] = generator.nextInt(4);
+}
+while(nums[0] == nums[2] || nums[1] == nums[2])
+{
+	nums[2] = generator.nextInt(4);
+}
+while(nums[0] == nums[3] || nums[1] == nums[3] || nums[2] == nums[3])
+{
+	nums[3] = generator.nextInt(4);
+}
+
+for(int i=0; i<mixed.length; i++)
+{
+	mixed[i] = org[nums[i]];
+}
+
+return mixed;
+}
 }

@@ -26,8 +26,8 @@ public class QuestionDisplay implements DisplayQuestion{
 		//DUMMY QUESTIONS
 		Question question = new Question();
 		//String answer = doQuestion("WHAT IS UP BUD?", null, null, null, null);
-		//String answer = doQuestion("WHAT is your name?", "true", "false", "BO", "BOB");
-		String answer =  doQuestion("am i flying now, how about now", "T", "F", null, null);
+		String answer = doQuestion("WHAT is your name?", "true", "false", "BO", "BOB");
+		//String answer =  doQuestion("am i flying now, how about now", "T", "F", null, null);
 
 		//System.out.println(answer);
 		
