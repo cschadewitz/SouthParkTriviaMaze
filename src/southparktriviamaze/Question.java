@@ -6,4 +6,5 @@ public interface Question {
 	public String getQuestionText();
 	public List<String> getChoices();
 	public boolean checkAnswer(String choice);
+	public int getQuestionType();
 }

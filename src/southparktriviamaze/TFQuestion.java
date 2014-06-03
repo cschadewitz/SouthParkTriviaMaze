@@ -1,17 +1,18 @@
 package southparktriviamaze;
 
-import java.sql.ResultSet;
-import java.sql.SQLException;
+import java.util.ArrayList;
 import java.util.List;
 
 public class TFQuestion implements Question {
 	private String questionText;
 	private boolean answer;
 	private List<String> choices;
+	private int questionType = 1;
 	
-	public TFQuestion(ResultSet randomQuestion) throws SQLException{
-		this.questionText = randomQuestion.getString("QuestionText");
-		switch(randomQuestion.getString("Answer").toLowerCase())
+	public TFQuestion(String columnQuestionText, String columnAnswer){
+		this.choices = new ArrayList<String>();
+		this.questionText = columnQuestionText;
+		switch(columnAnswer.toLowerCase())
 		{
 			case "true": this.answer = true;
 			break;
@@ -29,6 +30,10 @@ public class TFQuestion implements Question {
 	public List<String> getChoices() {
 		
 		return choices;
+	}
+	@Override
+	public int getQuestionType() {
+		return questionType ;
 	}
 
 	@Override

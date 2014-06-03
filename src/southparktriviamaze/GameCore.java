@@ -18,7 +18,7 @@ public class GameCore {
 	public GameCore(UserInterface userWindow, String[] cheats)
 	{
 		window = userWindow;
-		//questionFactory = new RandomQuestionFactory();
+		questionFactory = new RandomQuestionFactory();
 		
 	}
 	
@@ -48,15 +48,15 @@ public class GameCore {
 				break;
 			case Door: 
 				//Question quest = null;
-				//try {
-					//quest = questionFactory.getQuestion();
-					if( !(qd.askQuestion()))
+				try {
+					Question quest = questionFactory.getQuestion();
+					if( !(qd.doQuestion(quest)))
 						return;
-				//} catch (SQLException e) {
+				} catch (SQLException e) {
 					// TODO Auto-generated catch block
-				//	e.printStackTrace();
-				//	return;
-				//}
+					e.printStackTrace();
+					return;
+				}
 				
 
 				mapConverter = new MazeConversion(map);

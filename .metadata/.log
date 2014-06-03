@@ -1,0 +1,87 @@
+!SESSION 2014-06-01 08:35:32.124 -----------------------------------------------
+eclipse.buildId=4.3.2.M20140221-1700
+java.version=1.7.0_60
+java.vendor=Oracle Corporation
+BootLoader constants: OS=win32, ARCH=x86, WS=win32, NL=en_US
+Command-line arguments:  -os win32 -ws win32 -arch x86
+
+!ENTRY org.eclipse.egit.ui 2 0 2014-06-01 08:36:52.132
+!MESSAGE Warning: EGit couldn't detect the installation path "gitPrefix" of native Git. Hence EGit can't respect system level
+Git settings which might be configured in ${gitPrefix}/etc/gitconfig under the native Git installation directory.
+The most important of these settings is core.autocrlf. Git for Windows by default sets this parameter to true in
+this system level configuration. The Git installation location can be configured on the
+Team > Git > Configuration preference page's 'System Settings' tab.
+This warning can be switched off on the Team > Git > Confirmations and Warnings preference page.
+
+!ENTRY org.eclipse.egit.ui 2 0 2014-06-01 08:36:52.132
+!MESSAGE Warning: The environment variable HOME is not set. The following directory will be used to store the Git
+user global configuration and to define the default location to store repositories: 'C:\Users\schad_000'. If this is
+not correct please set the HOME environment variable and restart Eclipse. Otherwise Git for Windows and
+EGit might behave differently since they see different configuration options.
+This warning can be switched off on the Team > Git > Confirmations and Warnings preference page.
+
+!ENTRY com.vectrace.MercurialEclipse 1 0 2014-06-01 08:36:53.486
+!MESSAGE checking encoding (cp1252)...
+checking Python lib (C:\Users\schad_000\Downloads\eclipse-SDK-4.3.2-win32-efx-0.9.0\eclipse\plugins\com.intland.hgbinary.win32_2.3.2\os\win32\library.zip)...
+checking installed modules (C:\Users\schad_000\Downloads\eclipse-SDK-4.3.2-win32-efx-0.9.0\eclipse\plugins\com.intland.hgbinary.win32_2.3.2\os\win32\library.zip\mercurial)...
+checking templates (C:\Users\schad_000\Downloads\eclipse-SDK-4.3.2-win32-efx-0.9.0\eclipse\plugins\com.intland.hgbinary.win32_2.3.2\os\win32\templates)...
+checking commit editor...
+checking username...
+no username found, using 'schad_000@Ouroboros' instead
+no problems detected
+
+!ENTRY org.eclipse.egit.ui 4 0 2014-06-01 08:40:02.268
+!MESSAGE Invalid project description.
+!STACK 1
+org.eclipse.core.internal.resources.ResourceException: Invalid project description.
+	at org.eclipse.core.internal.resources.Project.checkDescription(Project.java:175)
+	at org.eclipse.core.internal.resources.Project.assertCreateRequirements(Project.java:53)
+	at org.eclipse.core.internal.resources.Project.create(Project.java:287)
+	at org.eclipse.core.internal.resources.Project.create(Project.java:269)
+	at org.eclipse.egit.ui.internal.clone.ProjectUtils.createExistingProject(ProjectUtils.java:156)
+	at org.eclipse.egit.ui.internal.clone.ProjectUtils.access$0(ProjectUtils.java:119)
+	at org.eclipse.egit.ui.internal.clone.ProjectUtils$1.run(ProjectUtils.java:91)
+	at org.eclipse.core.internal.resources.Workspace.run(Workspace.java:2345)
+	at org.eclipse.core.internal.resources.Workspace.run(Workspace.java:2327)
+	at org.eclipse.egit.ui.internal.clone.ProjectUtils.createProjects(ProjectUtils.java:111)
+	at org.eclipse.egit.ui.internal.clone.ProjectUtils.createProjects(ProjectUtils.java:55)
+	at org.eclipse.egit.ui.internal.clone.GitCreateProjectViaWizardWizard.importProjects(GitCreateProjectViaWizardWizard.java:164)
+	at org.eclipse.egit.ui.internal.clone.GitCreateProjectViaWizardWizard.access$1(GitCreateProjectViaWizardWizard.java:147)
+	at org.eclipse.egit.ui.internal.clone.GitCreateProjectViaWizardWizard$3.run(GitCreateProjectViaWizardWizard.java:131)
+	at org.eclipse.jface.operation.ModalContext$ModalContextThread.run(ModalContext.java:121)
+Contains: OK
+Contains: C:\Users\schad_000\Documents\GitHub\SouthParkTriviaMaze overlaps the workspace location: C:\Users\schad_000\Documents\GitHub\SouthParkTriviaMaze
+!SUBENTRY 1 org.eclipse.core.resources 4 77 2014-06-01 08:40:02.268
+!MESSAGE Invalid project description.
+!SUBENTRY 2 unknown 0 0 2014-06-01 08:40:02.268
+!MESSAGE OK
+!SUBENTRY 2 org.eclipse.core.resources 4 77 2014-06-01 08:40:02.268
+!MESSAGE C:\Users\schad_000\Documents\GitHub\SouthParkTriviaMaze overlaps the workspace location: C:\Users\schad_000\Documents\GitHub\SouthParkTriviaMaze
+
+!ENTRY org.eclipse.egit.ui 4 0 2014-06-01 08:40:37.478
+!MESSAGE Invalid project description.
+!STACK 1
+org.eclipse.core.internal.resources.ResourceException: Invalid project description.
+	at org.eclipse.core.internal.resources.Project.checkDescription(Project.java:175)
+	at org.eclipse.core.internal.resources.Project.assertCreateRequirements(Project.java:53)
+	at org.eclipse.core.internal.resources.Project.create(Project.java:287)
+	at org.eclipse.core.internal.resources.Project.create(Project.java:269)
+	at org.eclipse.egit.ui.internal.clone.ProjectUtils.createExistingProject(ProjectUtils.java:156)
+	at org.eclipse.egit.ui.internal.clone.ProjectUtils.access$0(ProjectUtils.java:119)
+	at org.eclipse.egit.ui.internal.clone.ProjectUtils$1.run(ProjectUtils.java:91)
+	at org.eclipse.core.internal.resources.Workspace.run(Workspace.java:2345)
+	at org.eclipse.core.internal.resources.Workspace.run(Workspace.java:2327)
+	at org.eclipse.egit.ui.internal.clone.ProjectUtils.createProjects(ProjectUtils.java:111)
+	at org.eclipse.egit.ui.internal.clone.ProjectUtils.createProjects(ProjectUtils.java:55)
+	at org.eclipse.egit.ui.internal.clone.GitCreateProjectViaWizardWizard.importProjects(GitCreateProjectViaWizardWizard.java:164)
+	at org.eclipse.egit.ui.internal.clone.GitCreateProjectViaWizardWizard.access$1(GitCreateProjectViaWizardWizard.java:147)
+	at org.eclipse.egit.ui.internal.clone.GitCreateProjectViaWizardWizard$3.run(GitCreateProjectViaWizardWizard.java:131)
+	at org.eclipse.jface.operation.ModalContext$ModalContextThread.run(ModalContext.java:121)
+Contains: OK
+Contains: C:\Users\schad_000\Documents\GitHub\SouthParkTriviaMaze overlaps the workspace location: C:\Users\schad_000\Documents\GitHub\SouthParkTriviaMaze
+!SUBENTRY 1 org.eclipse.core.resources 4 77 2014-06-01 08:40:37.478
+!MESSAGE Invalid project description.
+!SUBENTRY 2 unknown 0 0 2014-06-01 08:40:37.478
+!MESSAGE OK
+!SUBENTRY 2 org.eclipse.core.resources 4 77 2014-06-01 08:40:37.478
+!MESSAGE C:\Users\schad_000\Documents\GitHub\SouthParkTriviaMaze overlaps the workspace location: C:\Users\schad_000\Documents\GitHub\SouthParkTriviaMaze

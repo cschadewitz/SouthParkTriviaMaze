@@ -65,7 +65,56 @@ public class QuestionDisplay implements DisplayQuestion{
 	}
 	
 
-	
+	public boolean doQuestion(Question q)
+	{
+		String answer = null;
+		if(q.getQuestionType() == 2)
+		{
+			try 
+			{
+				QuestionDispShort dialog = new QuestionDispShort(q.getQuestionText());
+				dialog.setDefaultCloseOperation(JDialog.DISPOSE_ON_CLOSE);
+				dialog.setModalityType(Dialog.ModalityType.DOCUMENT_MODAL);
+				dialog.setModal(true);
+				dialog.setVisible(true);
+				answer = dialog.getAns();
+				dialog.dispose();
+			} 
+			catch (Exception e)	
+			{
+				e.printStackTrace();
+			}
+		}
+		else if(q.getQuestionType() == 1)
+		{
+			try {
+				QuestionDispTF dialog = new QuestionDispTF(q.getQuestionText());
+				dialog.setDefaultCloseOperation(JDialog.DISPOSE_ON_CLOSE);
+				dialog.setModalityType(Dialog.ModalityType.DOCUMENT_MODAL);
+				dialog.setModal(true);
+				dialog.setVisible(true);
+				answer = dialog.getAns();
+				dialog.dispose();
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
+		}
+		else if(q.getQuestionType() == 0)
+		{
+			try {
+				QuestionDispMult dialog = new QuestionDispMult(q.getQuestionText(), q.getChoices().get(0), q.getChoices().get(1), q.getChoices().get(2), q.getChoices().get(3));
+				dialog.setDefaultCloseOperation(JDialog.DISPOSE_ON_CLOSE);
+				dialog.setModalityType(Dialog.ModalityType.DOCUMENT_MODAL);
+				dialog.setModal(true);
+				dialog.setVisible(true);
+				answer = dialog.getAns();
+				dialog.dispose();
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
+		}
+		return q.checkAnswer(answer);
+	}
 	public String doQuestion(String ques, String ans1, String ans2, String ans3, String ans4)
 	{
 	String answer = null;
