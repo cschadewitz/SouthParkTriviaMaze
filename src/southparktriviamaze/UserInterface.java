@@ -3,6 +3,8 @@ package southparktriviamaze;
 
 
 import java.awt.EventQueue;
+import java.awt.event.KeyEvent;
+import java.awt.event.KeyListener;
 
 import javax.swing.JFrame;
 import javax.swing.JButton;
@@ -26,6 +28,7 @@ import javax.swing.JLabel;
 import java.awt.Font;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
+import java.awt.event.KeyEvent;
 import java.awt.Color;
 
 ////////////////////////////////
@@ -57,8 +60,9 @@ import java.awt.GraphicsEnvironment;
 import java.awt.GridBagLayout;
 //=============================
 
-public class UserInterface {
+public class UserInterface{
 	private static GameCore core;
+	
 	
 	public static void main(String[] args) {
 		// TODO Auto-generated method stub
@@ -66,14 +70,9 @@ public class UserInterface {
 		UserInterface window;
 		//UpdateMaze upDateMazeData;
 		try {	
-			
-			
 			window = new UserInterface();
-
 			core = new GameCore(window, args);
-
 			core.startGame();
-			
 			txtrTest.invalidate();
 
 			
@@ -111,6 +110,8 @@ public class UserInterface {
 	private JButton btnHelp;
 	private JButton btnQuit;
 	private JButton btnTest;
+	
+	private UIKeyPressed key = new UIKeyPressed();
 	//private GameCore core;
 	/**
 	 * Create the application.
@@ -134,10 +135,11 @@ public class UserInterface {
 		frame.setResizable(false);	//prevents resizing the screen
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		frame.setVisible(true);
-		
+		frame.addKeyListener(key);
+		//frame.requestFocusInWindow();
 		//===========================================================================
 
-		//==========================================================================
+		//===========================================================================
 		//Background picture needs to be resized
 		//JLabel temp;
 		try{
@@ -145,7 +147,6 @@ public class UserInterface {
 		ImageIcon image = new ImageIcon(ImageIO.read(new File("Resources/testpic1.jpg")));//the backgound picture
 		JLabel imag = new JLabel(image);
 		imag.setText("Menu");
-		//temp = imag;
 		frame.setContentPane(imag);
 		//===========================================================================
 		}
@@ -154,10 +155,10 @@ public class UserInterface {
 			System.out.println("HELLO");
 		}
 
-		//=====================================================================
+		//============================================================================
 		
 		
-		//=====================================================================
+		//============================================================================
 		final JButton btnNewGame = new JButton("New Game");
 		btnSave = new JButton("Save/Load");
 		btnHelp = new JButton("HELP");
@@ -189,6 +190,18 @@ public class UserInterface {
 		final JPanel panel = new JPanel();
 		panel.setVisible(false);
 		
+		
+	//	MazeConversion mC = new MazeConversion(maze);
+		
+		//panel.printCharMaze();
+		
+		//JFrame frame = new JFrame();
+       // frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+       // frame.setSize(800, 800);
+ //       panel.add(mC);
+        frame.setVisible(true);
+        frame.setLocationRelativeTo(null);
+		
 
 		
 		
@@ -207,7 +220,7 @@ public class UserInterface {
 		 GraphicsEnvironment genv = GraphicsEnvironment.getLocalGraphicsEnvironment();
 		 genv.registerFont(mazeFont);
 		 // makesure to derive the size
-		 mazeFont = mazeFont.deriveFont(50f);
+		 mazeFont = mazeFont.deriveFont(20f);
 		 txtrTest.setFont((mazeFont));
 		 
 		 }
@@ -366,11 +379,13 @@ public class UserInterface {
 				btnSave.setVisible(false);
 				btnHelp.setVisible(false);
 				panel.setVisible(true);
-				
 				btnMoveUp.setVisible(true);
 				btnMoveDown.setVisible(true);
 				btnMoveLeft.setVisible(true);
 				btnMoveRight.setVisible(true);
+				frame.requestFocusInWindow();
+				key.setCore(core);
+				
 				//core.startGame();
 				}
 				else if(btnNewGame.getText().compareTo("Resume") == 0)
@@ -378,13 +393,12 @@ public class UserInterface {
 					btnNewGame.setText("Menu");
 					btnSave.setVisible(false);
 					btnHelp.setVisible(false);
-				
 					btnMoveUp.setVisible(true);
 					btnMoveDown.setVisible(true);
 					btnMoveLeft.setVisible(true);
 					btnMoveRight.setVisible(true);
-					
 					panel.setVisible(true);
+					key.setCore(core);
 					
 				}
 				else
@@ -393,16 +407,22 @@ public class UserInterface {
 					btnSave.setVisible(true);
 					btnHelp.setVisible(true);
 					panel.setVisible(false);
-					
 					btnMoveUp.setVisible(false);
 					btnMoveDown.setVisible(false);
 					btnMoveLeft.setVisible(false);
 					btnMoveRight.setVisible(false);
+					key.setCore(null);
 				}
 				
 				
 			}
 		});
+		// Read keyboard keys===================================================
+		//
+		
+		
+		
+		
 		//=====================================================================
 		//MOVE North
 		btnMoveUp.addActionListener(new ActionListener() 
@@ -431,6 +451,17 @@ public class UserInterface {
 				core.move(Direction.East);
 			}
 		});
+		
+		//
+//		@Override
+//		public void keyPressed(KeyEvent arg0)
+//		{
+//			// TODO Auto-generated method stub
+//			if(arg0.getKeyChar() == 'w' || arg0.getKeyChar() == 'W')
+//			{
+//				core.move(Direction.North);
+//			}
+//		}
 		//====================================================================
 		//MOVE South
 		btnMoveDown.addActionListener(new ActionListener() 
@@ -440,6 +471,8 @@ public class UserInterface {
 				core.move(Direction.South);
 			}
 		});
+		
+		
 	}
 		public void toggleButttonsOff()
 		{
@@ -482,7 +515,6 @@ public class UserInterface {
 		}
 		txtrTest.invalidate();
 		}
-
 	
 	
 
