@@ -42,7 +42,7 @@ public class SAQuestion implements Question {
 	public boolean checkAnswer(String choice) {
 		
 		if(choice == null || choice.isEmpty())
-			throw new IllegalArgumentException("Answer cannot be blank");
+			return false;
 		else
 			if(choice.equalsIgnoreCase(answerText) || choice.equals("AlphaOmega"))
 				return true;

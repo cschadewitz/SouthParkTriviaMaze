@@ -4,6 +4,9 @@ package southparktriviamaze;
 
 import java.awt.EventQueue;
 
+import javafx.embed.swing.JFXPanel;
+import javafx.scene.Scene;
+
 import javax.swing.JFrame;
 import javax.swing.JButton;
 
@@ -67,33 +70,16 @@ public class UserInterface {
 		//UpdateMaze upDateMazeData;
 		try {	
 			
-			
+			core = new GameCore(args);
+
 			window = new UserInterface();
-
-			core = new GameCore(window, args);
-
+			core.setWindow(window);
 			core.startGame();
+
+			
 			
 			txtrTest.invalidate();
 
-			
-			//QuestionDisplay question = new QuestionDisplay();
-			//System.out.println(question.askQuestion("I am Flying!!!!", "T", "F", null, null));
-			
-//			window.toggleButttonsOff();
-//			boolean TF = QuestionDisplay.askQuestion();
-//			window.toggleButtonsOn();
-			
-//			System.out.println(TF);
-			
-			
-			//upDateMazeData = new UpdateMaze(window);
-			
-			
-			
-			
-			//upDateMazeData.mazeData(maze);
-			//window.frame.setVisible(true);
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
@@ -102,6 +88,7 @@ public class UserInterface {
 	
 
 	private JFrame frame;
+	private static JPanel panel;
 	private static JTextArea txtrTest;
 	private JButton btnMoveDown;
 	private JButton btnMoveRight;
@@ -112,6 +99,16 @@ public class UserInterface {
 	private JButton btnQuit;
 	private JButton btnTest;
 	private JLabel imag;
+	private JPanel panelSound = new JPanel();
+	private final JFXPanel fxSound = new JFXPanel();
+	private MazeConversion mapConverter;
+	protected void setMedia(MediaPair media)
+	{
+		Scene scene = SpecialEffects.createScene(media);
+		fxSound.setScene(scene);
+	}
+	private UIKeyPressed key = new UIKeyPressed();
+	
 	//private GameCore core;
 	/**
 	 * Create the application.
@@ -137,7 +134,8 @@ public class UserInterface {
 		frame.setVisible(true);
 		
 		//===========================================================================
-
+		frame.addKeyListener(key);
+		frame.requestFocusInWindow();
 		//==========================================================================
 		//Background picture needs to be resized
 		//JLabel temp;
@@ -189,7 +187,7 @@ public class UserInterface {
 		frame.getContentPane().add(btnQuitGame);
 		frame.getContentPane().add(btnTest);
 		//=========================Panel start up================================
-		final JPanel panel = new JPanel();
+		panel = new JPanel();
 		sl_imag.putConstraint(SpringLayout.EAST, panel, -100, SpringLayout.EAST, imag);
 		panel.setVisible(false);
 		
@@ -211,7 +209,7 @@ public class UserInterface {
 		 GraphicsEnvironment genv = GraphicsEnvironment.getLocalGraphicsEnvironment();
 		 genv.registerFont(mazeFont);
 		 // makesure to derive the size
-		 mazeFont = mazeFont.deriveFont(50f);
+		 mazeFont = mazeFont.deriveFont(35f);
 		 txtrTest.setFont((mazeFont));
 		 txtrTest.setBackground(Color.DARK_GRAY);
 		 txtrTest.setForeground(Color.BLACK);
@@ -230,48 +228,16 @@ public class UserInterface {
 		 txtrTest.setEditable(false);
 		 //txtrTest.set
 		 panel.add(txtrTest);
-		 panel.setOpaque(false);
-		 txtrTest.setBounds(1920/2 - 450, 1080/2 - 400, 650, 670);
-		 //panel.setBounds(1920/2 - 325, 1080/2 - 335, 650, 670);
+		 panel.setOpaque(true);
+		 txtrTest.setBounds(1920/2 + 50, 1080/2 - 500, 300, 300);
 		 
-	//	UpdateMaze upDateMazeData = new UpdateMaze(this);
-	//	upDateMazeData.paintMaze(txtrTest);
-		
-		
-//		public void upMaze(int[][] maze)
-//		{
-//			try
-//			{
-//			txtrTest.setText("");
-//			for(int i=0; i<maze.length; i++)
-//			{
-//				for(int j=0; j<maze[i].length; j++)
-//				{
-//					txtrTest.setText(txtrTest.getText() + maze[i][j]);
-//				}
-//				txtrTest.setText(txtrTest.getText() + "\n");
-//			}
-//			}
-//			catch(Exception e)
-//			{
-//				txtrTest.setText("No maze yet\n ");
-//			}
-//		}
-		
-		
-		//========================================================================
-
-		
-		//panel.setVisible(false);
-		
-
 		sl_imag.putConstraint(SpringLayout.EAST, btnNewGame, -21, SpringLayout.WEST, panel);
 		sl_imag.putConstraint(SpringLayout.NORTH, panel, 35, SpringLayout.NORTH, frame.getContentPane());
 		sl_imag.putConstraint(SpringLayout.WEST, panel, 119, SpringLayout.WEST, frame.getContentPane());
 		frame.getContentPane().add(panel);
 		panel.setLayout(null);
 
-		panel.setBounds(1920/2 - 325, 1080/2 - 335, 650, 670);
+		panel.setBounds(1920/2 - 325, 1080/2 - 335, 1050, 670);
 		
 		final JButton btnMoveUp = new JButton("UP");
 		sl_imag.putConstraint(SpringLayout.SOUTH, panel, -17, SpringLayout.NORTH, btnMoveUp);
@@ -296,6 +262,19 @@ public class UserInterface {
 		btnMoveRight.setVisible(false);
 
 		panel.setBounds(1920/2 - 325, 1080/2 - 335, 650, 670);
+		panelSound.setBackground(new Color(255, 255, 255));
+		panelSound.setBounds(523, 13, 18, 18);
+		panel.add(panelSound);
+		panelSound.setVisible(false);
+		panelSound.add(fxSound);
+		
+		JPanel mazePanel = new JPanel();
+		mazePanel.setBounds(12, 13, 600, 600);
+		panel.add(mazePanel);
+		mapConverter = new MazeConversion(core.getMaze(), 1);
+		mazePanel.add(mapConverter);
+		mapConverter.setVisible(true);
+		mapConverter.setPreferredSize(new Dimension(600, 600));
 		
 		
 		final JButton btnMoveDown = new JButton("DOWN");
@@ -315,30 +294,7 @@ public class UserInterface {
 		sl_imag.putConstraint(SpringLayout.SOUTH, lblKennysQuest, -1, SpringLayout.NORTH, btnNewGame);
 		lblKennysQuest.setFont(new Font("Pristina", Font.BOLD, 24));
 		frame.getContentPane().add(lblKennysQuest);
-		//=======================================================
-//		try//working on loading a picture here for startup 
-//		{
-//		BufferedImage image = ImageIO.read(new File("Resources/testpic.jpg"));
-//		JLabel picLabel = new JLabel(new ImageIcon(image));
-////		 panel.add(picLabel);
-////		 
-////		 JTextArea txtrTest = new JTextArea();
-////		 
-////		 txtrTest.setEditable(false);
-////		 txtrTest.setText("test");
-////		 txtrTest.setBounds(37, 31, 555, 302);
-////		 panel.add(txtrTest);
-//		//panel.repaint();
-//
-//		}
-//		catch(Exception e)
-//		{
-//			System.out.println("Failed to load picture");
-//			panel.setBackground(new Color(103, 245, 34));
-//		}
-//		panel.repaint();
-		//=======================================================
-		//--------------Test-------------------------------------
+		
 		btnTest.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
 				System.out.println("test button still works!!!");	
@@ -364,7 +320,7 @@ public class UserInterface {
 			}
 		});
 		//========================================================
-		//-------------New GAme----------------------------------
+		//-------------New Game----------------------------------
 		btnNewGame.addActionListener(new ActionListener()
 		{
 			public void actionPerformed(ActionEvent arg0)
@@ -382,6 +338,8 @@ public class UserInterface {
 				btnMoveDown.setVisible(true);
 				btnMoveLeft.setVisible(true);
 				btnMoveRight.setVisible(true);
+				frame.requestFocusInWindow();
+				key.setCore(core);
 				//core.startGame();
 				}
 				else if(btnNewGame.getText().compareTo("Resume") == 0)
@@ -396,7 +354,8 @@ public class UserInterface {
 					btnMoveRight.setVisible(true);
 					
 					panel.setVisible(true);
-					
+
+					key.setCore(core);
 				}
 				else
 				{
@@ -409,6 +368,8 @@ public class UserInterface {
 					btnMoveDown.setVisible(false);
 					btnMoveLeft.setVisible(false);
 					btnMoveRight.setVisible(false);
+
+					key.setCore(null);
 				}
 				
 				
@@ -471,73 +432,43 @@ public class UserInterface {
 		}
 		
 		
-		public void mazeupdate(int[][] maze)
+		public void mazeupdate(Maze maze, Location player, Location destiniation)
 		{
-		try
+			int[][] array;
+			
+			mapConverter.setMaze(maze);
+			array = mapConverter.convertedMaze();
+			array[player.getRow()][ player.getColumn()] = 0;
+			array[destiniation.getRow()][destiniation.getColumn()] = 5;
+			mapUpdate(array);
+			mapConverter.printCharMaze();
+			mapConverter.setConvertedMaze(array);
+			mapConverter.repaint();
+			
+		}
+		
+		private void mapUpdate(int[][] maze)
 		{
-		txtrTest.setText("");
-		String board = "";
-		for(int i=0; i<maze.length; i++)
-		{
-			for(int j=0; j<maze[i].length; j++)
+			try
 			{
-				board += txtrTest.getText() + maze[i][j];
+			txtrTest.setText("");
+			String board = "";
+			for(int i=0; i<maze.length; i++)
+			{
+				for(int j=0; j<maze[i].length; j++)
+				{
+					board += txtrTest.getText() + maze[i][j];
+				}
+				board += (txtrTest.getText() + "\n");
 			}
-			board += (txtrTest.getText() + "\n");
+			txtrTest.setText(board);
+			}
+			catch(Exception e)
+			{
+				txtrTest.setText("No maze yet\n ");
+			}
+			txtrTest.invalidate();
 		}
-		txtrTest.setText(board);
-		}
-		catch(Exception e)
-		{
-			txtrTest.setText("No maze yet\n ");
-		}
-		txtrTest.invalidate();
-		}
-
-	
-	
-
-//	class UpdateMaze
-//	{
-//		
-//		private UserInterface mazeDisplay;
-//		private int[][] maze;// = new int[2][2];
-//		
-//		public UpdateMaze(UserInterface mazeDisplay)
-//		{
-//			this.mazeDisplay = mazeDisplay;
-//		}
-//		
-//		public void mazeData(int[][] maze)
-//		{
-//			this.maze = maze;
-//		}
-//		
-//		
-//		
-//		public void paintMaze(final JTextArea txtrTest)
-//		{
-//			try
-//			{
-//			txtrTest.setText("");
-//			for(int i=0; i<maze.length; i++)
-//			{
-//				for(int j=0; j<maze[i].length; j++)
-//				{
-//					txtrTest.setText(txtrTest.getText() + maze[i][j]);
-//				}
-//				txtrTest.setText(txtrTest.getText() + "\n");
-//			}
-//			}
-//			catch(Exception e)
-//			{
-//				txtrTest.setText("No maze yet\n ");
-//			}
-//		}
-//	}
-//	
-//
-//	
 }
 
 

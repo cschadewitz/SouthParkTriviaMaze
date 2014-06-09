@@ -18,12 +18,7 @@ public class Sounds extends Application {
 	private static MediaPlayer player;
 	private static Media mediaByte;
 	
-	public static void main(String[] args) 
-	{
-		
-		PreLaunch(Character.Cartman, MediaType.Failure);
-		
-	}
+	
 	public static void PreLaunch(Character character, MediaType media)
 	{
 		
@@ -59,9 +54,16 @@ public class Sounds extends Application {
 		// TODO Auto-generated method stub
 		
 	}
+	
 	private void playButtersSound(MediaType media) {
 		
 	}
+	private String[][] cartmanSoundPaths =
+		{
+			{"Resources/CartmanSuccess.mp3", "" },
+			{"Resources/CartmanFailure.mp3", "" },
+			{"Resources/CartmanNeedFood.mp3", "" }
+		};
 	private void playCartmanSound(MediaType media) 
 	{
 		File path;
