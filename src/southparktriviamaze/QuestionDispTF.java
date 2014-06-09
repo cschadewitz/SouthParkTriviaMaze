@@ -1,6 +1,12 @@
-//Olin L. Anderson
+/*Question DisplayTF
+ * Author: Olin L. Anderson
+ * Revision: 1
+ * Rev. Author:
+ * Description: displays a dialog box with a question and two buttons one true and one false. after a buton has been pressed the String finaAnswer
+ * is set to the buton which was pressed and the visibility of the dialog box is set to false. if the getAns method is called the finalAnswer string
+ * is returned.
+ */
 package southparktriviamaze;
-
 import java.awt.BorderLayout;
 import java.awt.FlowLayout;
 import java.awt.Toolkit;
@@ -28,11 +34,8 @@ import javax.swing.ButtonGroup;
 import java.awt.event.FocusAdapter;
 import java.awt.event.FocusEvent;
 
-public class QuestionDispTF extends JDialog {
-
-	/**
-	 * 
-	 */
+public class QuestionDispTF extends JDialog
+{
 	private static final long serialVersionUID = 1L;
 	private final JPanel contentPanel = new JPanel();
 	private JTextField questionTextField;
@@ -41,46 +44,23 @@ public class QuestionDispTF extends JDialog {
 	private JButton btnTrue = null;
 	private JButton btnFalse = null;
 
-	/**
-	 * Create the dialog.
-	 */
-	public QuestionDispTF(String question) {
+/*
+ * Initializes QuestonDispTF with the parameter String question
+ * parameters:
+ * String question the Question which will be displayed to the screen in the dialog box
+ * returns:
+ * none
+ * throws:
+ * 
+ */
+	public QuestionDispTF(String question) 
+	{
 		setBounds(100, 100, 450, 300);
 		getContentPane().setLayout(new BorderLayout());
-		
-		contentPanel.setBackground(Color.GRAY);
-		
+		contentPanel.setBackground(Color.GRAY);	
 		contentPanel.setBorder(new LineBorder(Color.YELLOW));
 		contentPanel.setLocation(800, 300);
 		setUndecorated(true);
-		
-		
-		
-		
-//		btnTrue.addKeyListener(new KeyAdapter() {
-//			@Override
-//			public void keyPressed(KeyEvent arg0) {
-//				if(arg0.getKeyCode() == KeyEvent.VK_UP)
-//				{
-//					finalAnswer = "True";
-//					btnTrue.setBorderPainted(true);
-//					btnFalse.setBorderPainted(false);
-//				}
-//				if(arg0.getKeyCode() == KeyEvent.VK_DOWN)
-//				{
-//					
-//					finalAnswer = "false)";
-//					btnTrue.setBorderPainted(false);
-//					btnFalse.setBorderPainted(true);
-//				}
-//				if(arg0.getKeyCode() == KeyEvent.VK_ENTER)
-//				{
-//					contentPanel.requestFocus(false);
-//					contentPanel.setVisible(false);
-//					//contentPanel.setFocusable(false);
-//				}
-//			}
-//		});
 		getContentPane().add(contentPanel, BorderLayout.CENTER);
 		{
 			questionTextField = new JTextField();
@@ -88,21 +68,27 @@ public class QuestionDispTF extends JDialog {
 			questionTextField.setBackground(Color.GRAY);
 			questionTextField.setColumns(10);
 			questionTextField.setEditable(false);
-
-			
 			questionTextField.setText(question);
-
-			
-			
 		}
 		int x = Math.max(0, (Toolkit.getDefaultToolkit().getScreenSize().width  - this.getSize().width));
 		int y =(int) Math.max(0, (Toolkit.getDefaultToolkit().getScreenSize().height  - this.getSize().height)/1.5);
-		setLocation(x, y);
-				
-		/*final JButton */btnTrue = new JButton("True");
-btnTrue.addKeyListener(new KeyAdapter() {
+		setLocation(x, y);		
+		btnTrue = new JButton("True");
+		
+		/* changes the focus in the dialog box or sets the finalAnswer Sting to 
+		 * true of false and sets visibility of dialog to false
+		 * parameters:
+		 * KeyEvent e the integer code for which key was pressed
+		 * returns
+		 * none
+		 * throws:
+		 * 
+		 */
+btnTrue.addKeyListener(new KeyAdapter()
+{
 	@Override
-	public void keyPressed(KeyEvent e) {
+	public void keyPressed(KeyEvent e) 
+	{
 		if(e.getKeyCode() == KeyEvent.VK_DOWN)
 		{
 		btnFalse.requestFocusInWindow();
@@ -117,57 +103,43 @@ btnTrue.addKeyListener(new KeyAdapter() {
 		}
 	}
 });
-		//btnTrue.setBorderPainted(false);
-
-		
-//		btnTrue.addFocusListener(new FocusAdapter() {
-//			@Override
-//			public void focusGained(FocusEvent e) {
-//				btnTrue.setBorderPainted(true);
-//				
-//				
-//				
-//			}
-//			@Override
-//			public void focusLost(FocusEvent e) {
-//				btnTrue.setBorderPainted(false);
-//			}
-//			
-//		});
-		//btnTrue.requestFocusInWindow();
-//		btnTrue.addFocusListener(new FocusAdapter() {
-//			@Override
-//			public void focusGained(FocusEvent arg0) {
-//				contentPanel.addKeyListener(new KeyAdapter() {
-//					@Override
-//					public void keyPressed(KeyEvent e) {
-//						if(e.getKeyCode() == (KeyEvent.VK_ENTER))
-//						{
-//							System.out.println("HELLO THERER");
-//							finalAnswer = "True";
-//							setVisible(false);
-//						}
-//					}
-//				});
-//				
-//			}
-//		});
 		buttonGroup.add(btnTrue);
 		btnTrue.setFont(new Font("Tahoma", Font.BOLD, 12));
 		btnTrue.setForeground(Color.YELLOW);
 		btnTrue.setBackground(Color.GRAY);
-//		btnTrue.requestFocus();
-		btnTrue.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
+		/*
+		 * sets the visibility of the dialog to false when button is pressed and the finalAnswerString to false
+		 * parameters:
+		 * ActionEvent e when the button is pressed
+		 * returns 
+		 * void
+		 * 
+		 */
+		btnTrue.addActionListener(new ActionListener()
+		{
+			public void actionPerformed(ActionEvent e) 
+			{
 				finalAnswer = "True";
 				setVisible(false);
 			}
 		});
 		
-		/*final JButton */btnFalse = new JButton("False");
-btnFalse.addKeyListener(new KeyAdapter() {
+		btnFalse = new JButton("False");
+		
+		/* changes the focus in the dialog box or sets the finalAnswer Sting to 
+		 * true of false and sets visibility of dialog to false
+		 * parameters:
+		 * KeyEvent e the integer code for which key was pressed
+		 * returns
+		 * none
+		 * throws:
+		 * 
+		 */
+btnFalse.addKeyListener(new KeyAdapter() 
+{
 	@Override
-	public void keyPressed(KeyEvent e) {
+	public void keyPressed(KeyEvent e)
+	{
 		if(e.getKeyCode() == KeyEvent.VK_UP)
 		{
 		btnTrue.requestFocusInWindow();
@@ -183,22 +155,22 @@ btnFalse.addKeyListener(new KeyAdapter() {
 	}
 });
 		btnFalse.setBorderPainted(false);
-//		btnFalse.addFocusListener(new FocusAdapter() {
-//			@Override
-//			public void focusGained(FocusEvent e) {
-//				btnFalse.setBorderPainted(true);
-//			}
-//			@Override
-//			public void focusLost(FocusEvent e) {
-//				btnFalse.setBorderPainted(false);
-//			}
-//		});
 		buttonGroup.add(btnFalse);
 		btnFalse.setForeground(Color.YELLOW);
 		btnFalse.setFont(new Font("Tahoma", Font.BOLD, 12));
 		btnFalse.setBackground(Color.GRAY);
-		btnFalse.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
+		/*
+		 * sets the visibility of the dialog to false when button is pressed and the finalAnswerString to false
+		 * parameters:
+		 * ActionEvent e when the button is pressed
+		 * returns 
+		 * void
+		 * 
+		 */
+		btnFalse.addActionListener(new ActionListener() 
+		{
+			public void actionPerformed(ActionEvent e)
+			{
 				finalAnswer = "False";
 				setVisible(false);
 			}
@@ -227,17 +199,17 @@ btnFalse.addKeyListener(new KeyAdapter() {
 					.addContainerGap(158, Short.MAX_VALUE))
 		);
 		contentPanel.setLayout(gl_contentPanel);
-		//btnTrue.requestFocusInWindow();
 		pack();
-//		contentPanel.getRootPane().setDefaultButton(btnTrue);
 		btnTrue.requestFocus();
-		//btnTrue.requestFocusInWindow();
-
-		//contentPanel.requestFocusInWindow();
-
 	}
 	
-
+	/*
+	 * returns the finalAnswer String 
+	 * parameters:
+	 * none
+	 * returns:
+	 * String finalAnswer the users answer to the question
+	 */
 	public String getAns()
 	{
 		return finalAnswer;

@@ -1,4 +1,10 @@
-//Olin L. Anderson
+/*QuestiondisplayShort
+ * Author: Olin L. Anderson
+ * Revision: 1
+ * Rev. Author:
+ * Description: displays a dialog with a question and a field for writing the answer, once the answer has been submitted the visibility f the dialog is set to false
+ * the getAns method is called and returns the String finalAnswer which was set when the submit button was pressed.
+ */
 //
 package southparktriviamaze;
 
@@ -28,20 +34,21 @@ import java.awt.event.WindowAdapter;
 import java.awt.Color;
 import java.awt.Font;
 
-public class QuestionDispShort extends JDialog {
-	/**
-	 * 
-	 */
+public class QuestionDispShort extends JDialog 
+{
 	private JTextField answerTextField;
 	private static final long serialVersionUID = 1L;
 	private String finalAnswer = "Wrong Answer";
 	private JTextField questionTextField;
 	
 
-	/**
-	 * Create the dialog.
+	/*Initializes the QuestionDisplayShort class with the String Question set as the displayed question
+	 * parameters:
+	 * String question is the question which will be displayed to the user
+	 * 
 	 */
-	public QuestionDispShort(String question) {
+	public QuestionDispShort(String question)
+	{
 		getContentPane().setForeground(Color.YELLOW);
 		getContentPane().setBackground(Color.GRAY);
 
@@ -57,15 +64,19 @@ public class QuestionDispShort extends JDialog {
 		answerTextField.setFont(new Font("Tahoma", Font.BOLD, 12));
 		answerTextField.setBackground(Color.GRAY);
 		answerTextField.setForeground(Color.YELLOW);
-//		answerTextField.addFocusListener(new FocusAdapter() {
-//			@Override
-//			public void focusGained(FocusEvent arg0) {
-//				answerTextField.requestFocus();
-//			}
-//		});
-		answerTextField.addKeyListener(new KeyAdapter() {
+/* 
+ * sets the finalAnswer tring to the user input and sets the visibility of the dialog to false
+ * parameters:
+ * KeyEvent arg0 a KeyEvent integer representing which key was pressed
+ * returns
+ * void
+ * throws 
+ */
+		answerTextField.addKeyListener(new KeyAdapter() 
+		{
 			@Override
-			public void keyPressed(KeyEvent arg0) {
+			public void keyPressed(KeyEvent arg0)
+			{
 				if(arg0.getKeyCode() == KeyEvent.VK_ENTER)
 				{
 					finalAnswer = answerTextField.getText();
@@ -75,7 +86,7 @@ public class QuestionDispShort extends JDialog {
 		});
 		answerTextField.setColumns(10);
 		int x = Math.max(0, (Toolkit.getDefaultToolkit().getScreenSize().width  - this.getSize().width));
-		int y =(int) Math.max(0, (Toolkit.getDefaultToolkit().getScreenSize().height  - this.getSize().height)/1.5);
+		int y = (int) Math.max(0, (Toolkit.getDefaultToolkit().getScreenSize().height  - this.getSize().height)/1.5);
 		setLocation(x, y);
 		
 		answerTextField.requestFocus();
@@ -84,6 +95,13 @@ public class QuestionDispShort extends JDialog {
 		btnSubmit.setFont(new Font("Tahoma", Font.BOLD, 12));
 		btnSubmit.setBackground(Color.GRAY);
 		btnSubmit.setForeground(Color.YELLOW);
+		/*
+		 * if the button is pressed the finalAnswer String is set to the userinPut and the visibility is set to fase
+		 * parameters:
+		 * ActionListener ActionEvent e the button being clicked
+		 *	returns 
+		 *	void
+		 */
 		btnSubmit.addActionListener(new ActionListener()
 		{
 			public void actionPerformed(ActionEvent e)
@@ -133,6 +151,14 @@ public class QuestionDispShort extends JDialog {
 		pack();
 		answerTextField.requestFocusInWindow();
 		
+		/*returns the finalAnswer string in the class
+		 * Parameters:
+		 * none
+		 * Returns:
+		 * String finalAnswer the users answer to the question displayed in the dialog box
+		 * throws:
+		 * 
+		 */
 	}
 	public String getAns()
 	{

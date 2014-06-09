@@ -1,4 +1,11 @@
-//Olin L. Anderson
+/*QuestionDisplay
+ * Author: Olin L. Anderson
+ * Revision: 2
+ * Rev. Author: Casey Schadewitz
+ * Description: QuestionDisplay acts as an intermediary between the generated questions and the classes which display the
+ * questions, QuestionDisplayShort, QuestionDisplayTF, QuestionDisplayMult, and selects the appropriate display class based 
+ * on the question which it receives from the questionfactory.
+ */
 package southparktriviamaze;
 
 import java.awt.Dialog;
@@ -65,7 +72,17 @@ public class QuestionDisplay implements DisplayQuestion{
 	}
 	
 
-	
+	/*takes in Strings as parameters and initalizes the appropriate questionDisplayClass based on the number
+	 *of Strings which are non null and retruns the answer
+	 *Parameters:
+	 *String ques the String that is the question to be asked
+	 *String ans1 the first answer String
+	 *String ans2 the second answer String
+	 *String ans3 the third answer String
+	 *String ans4 the fourth answer String
+	 *Returns:
+	 *String answer a String which holds the returned answer for the appropriate questionDisplay class
+	 */
 	public String doQuestion(String ques, String ans1, String ans2, String ans3, String ans4)
 	{
 	String answer = null;

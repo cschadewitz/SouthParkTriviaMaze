@@ -1,4 +1,12 @@
-//Olin L. Anderson
+/*QuestionDisplayMult
+ * Author: Olin L. Anderson
+ * Revision: 1
+ * Rev. Author:
+ * Description: Displays a dialog box showing a question and 4 answers with associated buttons. when a button is pressed 
+ * the String finalAnswer is set the the appropriate answer and the diablogs visibility is set to false.
+ * 
+ * A second method get answer can be called which will return the value of the finalAnswer String.
+ */
 package southparktriviamaze;
 
 import java.awt.EventQueue;
@@ -22,24 +30,36 @@ import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
 import java.awt.Color;
 
-public class QuestionDispMult extends JDialog {
+public class QuestionDispMult extends JDialog 
+{
 
 	private String finalAnswer = "Not Good";
 	private JTextField questionTextField;
+	//btnAnsA is the button for answer A 
 	private JButton btnAnsA;
 	private JButton btnAnsB;
 	private JButton btnAnsC;
 	private JButton btnAnsD;
+	//lblAnsA is the label for button A
 	private JLabel lblAnsA;
 	private JLabel lblAnsB;
 	private JLabel lblAnsC;
 	private JLabel lblAnsD;
 
 
-	/**
-	 * Create the dialog.
-	 */
-	public QuestionDispMult(String question, String ans1, String ans2, String ans3, String ans4) {
+/*
+ * Initializes a new QuestionDisplayMult diolog with question and answers set based on the parameters
+ * Parameters:
+ * String question is the String for the question to be displayed
+ * String ans1 is the String for the Answer a to be displayed
+ * String ans2 is the String for the Answer B to be displayed
+ * String ans3 is the String for the Answer C to be displayed
+ * String ans4 is the String for the Answer D to be displayed
+ *
+ *Note: the Code for generateing the dialog Box was originally produced by WindowBuilder in eclipse and was modifed by Olin L. Anderson 
+ */
+	public QuestionDispMult(String question, String ans1, String ans2, String ans3, String ans4)
+	{
 		getContentPane().setBackground(Color.GRAY);
 		getContentPane().setForeground(Color.YELLOW);
 		setBounds(100, 100, 450, 300);
@@ -74,9 +94,16 @@ public class QuestionDispMult extends JDialog {
 		btnAnsA = new JButton("A");
 		btnAnsA.setBackground(Color.GRAY);
 		btnAnsA.setForeground(Color.YELLOW);
-
-		btnAnsA.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent arg0) {
+		/*sets the finalAnswer to the corresponding String and sets visibility to false
+		 * Parameters:
+		 * ActionListener ActionPerformed e activated when the button is pressed
+		 * returns:
+		 * void
+		 */
+		btnAnsA.addActionListener(new ActionListener()
+		{
+			public void actionPerformed(ActionEvent arg0) 
+			{
 				finalAnswer = lblAnsA.getText();
 				setVisible(false);
 			}
@@ -85,8 +112,16 @@ public class QuestionDispMult extends JDialog {
 		btnAnsB = new JButton("B");
 		btnAnsB.setBackground(Color.GRAY);
 		btnAnsB.setForeground(Color.YELLOW);
-		btnAnsB.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
+		/*sets the finalAnswer to the corresponding String and sets visibility to false
+		 * Parameters:
+		 * ActionListener ActionPerformed e activated when the button is pressed
+		 * returns:
+		 * void
+		 */
+		btnAnsB.addActionListener(new ActionListener() 
+		{
+			public void actionPerformed(ActionEvent e)
+			{
 				finalAnswer = lblAnsB.getText();
 				setVisible(false);
 			}
@@ -95,8 +130,16 @@ public class QuestionDispMult extends JDialog {
 		btnAnsC = new JButton("C");
 		btnAnsC.setBackground(Color.GRAY);
 		btnAnsC.setForeground(Color.YELLOW);
-		btnAnsC.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
+		/*sets the finalAnswer to the corresponding String and sets visibility to false
+		 * Parameters:
+		 * ActionListener ActionPerformed e activated when the button is pressed
+		 * returns:
+		 * void
+		 */
+		btnAnsC.addActionListener(new ActionListener()
+		{
+			public void actionPerformed(ActionEvent e) 
+			{
 				finalAnswer = lblAnsC.getText();
 				setVisible(false);
 			}
@@ -105,8 +148,16 @@ public class QuestionDispMult extends JDialog {
 		btnAnsD = new JButton("D");
 		btnAnsD.setBackground(Color.GRAY);
 		btnAnsD.setForeground(Color.YELLOW);
-		btnAnsD.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
+		/*sets the finalAnswer to the corresponding String and sets visibility to false
+		 * Parameters:
+		 * ActionListener ActionPerformed e activated when the button is pressed
+		 * returns:
+		 * void
+		 */
+		btnAnsD.addActionListener(new ActionListener() 
+		{
+			public void actionPerformed(ActionEvent e) 
+			{
 				finalAnswer = lblAnsD.getText();
 				setVisible(false);
 			}
@@ -114,9 +165,18 @@ public class QuestionDispMult extends JDialog {
 		
 		
 //===================================================================
-		btnAnsA.addKeyListener(new KeyAdapter() {
+		/*when the btnAnsA has focus it sets the finalAnswer to the corresponding String and set visibility to false
+		 * Parameters:
+		 * KeyEvent e an integer representing the key pressed
+		 * returns 
+		 * Void
+		 * 
+		 */
+		btnAnsA.addKeyListener(new KeyAdapter() 
+		{
 			@Override
-			public void keyPressed(KeyEvent e) {
+			public void keyPressed(KeyEvent e) 
+			{
 				if(e.getKeyCode() == KeyEvent.VK_DOWN)
 				{
 					btnAnsB.requestFocus();
@@ -130,9 +190,18 @@ public class QuestionDispMult extends JDialog {
 				}
 			}
 		});
-		btnAnsB.addKeyListener(new KeyAdapter() {
+		/*when the btnAnsB has focus it sets the finalAnswer to the corresponding String and set visibility to false
+		 * Parameters:
+		 * KeyEvent e an integer representing the key pressed
+		 * returns 
+		 * Void
+		 * 
+		 */
+		btnAnsB.addKeyListener(new KeyAdapter() 
+		{
 			@Override
-			public void keyPressed(KeyEvent e) {
+			public void keyPressed(KeyEvent e) 
+			{
 				if(e.getKeyCode() == KeyEvent.VK_DOWN)
 				{
 					btnAnsC.requestFocus();
@@ -152,9 +221,18 @@ public class QuestionDispMult extends JDialog {
 				}
 			}
 		});
-		btnAnsC.addKeyListener(new KeyAdapter() {
+		/*when the btnAnsC has focus it sets the finalAnswer to the corresponding String and set visibility to false
+		 * Parameters:
+		 * KeyEvent e an integer representing the key pressed
+		 * returns 
+		 * Void
+		 * 
+		 */
+		btnAnsC.addKeyListener(new KeyAdapter() 
+		{
 			@Override
-			public void keyPressed(KeyEvent e) {
+			public void keyPressed(KeyEvent e)
+			{
 				if(e.getKeyCode() == KeyEvent.VK_DOWN)
 				{
 					btnAnsD.requestFocus();
@@ -174,9 +252,18 @@ public class QuestionDispMult extends JDialog {
 				}
 			}
 		});
-		btnAnsD.addKeyListener(new KeyAdapter() {
+		/*when the btnAnsD has focus it sets the finalAnswer to the corresponding String and set visibility to false
+		 * Parameters:
+		 * KeyEvent e an integer representing the key pressed
+		 * returns 
+		 * Void
+		 * 
+		 */
+		btnAnsD.addKeyListener(new KeyAdapter() 
+		{
 			@Override
-			public void keyPressed(KeyEvent e) {
+			public void keyPressed(KeyEvent e) 
+			{
 				if(e.getKeyCode() == KeyEvent.VK_UP)
 				{
 					btnAnsC.requestFocus();
@@ -248,12 +335,23 @@ public class QuestionDispMult extends JDialog {
 		btnAnsD.setBorderPainted(false);
 		
 	}
-	
+	/*returns the String finalAnswer
+	 * Parameters:
+	 * none
+	 * return String for the finalAnswer
+	 * throws:
+	 */
 	public String getAns()
 	{
 		return finalAnswer;
 	}
 
+	/*mixes the String in the String array parameter and returns a mixed Sting array
+	 * Parameters:
+	 * String[] org is the original order of the incoming strings
+	 * returns:
+	 *String[] mixed a string array with the incoming strings orders mixed.
+	 */
 private String[] mix(String[] org)
 {
 
