@@ -356,9 +356,8 @@ public class UserInterface{
 				btnMoveDown.setVisible(true);
 				btnMoveLeft.setVisible(true);
 				btnMoveRight.setVisible(true);
-				
+				//==========================================================================================				
 				frame.requestFocusInWindow();
-				//==========================================================================================
 				key.setCore(core);
 				//==========================================================================================
 				//core.startGame();
