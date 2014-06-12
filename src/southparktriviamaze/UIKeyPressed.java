@@ -9,11 +9,9 @@ package southparktriviamaze;
 
 import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
-//import java.awt.event.KeyListener;
 
-
-
-public class UIKeyPressed extends KeyAdapter {
+public class UIKeyPressed extends KeyAdapter 
+{
 
 	private GameCore core;
 
@@ -39,14 +37,10 @@ public class UIKeyPressed extends KeyAdapter {
 	 * throws:
 	 */
 	@Override
-	public void keyPressed(KeyEvent arg0) {
-
-		//System.out.println(arg0.getKeyChar());
-		
-		
+	public void keyPressed(KeyEvent arg0) 
+	{
 		if(arg0.getKeyChar() == 'W' || arg0.getKeyChar() == 'w')
 		{
-			//System.out.println("HELLO OLIN YOU PRESSED W");
 			core.move(Direction.North);
 		}
 		else if(arg0.getKeyChar() == 'A' || arg0.getKeyChar() == 'a')
@@ -78,5 +72,4 @@ public class UIKeyPressed extends KeyAdapter {
 			core.move(Direction.South);
 		}
 	}
-
 }

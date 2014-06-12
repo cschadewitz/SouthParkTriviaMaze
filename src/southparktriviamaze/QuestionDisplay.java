@@ -1,70 +1,30 @@
-//Olin L. Anderson
+/*
+ * QuestionDisplay
+ * Author: Olin L. Anderson
+ * Revision:2
+ * Rev. Author: Casey Schadewitz
+ * Description:
+ * selects the appropriate Question display class to display the question to the user
+ * 
+ */
 package southparktriviamaze;
 
 import java.awt.Dialog;
-import java.awt.EventQueue;
-import java.util.concurrent.CountDownLatch;
-
 import javax.swing.JDialog;
 
 
-public class QuestionDisplay implements DisplayQuestion{
-
-	int questionNumber = 0;
-	String ans=null;
-	public boolean askQuestion()
-	{
-		
-//		QuestionFactory questionFactory =new RandomQuestionFactory();
-//		Question question = questionFactory.getQuestion();
-//		String[] answers = new String[4];
-//		question.questions.toString(answers);
-//		String answer = doQuestion(question.question, answers[0], answers[1], answers[2], answers[3]);
-//		return question.isCorrect(answer);	
-		
-		//=============================================================================
-		//DUMMY QUESTIONS
-		//Question question = new Question();
-		
-		//String answer = doQuestion("WHAT IS UP BUD?", null, null, null, null);
-		//String answer = doQuestion("WHAT is your name?", "true", "false", "BO", "BOB");
-		String answer = "";
-		switch(questionNumber)
-		{
-			case 0: answer =  doQuestion("Am I flying now, how about now?", "T", "F", null, null);
-							  ans = "True";
-				break;
-			case 1: answer =  doQuestion("What is my name?", "Kenny", "Stan", "Kyle", "Cartman");
-							  ans = "Kenny";
-				break;
-			case 2: answer =  doQuestion("I have a super power?", "T", "F", null, null);
-							  ans = "True";
-				break;
-			case 3: answer =  doQuestion("What is Cartman's alter-ego?", null, null, null, null);
-							  ans = "The Coon";
-				break;
-			case 4: answer =  doQuestion("What is my alter-ego", null, null, null, null);
-							  ans = "Mysterion";
-				break;
-		}
-		
-		questionNumber = (questionNumber % 5) + 1;
-		//System.out.println(answer);
-		
-		///////////////////============================================================
-
-		System.out.println(answer);
-		
-		//return(question.isCorrect(answer));
-		
-		if(answer.toLowerCase().compareTo(ans.toLowerCase()) == 0 || answer.compareTo("AlphaOmega") == 0)
-		{
-			return true;
-		}
-		return false;
-	}
+public class QuestionDisplay
+{
 	
-
+/*
+ * call the correct class to display the question
+ * Parameters:
+ * Question q the question and answer to be displayed
+ * returns:
+ * boolean
+ * throws:
+ * none
+ */
 	public boolean doQuestion(Question q)
 	{
 		String answer = null;
@@ -115,6 +75,21 @@ public class QuestionDisplay implements DisplayQuestion{
 		}
 		return q.checkAnswer(answer);
 	}
+	/*
+	 * call the correct class to display the question
+	 * Parameters:
+	 * String ques the question
+	 * String ans1 the first answer
+	 * String ans2 the second answer
+	 * String ans3 the third answer
+	 * String ans4 the fourth answer
+	 * returns:
+	 * String the answer
+	 * throws:
+	 * none
+	 * (non-Javadoc)
+	 * @see southparktriviamaze.DisplayQuestion#doQuestion(java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String)
+	 */
 	public String doQuestion(String ques, String ans1, String ans2, String ans3, String ans4)
 	{
 	String answer = null;
