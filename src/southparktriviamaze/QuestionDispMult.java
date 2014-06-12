@@ -20,6 +20,7 @@ import java.awt.BorderLayout;
 import javax.swing.GroupLayout;
 import javax.swing.GroupLayout.Alignment;
 import javax.swing.JButton;
+import javax.swing.JTextPane;
 import javax.swing.LayoutStyle.ComponentPlacement;
 import javax.swing.JLabel;
 
@@ -33,7 +34,7 @@ import java.awt.Color;
 public class QuestionDispMult extends JDialog {
 
 	private String finalAnswer = "Not Good";
-	private JTextField questionTextField;
+	private JTextPane questionTextField;
 	//btnAnsA is the button for answer A 
 	private JButton btnAnsA;
 	private JButton btnAnsB;
@@ -62,16 +63,17 @@ public class QuestionDispMult extends JDialog {
 		getContentPane().setForeground(Color.YELLOW);
 		setBounds(100, 100, 450, 300);
 		
-		questionTextField = new JTextField();
+		questionTextField = new JTextPane();
 		questionTextField.setBackground(Color.GRAY);
 		questionTextField.setForeground(Color.YELLOW);
-		questionTextField.setColumns(10);
+
+		System.out.println(question.length());
 		questionTextField.setText(question);
 		questionTextField.setEditable(false);
 		
 		setUndecorated(true);
 		int x = Math.max(0, (Toolkit.getDefaultToolkit().getScreenSize().width  - this.getSize().width));
-		int y =(int) Math.max(0, (Toolkit.getDefaultToolkit().getScreenSize().height  - this.getSize().height)/1.2);
+		int y =(int) Math.max(0, (Toolkit.getDefaultToolkit().getScreenSize().height  - this.getSize().height)/1.5);
 		
 		setLocation(x, y);
 		String[] answers = {ans1, ans2, ans3, ans4};

@@ -2,7 +2,7 @@ package southparktriviamaze;
 
 import java.awt.EventQueue;
 
-import javafx.application.Platform;
+//import javafx.application.Platform;
 
 import javax.swing.SwingUtilities;
 
@@ -19,12 +19,12 @@ public class GameCore {
 	private QuestionDisplay qd = new QuestionDisplay();
 	private MediaPair media;
 	private Character playerCharacter = Character.Butters;
-	private Runnable playEffect = new Runnable() {
-		@Override
-		public void run() {
-			window.setMedia(media);
-		}
-	};
+//	private Runnable playEffect = new Runnable() {
+//		@Override
+//		public void run() {
+//			window.setMedia(media);
+//		}
+//	};
 	public GameCore(String[]cheats)
 	{
 
@@ -82,7 +82,7 @@ public class GameCore {
 					if( !(qd.doQuestion(quest)))
 					{
 						media = new MediaPair(playerCharacter, MediaType.Failure);
-						Platform.runLater(playEffect);
+			//			Platform.runLater(playEffect);
 						return;
 					}
 				} catch (SQLException e) {
@@ -91,7 +91,7 @@ public class GameCore {
 					return;
 				}
 				media = new MediaPair(playerCharacter, MediaType.Success);
-				Platform.runLater(playEffect);
+		//		Platform.runLater(playEffect);
 				/*mapConverter = new MazeConversion(map);
 				array = mapConverter.convertedMaze();
 				

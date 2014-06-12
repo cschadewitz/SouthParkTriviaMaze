@@ -31,7 +31,7 @@ public class UIKeyPressed extends KeyAdapter {
 	}
 	
 	/*
-	 * checks which key was pressed on the keyboard and calls a move instruction of the corect keys are ressed
+	 * checks which key was pressed on the keyboard and calls a move instruction of the correct keys are pressed
 	 * Parameters:
 	 * KeyEvent arg0 The data for which key was pressed.
 	 * Returns:

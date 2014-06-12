@@ -23,6 +23,7 @@ import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
 
 import javax.swing.JTextField;
+import javax.swing.JTextPane;
 import javax.swing.LayoutStyle.ComponentPlacement;
 import javax.swing.JLabel;
 
@@ -39,7 +40,7 @@ public class QuestionDispShort extends JDialog
 	private JTextField answerTextField;
 	private static final long serialVersionUID = 1L;
 	private String finalAnswer = "Wrong Answer";
-	private JTextField questionTextField;
+	private JTextPane questionTextField;
 	
 
 	/*Initializes the QuestionDisplayShort class with the String Question set as the displayed question
@@ -54,24 +55,23 @@ public class QuestionDispShort extends JDialog
 
 		setBounds(100, 100, 450, 300);
 		setUndecorated(true);
-		questionTextField = new JTextField();
+		questionTextField = new JTextPane();
 		questionTextField.setForeground(Color.YELLOW);
 		questionTextField.setBackground(Color.GRAY);
-		questionTextField.setColumns(10);
 		questionTextField.setText(question);
 		questionTextField.setEditable(false);
 		answerTextField = new JTextField();
 		answerTextField.setFont(new Font("Tahoma", Font.BOLD, 12));
 		answerTextField.setBackground(Color.GRAY);
 		answerTextField.setForeground(Color.YELLOW);
-/* 
- * sets the finalAnswer tring to the user input and sets the visibility of the dialog to false
- * parameters:
- * KeyEvent arg0 a KeyEvent integer representing which key was pressed
- * returns
- * void
- * throws 
- */
+		/* 
+		 * sets the finalAnswer tring to the user input and sets the visibility of the dialog to false
+		 * parameters:
+		 * KeyEvent arg0 a KeyEvent integer representing which key was pressed
+		 * returns
+		 * void
+		 * throws 
+		 */
 		answerTextField.addKeyListener(new KeyAdapter() 
 		{
 			@Override

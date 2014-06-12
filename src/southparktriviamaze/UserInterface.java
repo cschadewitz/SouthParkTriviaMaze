@@ -1,11 +1,16 @@
+/*UserInterface
+ * Author: Olin L. Anderson
+ * Revision: 2
+ * Rev. Author: Casey Schadewitz
+ * Description: the primary userInterface where the maze mas are displayed for the user and the user is able to chouse what 
+ * direction they would like to go next. 
+ */
 package southparktriviamaze;
-
-
 
 import java.awt.EventQueue;
 
-import javafx.embed.swing.JFXPanel;
-import javafx.scene.Scene;
+//import javafx.embed.swing.JFXPanel;
+//import javafx.scene.Scene;
 
 import javax.swing.JFrame;
 import javax.swing.JButton;
@@ -58,35 +63,37 @@ import java.awt.Graphics;
 import java.awt.Graphics2D;
 import java.awt.GraphicsEnvironment;
 import java.awt.GridBagLayout;
-//=============================
 
-public class UserInterface {
+public class UserInterface 
+{
 	private static GameCore core;
 	
-	public static void main(String[] args) {
-		// TODO Auto-generated method stub
-		//System.out.println("HELLO WORLD");
+	/*
+	 * programs start location, displays the user interface screen and starts the game core
+	 * Parameters:
+	 * String[] args: the games cheat codes
+	 * Returns:
+	 * void
+	 * throws:
+	 * none
+	 */
+	public static void main(String[] args) 
+	{
 		UserInterface window;
-		//UpdateMaze upDateMazeData;
-		try {	
-			
+		try 
+		{	
 			core = new GameCore(args);
-
 			window = new UserInterface();
 			core.setWindow(window);
 			core.startGame();
-
-			
-			
 			txtrTest.invalidate();
-
-		} catch (Exception e) {
+		} 
+		catch (Exception e)
+		{
 			e.printStackTrace();
 		}
-		
 	}
 	
-
 	private JFrame frame;
 	private static JPanel panel;
 	private static JTextArea txtrTest;
@@ -94,36 +101,42 @@ public class UserInterface {
 	private JButton btnMoveRight;
 	private JButton btnMoveLeft;
 	private JButton btnMoveUp;
-	private JButton btnSave;
 	private JButton btnHelp;
-	private JButton btnQuit;
-	private JButton btnTest;
+	private JButton btnQuitt;
+//	private JButton btnQuit;
 	private JLabel imag;
 	private JPanel panelSound = new JPanel();
-	private final JFXPanel fxSound = new JFXPanel();
+//	private final JFXPanel fxSound = new JFXPanel();
 	private MazeConversion mapConverter;
-	protected void setMedia(MediaPair media)
-	{
-		Scene scene = SpecialEffects.createScene(media);
-		fxSound.setScene(scene);
-	}
+//	protected void setMedia(MediaPair media)
+//	{
+//		Scene scene = SpecialEffects.createScene(media);
+//		fxSound.setScene(scene);
+//	}
 	private UIKeyPressed key = new UIKeyPressed();
 	
 	//private GameCore core;
-	/**
-	 * Create the application.
+	/*
+	 * calls the initialization of the UserInterface
+	 * Parameters:
+	 * none
+	 * Returns:
+	 * void
+	 * throws:
+	 * none
 	 */
-	public UserInterface() {
+	public UserInterface() 
+	{
 		initialize();
-		//QuestionDisplay.askQuestion();
 	}
-	
-
-	
-	/**
-	 * Initialize the contents of the frame.
-	 */
-	private void initialize() {
+/*
+ * Initializes the UserInterface class and displays the game screen
+ * the UserInterface was designed using eclipse windowBuilder plugin and 
+ * then the code was modified by Olin L. Anderson for the appropriate 
+ * key listeners and button actions.
+ */
+	private void initialize() 
+	{
 		frame = new JFrame("Kenny's Quest");
 		frame.getContentPane().setBackground(Color.DARK_GRAY);
 		frame.setBounds(0, 0, 772, 508);	//default size
@@ -137,96 +150,78 @@ public class UserInterface {
 		frame.addKeyListener(key);
 		frame.requestFocusInWindow();
 		//==========================================================================
-		//Background picture needs to be resized
-		//JLabel temp;
-		try{
-			
+		try
+		{
 		ImageIcon image = new ImageIcon(ImageIO.read(new File("Resources/1411_coon-2-hindsight_1920x1200.jpg")));//the backgound picture
 		imag = new JLabel(image);
 		imag.setBounds(0, 0, 1080, 1920);
-		
-		//imag.setText("Menu");
-		//temp = imag;
 		frame.setContentPane(imag);
 		//===========================================================================
 		}
 		catch(Exception e)
 		{
-			System.out.println("HELLO");
+			System.out.println("Picture Failure");
 		}
-
-		//=====================================================================
-		
-		
 		//=====================================================================
 		final JButton btnNewGame = new JButton("New Game");
-		btnSave = new JButton("Save/Load");
-		btnHelp = new JButton("HELP");
-		final JButton btnQuitGame = new JButton("Quit Game");
-		btnTest = new JButton("TEST");
-				
+		btnHelp = new JButton("Help");
+		btnHelp.addActionListener(new ActionListener() 
+		{
+			public void actionPerformed(ActionEvent arg0) 
+			{
+				UserHelp.help();
+			}
+		});
+		btnQuitt = new JButton("Quit");
+		btnQuitt.addActionListener(new ActionListener()
+		{
+			public void actionPerformed(ActionEvent arg0) 
+			{
+				frame.setVisible(false);
+				frame.dispose();
+			}
+		});
 		SpringLayout sl_imag = new SpringLayout();
 		sl_imag.putConstraint(SpringLayout.WEST, btnNewGame, 0, SpringLayout.WEST, frame.getContentPane());
-		sl_imag.putConstraint(SpringLayout.NORTH, btnTest, 6, SpringLayout.SOUTH, btnQuitGame);
-		sl_imag.putConstraint(SpringLayout.EAST, btnTest, 0, SpringLayout.EAST, btnNewGame);
-		sl_imag.putConstraint(SpringLayout.NORTH, btnQuitGame, 6, SpringLayout.SOUTH, btnHelp);
-		sl_imag.putConstraint(SpringLayout.EAST, btnQuitGame, 0, SpringLayout.EAST, btnNewGame);
-		sl_imag.putConstraint(SpringLayout.NORTH, btnHelp, 6, SpringLayout.SOUTH, btnSave);
+		sl_imag.putConstraint(SpringLayout.NORTH, btnQuitt, 6, SpringLayout.SOUTH, btnHelp);
+		sl_imag.putConstraint(SpringLayout.EAST, btnQuitt, 0, SpringLayout.EAST, btnNewGame);
 		sl_imag.putConstraint(SpringLayout.EAST, btnHelp, 0, SpringLayout.EAST, btnNewGame);
-		sl_imag.putConstraint(SpringLayout.EAST, btnSave, 0, SpringLayout.EAST, btnNewGame);
-		sl_imag.putConstraint(SpringLayout.WEST, btnTest, 0, SpringLayout.WEST, frame.getContentPane());
-		sl_imag.putConstraint(SpringLayout.WEST, btnQuitGame, 0, SpringLayout.WEST, frame.getContentPane());
+		sl_imag.putConstraint(SpringLayout.WEST, btnQuitt, 0, SpringLayout.WEST, frame.getContentPane());
+		sl_imag.putConstraint(SpringLayout.NORTH, btnHelp, 6, SpringLayout.SOUTH, btnNewGame);
 		sl_imag.putConstraint(SpringLayout.WEST, btnHelp, 0, SpringLayout.WEST, frame.getContentPane());
-		sl_imag.putConstraint(SpringLayout.NORTH, btnSave, 6, SpringLayout.SOUTH, btnNewGame);
-		sl_imag.putConstraint(SpringLayout.WEST, btnSave, 0, SpringLayout.WEST, frame.getContentPane());
 		sl_imag.putConstraint(SpringLayout.NORTH, btnNewGame, 35, SpringLayout.NORTH, frame.getContentPane());
 		frame.getContentPane().setLayout(sl_imag);
 		frame.getContentPane().add(btnNewGame);
-		frame.getContentPane().add(btnSave);
 		frame.getContentPane().add(btnHelp);
-		frame.getContentPane().add(btnQuitGame);
-		frame.getContentPane().add(btnTest);
+		frame.getContentPane().add(btnQuitt);
 		//=========================Panel start up================================
 		panel = new JPanel();
 		sl_imag.putConstraint(SpringLayout.EAST, panel, -100, SpringLayout.EAST, imag);
 		panel.setVisible(false);
-		
-
-		
-		
-		
-		//========================================================================
-		// panel.add(picLabel);
-		 
+		//=========================================================================
 		 txtrTest = new JTextArea();
 		 //setup font=============================================================
 		 try
 		 {
-			// File fontFile = new File("/mazeCells");
 			 InputStream mazeF = new FileInputStream("Resources//MazeCells.TTF");
 			 
-		 Font mazeFont = Font.createFont(Font.TRUETYPE_FONT, mazeF);
-		 GraphicsEnvironment genv = GraphicsEnvironment.getLocalGraphicsEnvironment();
-		 genv.registerFont(mazeFont);
-		 // makesure to derive the size
-		 mazeFont = mazeFont.deriveFont(35f);
-		 txtrTest.setFont((mazeFont));
-		 txtrTest.setBackground(Color.DARK_GRAY);
-		 txtrTest.setForeground(Color.BLACK);
-		 
+			 Font mazeFont = Font.createFont(Font.TRUETYPE_FONT, mazeF);
+			 GraphicsEnvironment genv = GraphicsEnvironment.getLocalGraphicsEnvironment();
+			 genv.registerFont(mazeFont);
+			 // makesure to derive the size
+			 mazeFont = mazeFont.deriveFont(35f);
+			 txtrTest.setFont((mazeFont));
+			 txtrTest.setBackground(Color.DARK_GRAY);
+		 	 txtrTest.setForeground(Color.BLACK);
 		 }
 		 catch(Exception e)
 		 {
 			 System.out.println("The font was nott found");
 			 txtrTest.setFont(new Font("Monospaced", Font.BOLD, 22));
 		 }
-		 
 		 //=======================================================================
 		 
-		// txtrTest.setFont(new Font("Monospaced", Font.BOLD, 22));
-		 
 		 txtrTest.setEditable(false);
-		 //txtrTest.set
 		 panel.add(txtrTest);
 		 panel.setOpaque(true);
 		 txtrTest.setBounds(1920/2 + 50, 1080/2 - 500, 300, 300);
@@ -266,7 +261,7 @@ public class UserInterface {
 		panelSound.setBounds(523, 13, 18, 18);
 		panel.add(panelSound);
 		panelSound.setVisible(false);
-		panelSound.add(fxSound);
+//		panelSound.add(fxSound);
 		
 		JPanel mazePanel = new JPanel();
 		mazePanel.setBounds(12, 13, 600, 600);
@@ -289,51 +284,34 @@ public class UserInterface {
 		btnMoveDown.setVisible(false);
 		
 		JLabel lblKennysQuest = new JLabel("Kenny's Quest");
-		lblKennysQuest.setForeground(new Color(128, 128, 0));
+		lblKennysQuest.setForeground(Color.YELLOW);
 		sl_imag.putConstraint(SpringLayout.WEST, lblKennysQuest, 10, SpringLayout.WEST, frame.getContentPane());
 		sl_imag.putConstraint(SpringLayout.SOUTH, lblKennysQuest, -1, SpringLayout.NORTH, btnNewGame);
 		lblKennysQuest.setFont(new Font("Pristina", Font.BOLD, 24));
 		frame.getContentPane().add(lblKennysQuest);
-		
-		btnTest.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent arg0) {
-				System.out.println("test button still works!!!");	
-				
-				
-				txtrTest.setText("5103030111011101\n"
-								+"2141114111411141\n"
-								+"0303030111030301\n"
-								+"0000011110000000\n"
-								+"0001110011100011\n"
-								+"0011000001000000\n"
-								+"0110000001111111\n");
-				
-				}
-		});
-		
-
-		//========================================================
-		//--------------Quit Game---------------------------------
-		btnQuitGame.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent arg0) {
-				System.exit(0);
-			}
-		});
 		//========================================================
 		//-------------New Game----------------------------------
 		btnNewGame.addActionListener(new ActionListener()
 		{
+			/*
+			 * (non-Javadoc)
+			 * @see java.awt.event.ActionListener#actionPerformed(java.awt.event.ActionEvent)
+			 * changes the visibility of the screens buttons and the display panel 
+			 * Parameters:
+			 * ActionEvent arg0: the newGame/menu/resume button is pressed
+			 * returns:
+			 * void
+			 * throws:
+			 * none
+			 */
 			public void actionPerformed(ActionEvent arg0)
 			{
-				System.out.println("NEW GAME!!!");
-				
 				if(btnNewGame.getText().compareTo("New Game") == 0)
 				{
 				btnNewGame.setText("Menu");
-				btnSave.setVisible(false);
 				btnHelp.setVisible(false);
+				btnQuitt.setVisible(false);
 				panel.setVisible(true);
-				
 				btnMoveUp.setVisible(true);
 				btnMoveDown.setVisible(true);
 				btnMoveLeft.setVisible(true);
@@ -345,38 +323,41 @@ public class UserInterface {
 				else if(btnNewGame.getText().compareTo("Resume") == 0)
 				{
 					btnNewGame.setText("Menu");
-					btnSave.setVisible(false);
 					btnHelp.setVisible(false);
-				
+					btnQuitt.setVisible(false);
 					btnMoveUp.setVisible(true);
 					btnMoveDown.setVisible(true);
 					btnMoveLeft.setVisible(true);
 					btnMoveRight.setVisible(true);
-					
 					panel.setVisible(true);
-
+					frame.requestFocusInWindow();//==================================================
 					key.setCore(core);
 				}
 				else
 				{
 					btnNewGame.setText("Resume");
-					btnSave.setVisible(true);
 					btnHelp.setVisible(true);
+					btnQuitt.setVisible(true);
 					panel.setVisible(false);
-					
 					btnMoveUp.setVisible(false);
 					btnMoveDown.setVisible(false);
 					btnMoveLeft.setVisible(false);
 					btnMoveRight.setVisible(false);
-
 					key.setCore(null);
 				}
-				
-				
 			}
 		});
 		//=====================================================================
 		//MOVE North
+		/*
+		 * tells the game core what direction the user wants to move.
+		 * Parameters:
+		 * ActionEvent: arg0 the btnMoveUp button was pressed
+		 * returns:
+		 * void
+		 * throws:
+		 * none
+		 */
 		btnMoveUp.addActionListener(new ActionListener() 
 		{
 			public void actionPerformed(ActionEvent arg0) 
@@ -386,6 +367,15 @@ public class UserInterface {
 		});
 		//=====================================================================
 		//MOVE West
+		/*
+		 * tells the game core what direction the user wants to move.
+		 * Parameters:
+		 * ActionEvent: arg0 the btnMoveLeft button was pressed
+		 * returns:
+		 * void
+		 * throws:
+		 * none
+		 */
 		btnMoveLeft.addActionListener(new ActionListener()
 		{
 			public void actionPerformed(ActionEvent e) 
@@ -395,6 +385,15 @@ public class UserInterface {
 		});
 		//=====================================================================
 		//MOVE East
+		/*
+		 * tells the game core what direction the user wants to move.
+		 * Parameters:
+		 * ActionEvent: arg0 the btnMoveRight button was pressed
+		 * returns:
+		 * void
+		 * throws:
+		 * none
+		 */
 		btnMoveRight.addActionListener(new ActionListener() 
 		{
 			public void actionPerformed(ActionEvent e)
@@ -405,6 +404,15 @@ public class UserInterface {
 		});
 		//====================================================================
 		//MOVE South
+		/*
+		 * tells the game core what direction the user wants to move.
+		 * Parameters:
+		 * ActionEvent: arg0 the btnMoveDown button was pressed
+		 * returns:
+		 * void
+		 * throws:
+		 * none
+		 */
 		btnMoveDown.addActionListener(new ActionListener() 
 		{
 			public void actionPerformed(ActionEvent e) 
@@ -413,6 +421,15 @@ public class UserInterface {
 			}
 		});
 	}
+	/*
+	 * sets the visibility of the btnMoveUp, btnMoveDown, btnmoveLeft, and btnMoveRight to false, the buttons are now not visible
+	 * Parameters:
+	 * none
+	 * Returns:
+	 * void
+	 * throws:
+	 * none
+	 */
 		public void toggleButttonsOff()
 		{
 			btnMoveDown.setVisible(false);;
@@ -421,7 +438,15 @@ public class UserInterface {
 			btnMoveUp.setVisible(false);
 			return;
 		}
-		
+		/*
+		 * sets the visibility of the btnMoveUp, btnMoveDown, btnmoveLeft, and btnMoveRight to true, the buttons are now visible
+		 * Parameters:
+		 * none
+		 * Returns:
+		 * void
+		 * throws:
+		 * none
+		 */
 		public void toggleButtonsOn()
 		{
 			btnMoveDown.setVisible(true);;
@@ -431,7 +456,17 @@ public class UserInterface {
 			return;
 		}
 		
-		
+		/*
+		 * updates the GUI Maze map on the screen
+		 * Parameters:
+		 * Maze maze the GUI maze data
+		 * Location player the cordinates of the player in the Maze
+		 * Location Destination the location on the maze where the player now needs to go
+		 * returns:
+		 * void
+		 * throws:
+		 * none
+		 */
 		public void mazeupdate(Maze maze, Location player, Location destiniation)
 		{
 			int[][] array;
@@ -446,6 +481,15 @@ public class UserInterface {
 			mapConverter.repaint();
 			
 		}
+		/*
+		 * updates the text maze map on the user interface screen
+		 * Parameters:
+		 * int[][] maze an 2 dimetional integer array which prepresents the maze and the layers location in the maze
+		 * returns:
+		 * void
+		 * throws:
+		 * none
+		 */
 		
 		private void mapUpdate(int[][] maze)
 		{
@@ -471,7 +515,4 @@ public class UserInterface {
 		}
 }
 
-
-/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
