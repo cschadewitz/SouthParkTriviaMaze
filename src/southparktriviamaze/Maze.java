@@ -1,16 +1,18 @@
+//Maze
+//Author: Chris Purta
+///Revision: 1
+//rev. Author:
+//NA
+ //* 	Description: This is a Maze class that holds as the underlying structure a 2-d array of
+// * 	Cells, which contains four walls and then uses a recursive backtracking algorithm that 
+// * 	"knocks down" walls as needed.
+
 package southparktriviamaze;
 
 import java.util.ArrayList;
 import java.util.Random;
 import java.util.Stack;
-/*
- * 	@author Chris Purta
- * 
- * 	Description: This is a Maze class that holds as the underlying structure a 2-d array of
- * 	Cells, which contains four walls and then uses a recursive backtracking algorithm that 
- * 	"knocks down" walls as needed.
- * 
- */
+
 
 public class Maze implements MazeInterface 
 {
@@ -34,6 +36,15 @@ public class Maze implements MazeInterface
 		private Door upperDoor;
 		private Door lowerDoor;
 		
+		///initalizes a new room
+		///Parameters:
+		///int i the x coordinate
+		//int j the y axis
+		///boolean v sets if the room has been visited yet.
+		///returns:
+		///void
+		///throws:
+		///none
 		public Room(int i, int j, boolean v)
 		{
 			this.x = i;
@@ -44,35 +55,90 @@ public class Maze implements MazeInterface
 			this.upperDoor = new NullDoor();
 			this.lowerDoor = new NullDoor();
 		}
-
+		
+		///sets the left doors attributes
+		//Parameters:
+		//Door leftDoor sets the rooms left door the the left door parameter
+		//returns:
+		//void
+		//throws:
+		//none
 		public void setLeftDoor(Door leftDoor) {
 			this.leftDoor = leftDoor;
 		}
 
+		///sets the right doors attributes
+		//Parameters:
+		//Door rightDoor sets the rooms left door the the left door parameter
+		//returns:
+		//void
+		//throws:
+		//none
 		public void setRightDoor(Door rightDoor) {
 			this.rightDoor = rightDoor;
 		}
 
+		///sets the upper doors attributes
+		//Parameters:
+		//Door upperDoor sets the rooms left door the the left door parameter
+		//returns:
+		//void
+		//throws:
+		//none
 		public void setUpperDoor(Door upperDoor) {
 			this.upperDoor = upperDoor;
 		}
 
+		///sets the lower doors attributes
+		//Parameters:
+		//Door lowerDoor sets the rooms left door the the left door parameter
+		//returns:
+		//void
+		//throws:
+		//none
 		public void setLowerDoor(Door lowerDoor) {
 			this.lowerDoor = lowerDoor;
 		}
 
+		//returns the x coordinate of the room
+		//Parameters:
+		//none
+		//returns:
+		//x coordinate 
+		//throws:
+		//none
 		public int getX() {
 			return x;
 		}
-
+		//returns the x coordinate of the room
+		//Parameters:
+		//none
+		//returns:
+		//y coordinate 
+		//throws:
+		//none
 		public int getY() {
 			return y;
 		}
 
+		//returns if the room has been visited
+		//Parameters:
+		//none
+		//returns:
+		//boolean if the door has been visited
+		//throws:
+		//none
 		public boolean isVisited() {
 			return visited;
 		}
 
+		//set the room to visited or not visited
+		//Parameters:
+		//none
+		//returns:
+		//void
+		//throws:
+		//none
 		public void setVisited(boolean inMaze) {
 			this.visited = inMaze;
 		}
@@ -94,6 +160,12 @@ public class Maze implements MazeInterface
 		mazeGenerator();
 	}
 	
+	//initalizes the maze
+	//parameters:
+	//int x the x location
+	//int y the y location
+	//
+	
 	public Maze(int x, int y) throws Exception
 	{
 		if(x <= 1 || y <= 1)
@@ -112,34 +184,86 @@ public class Maze implements MazeInterface
 		
 	}
 	
+	//returns the number of rows in the maze
+	//parameters:
+	//none
+	//returns:
+	//the number of rows in the maze
+	//throws:
+	//none
 	public int getRows() {
 		return this.rows;
 	}
 	
+	//returns the number of columns in the maze
+	//parameters:
+	//none
+	//returns:
+	//int the number of columns in the maze
 	public int getCols() {
 		return this.cols;
 	}
 	
+	//returns the upper doors state
+	//parameters:
+	//int i the x location of the room
+	//int j the y location of the room
+	//returns 
+	//boolean whether the upper door is locked or not
+	//throws:
+	//none
 	public boolean northDoorUnlocked(int i, int j)
 	{
 		return this.roomMaze[i][j].upperDoor.isUnlocked();
 	}
 	
+	//returns the lower doors state
+	//parameters:
+	//int i the x location of the room
+	//int j the y location of the room
+	//returns 
+	//boolean whether the lower door is locked or not
+	//throws:
+	//none
 	public boolean southDoorUnlocked(int i, int j)
 	{
 		return this.roomMaze[i][j].lowerDoor.isUnlocked();
 	}
 	
+	//returns the right doors state
+	//parameters:
+	//int i the x location of the room
+	//int j the y location of the room
+	//returns 
+	//boolean whether the right door is locked or not
+	//throws:
+	//none
 	public boolean eastDoorUnlocked(int i, int j)
 	{
 		return this.roomMaze[i][j].rightDoor.isUnlocked();
 	}
 	
+	//returns the Left doors state
+	//parameters:
+	//int i the x location of the room
+	//int j the y location of the room
+	//returns 
+	//boolean whether the Left door is locked or not
+	//throws:
+	//none
 	public boolean westDoorUnlocked(int i, int j)
 	{
 		return this.roomMaze[i][j].leftDoor.isUnlocked();
 	}
 	
+	//returns the type of the neighbor room, wall, room, door
+	//parameters:
+	//location the location of the room we are in
+	//direction the direction to the room we want to be in
+	//returns:
+	//CellType the type of cell  next to the room we are in
+	//throws:
+	//none
 	public CellType getNeighborType(Location location, Direction direction)
 	{
 		//if(location.getX() < 1 || location.getX() >= rows || location.getY() < 1 || location.getY() >= cols)
@@ -157,6 +281,14 @@ public class Maze implements MazeInterface
 		}//end switch
 	}
 	
+	//returns the type of the neighbor cell, wall, room, door
+	//parameters:
+	//direction the direction to the room we want to be in
+	//Door the door in the direction we are going
+	//returns:
+	//CellType the type of cell  next to the room we are in
+	//throws:
+	//none
 	public CellType determineType(Direction direction, Door door)
 	{
 		if(!door.isDoor())
@@ -171,6 +303,14 @@ public class Maze implements MazeInterface
 			return CellType.Room;
 	}
 	
+	//unlocks a neighbor door
+	//parameters:
+	//location the location of the room we are in
+	//the direction the direction we are going
+	//returns:
+	//void
+	//throws:
+	//none
 	public void unlockDoor(Location location, Direction direction)
 	{
 		int x = location.getRow();
@@ -198,6 +338,14 @@ public class Maze implements MazeInterface
 		}//end switch
 	}
 	
+	//returns an array of booleans for the neighbors, door or not
+	//parameters:
+	//int i the x location of the room we are in
+	//int j the y location of teh room we are in
+	//returns:
+	//boolean array
+	//throws:
+	//none
 	public boolean[] getNeighboringRooms(int i, int j)
 	{
 		Room curRoom = this.roomMaze[i][j];
@@ -216,6 +364,13 @@ public class Maze implements MazeInterface
 		return rooms;
 	}
 	
+	//generates a random maze
+	//arameters:
+	//none
+	//returns:
+	//void
+	//throws:
+	//none
 	private void mazeGenerator()
 	{
 		/*
@@ -271,7 +426,15 @@ public class Maze implements MazeInterface
 		
 	}//end mazeGenerator
 
-	
+
+	//removers the wals between the randome cell and trhe current cell while generating a maze
+	//Parameters:
+	//Room curRoom the room we are in
+	//Room randCell a random adjoined room
+	//returns:
+	//void
+	//throws:
+	//none
 	private void removeWalls(Room curRoom, Room randCell) {
 		
 		/*
@@ -322,6 +485,13 @@ public class Maze implements MazeInterface
 		}//end if
 	}//end removeWalls
 
+	//gets the neighboring visited rooms for the current room
+	//parameters:
+	//Room curRoom the room we are looking at
+	//returns:
+	//Arrayist<Room> an array list of the adjoined rooms
+	//throws:
+	//none
 	private ArrayList<Room> getVisitedNeighbors(Room curRoom) {
 		
 		ArrayList<Room> neighbors = new ArrayList<Room>();
