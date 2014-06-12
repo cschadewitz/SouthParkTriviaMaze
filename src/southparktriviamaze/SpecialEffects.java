@@ -1,3 +1,11 @@
+/* SpecialEffects.java
+ * Author: Casey Schadewitz
+ * Revision: N/A
+ * Rev. Author: N/A
+ * Description: This class handles the retrival of 
+ * sound effect assets and creates a javafx scene. 
+ * 
+ */
 package southparktriviamaze;
 
 import java.io.File;
@@ -17,6 +25,9 @@ public class SpecialEffects {
 	public static int failureCount = 0;
 	public static boolean censored;
 	
+	//Initializes a new SpecialEffects object
+	//Parameters:
+	//String[] args	used to indicate if the game is censored or uncensored
 	public SpecialEffects(String[] args)
 	{
 		if(args[0] != null && args[0].equals("censored"))
@@ -25,6 +36,9 @@ public class SpecialEffects {
 			censored = false;
 	}
 	
+	//Creates a javafx scene for the indicated sound
+	//Parameters:
+	//MediaPair fx	used to indicate the sound to be played
 	public Scene createScene(MediaPair fx)
 	{
 		final StackPane layout = new StackPane();
@@ -45,6 +59,10 @@ public class SpecialEffects {
 		return new Scene(layout);
 	}
 
+	//Used to get determine the type of sound to play
+	//Parameters:
+	//MediaPair fx	used to indicate the sound to be played
+	
 	private File getFile(MediaPair fx) 
 	{
 		switch(fx.character)
@@ -57,6 +75,9 @@ public class SpecialEffects {
 		}
 	}
 
+	//Used to get character type of sound to play
+	//Parameters:
+	//MediaPair fx	used to indicate the sound to be played
 	private File getSound(MediaType media) {
 		File sound;
 		if(!censored)
@@ -88,16 +109,21 @@ public class SpecialEffects {
 		return sound;
 	}
 
+	//Used to get the opening sound to play
+	//Parameters:
+	//MediaPair fx	used to indicate the sound to be played
 	private  File getSong(MediaType media) {
 		File sound;
 		sound = new File("Alert.mp3");
 		return sound;
 	}
-
+	
+	//UNIMPLEMENTED
 	private  File getOtherSound() {
 		// TODO Auto-generated method stub
 		return null;
 	}
+	
 	private static String[] successSounds =
 	{
 		"GeneralSuccess.mp3",
