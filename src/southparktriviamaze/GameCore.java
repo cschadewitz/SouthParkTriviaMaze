@@ -55,14 +55,14 @@ public class GameCore {
 		return map;
 	}
 	
+	public void playOpening()
+	{
+		media = new MediaPair(Character.Narrator, MediaType.Opening);
+		Platform.runLater(playEffect);
+	}
 	public void startGame()
 	{
-		try {
-			//map = new Maze(10, 10);
-		} catch (Exception e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
+		
 		player = new Location(1, 1);
 		window.mazeupdate(map, player, player);
 	}

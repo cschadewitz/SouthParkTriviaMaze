@@ -72,33 +72,33 @@ import javax.swing.JPanel;
 //			setFocusTraversalKeysEnabled(false);
 			
 			try {
-				this.room = new ImageIcon(ImageIO.read(new File("Resources/Room.png"))).getImage();
+				this.room = new ImageIcon(ImageIO.read(new File("Room.png"))).getImage();
 				
-				this.wall = new ImageIcon(ImageIO.read(new File("Resources/Wall.png"))).getImage();
+				this.wall = new ImageIcon(ImageIO.read(new File("Wall.png"))).getImage();
 
-				this.lockedDoor = new ImageIcon(ImageIO.read(new File("Resources/lockedDoor.png"))).getImage();
+				this.lockedDoor = new ImageIcon(ImageIO.read(new File("lockedDoor.png"))).getImage();
 
-				this.unlockedDoor = new ImageIcon(ImageIO.read(new File("Resources/unlockedDoor.png"))).getImage();
+				this.unlockedDoor = new ImageIcon(ImageIO.read(new File("unlockedDoor.png"))).getImage();
 				
 				switch(playerNum)
 				{
 					//Mysterion
-					case 0: this.player = new ImageIcon(ImageIO.read(new File("Resources/MysterionRoom.png"))).getImage();
+					case 0: this.player = new ImageIcon(ImageIO.read(new File("MysterionRoom.png"))).getImage();
 						break;
 					//The Coon
-					case 1: this.player = new ImageIcon(ImageIO.read(new File("Resources/TheCoonRoom.png"))).getImage();
+					case 1: this.player = new ImageIcon(ImageIO.read(new File("TheCoonRoom.png"))).getImage();
 						break;
 					//Tool Shed
-					case 2: this.player = new ImageIcon(ImageIO.read(new File("Resources/ToolShedRoom.png"))).getImage();
+					case 2: this.player = new ImageIcon(ImageIO.read(new File("ToolShedRoom.png"))).getImage();
 						break;
 					//Human Kite
-					case 3: this.player = new ImageIcon(ImageIO.read(new File("Resources/HumanKiteRoom.png"))).getImage();
+					case 3: this.player = new ImageIcon(ImageIO.read(new File("HumanKiteRoom.png"))).getImage();
 						break;
 					//Professor Chaos
-					case 4: this.player = new ImageIcon(ImageIO.read(new File("Resources/ProfessorChaosRoom.png"))).getImage();
+					case 4: this.player = new ImageIcon(ImageIO.read(new File("ProfessorChaosRoom.png"))).getImage();
 						break;
 					//Default Myseterion
-					default: this.player = new ImageIcon(ImageIO.read(new File("Resources/MyseterionRoom.png"))).getImage();
+					default: this.player = new ImageIcon(ImageIO.read(new File("MyseterionRoom.png"))).getImage();
 				}//end switch
 				
 			} catch (IOException e) {

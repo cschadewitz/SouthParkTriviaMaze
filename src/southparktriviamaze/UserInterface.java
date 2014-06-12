@@ -65,29 +65,20 @@ public class UserInterface {
 	private static String[] cheats;
 	
 	public static void main(String[] args) {
-		// TODO Auto-generated method stub
-		//System.out.println("HELLO WORLD");
+
 		UserInterface window;
 		cheats = args;
-		//UpdateMaze upDateMazeData;
 		try {	
 			
 			core = new GameCore(args);
-
 			window = new UserInterface();
 			core.setWindow(window);
 			core.startGame();
-
-			
-			
 			txtrTest.invalidate();
-
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
-		
 	}
-	
 
 	private JFrame frame;
 	private static JPanel panel;
@@ -105,25 +96,20 @@ public class UserInterface {
 	private MazeConversion mapConverter;
 	private JPanel mazePanel;
 	private SpecialEffects effects;
+
 	protected void setMedia(MediaPair media)
 	{
 		Scene scene = effects.createScene(media);
 		fxSound.setScene(scene);
 	}
-	private UIKeyPressed key = new UIKeyPressed();
 	
-	//private GameCore core;
-	/**
-	 * Create the application.
-	 */
+	private UIKeyPressed key = new UIKeyPressed();
+		
 	public UserInterface() {
 		initialize();
-		effects = new SpecialEffects();
-		//QuestionDisplay.askQuestion();
+		effects = new SpecialEffects(cheats);
 	}
-	
 
-	
 	/**
 	 * Initialize the contents of the frame.
 	 */
@@ -145,7 +131,7 @@ public class UserInterface {
 		//JLabel temp;
 		try{
 			
-		ImageIcon image = new ImageIcon(ImageIO.read(new File("Resources/1411_coon-2-hindsight_1920x1200.jpg")));//the backgound picture
+		ImageIcon image = new ImageIcon(ImageIO.read(new File("1411_coon-2-hindsight_1920x1200.jpg")));//the backgound picture
 		imag = new JLabel(image);
 		imag.setBounds(0, 0, 1080, 1920);
 		
@@ -208,7 +194,7 @@ public class UserInterface {
 		 try
 		 {
 			// File fontFile = new File("/mazeCells");
-			 InputStream mazeF = new FileInputStream("Resources//MazeCells.TTF");
+			 InputStream mazeF = new FileInputStream("MazeCells.TTF");
 			 
 		 Font mazeFont = Font.createFont(Font.TRUETYPE_FONT, mazeF);
 		 GraphicsEnvironment genv = GraphicsEnvironment.getLocalGraphicsEnvironment();
@@ -323,6 +309,7 @@ public class UserInterface {
 				btnMoveRight.setVisible(true);
 				frame.requestFocusInWindow();
 				key.setCore(core);
+				core.playOpening();
 				//core.startGame();
 				}
 				else if(btnNewGame.getText().compareTo("Resume") == 0)
@@ -420,7 +407,9 @@ public class UserInterface {
 				
 				core = new GameCore(cheats);
 				core.setWindow(this);
+				
 				core.startGame();
+				
 
 				
 				

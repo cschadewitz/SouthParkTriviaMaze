@@ -10,7 +10,9 @@ import org.sqlite.*;
 public class SQLiteDBHandler implements SQLProxy {
 
 	private List<Integer> questionIDs = new ArrayList<Integer>();
-	private Random rand = new Random();
+	private Integer[] questionIDsFull;
+	Random rand = new Random();
+	private int countOfQuestions = 0;
 	private static Question currentQuestion;
 	public static void main( String args[] )
 	{
@@ -34,7 +36,10 @@ public class SQLiteDBHandler implements SQLProxy {
 			while (count.next())
 			{
 				questionIDs.add(count.getInt("total"));
+				countOfQuestions++;
 			}
+			questionIDsFull = new Integer[countOfQuestions];
+			questionIDsFull = questionIDs.toArray(questionIDsFull);
 			count.close();
 			command.close();
 			conn.close();
@@ -46,6 +51,11 @@ public class SQLiteDBHandler implements SQLProxy {
 	}
 	@Override
 	public Question getRandomQuestion() {
+		if(questionIDs.isEmpty())
+		{
+			for(int i = 0; i < countOfQuestions; i++)
+				questionIDs.add(questionIDsFull[i]);
+		}
 		Connection conn = null;
 		Statement command = null;
 		ResultSet randomQuestion;

@@ -15,8 +15,17 @@ public class SpecialEffects {
 
 	public static int successCount = 0;
 	public static int failureCount = 0;
+	public static boolean censored;
 	
-	public static Scene createScene(MediaPair fx)
+	public SpecialEffects(String[] args)
+	{
+		if(args[0] != null && args[0].equals("censored"))
+			censored = true;
+		else 
+			censored = false;
+	}
+	
+	public Scene createScene(MediaPair fx)
 	{
 		final StackPane layout = new StackPane();
 		final File file = getFile(fx);
@@ -36,11 +45,11 @@ public class SpecialEffects {
 		return new Scene(layout);
 	}
 
-	private static File getFile(MediaPair fx) 
+	private File getFile(MediaPair fx) 
 	{
 		switch(fx.character)
 		{
-			case Narrator: return getVideo(fx.media);
+			case Narrator: return getSong(fx.media);
 				
 			case Others: return getOtherSound();
 				
@@ -48,50 +57,88 @@ public class SpecialEffects {
 		}
 	}
 
-	private static File getSound(MediaType media) {
+	private File getSound(MediaType media) {
 		File sound;
-		switch(media)
+		if(!censored)
 		{
-		case Success: sound = new File(successSounds[successCount]);
-			successCount = (successCount + 1) % successSounds.length;
-			break;
-		case Failure: sound = new File(failureSounds[failureCount]);
-		failureCount = (failureCount + 1) % failureSounds.length;
-
-			break;
-		default: sound = null;
+			switch(media)
+			{
+			case Success: sound = new File(successSounds[successCount]);
+				successCount = (successCount + 1) % successSounds.length;
+				break;
+			case Failure: sound = new File(failureSounds[failureCount]);
+				failureCount = (failureCount + 1) % failureSounds.length;
+				break;
+			default: sound = null;
+			}
+		}
+		else
+		{
+			switch(media)
+			{
+			case Success: sound = new File(successSoundsCensored[successCount]);
+				successCount = (successCount + 1) % successSoundsCensored.length;
+				break;
+			case Failure: sound = new File(failureSoundsCensored[failureCount]);
+				failureCount = (failureCount + 1) % failureSoundsCensored.length;
+				break;
+			default: sound = null;
+			}
 		}
 		return sound;
 	}
 
-	private static File getVideo(MediaType media) {
-		// TODO Auto-generated method stub
-		return null;
+	private  File getSong(MediaType media) {
+		File sound;
+		sound = new File("Alert.mp3");
+		return sound;
 	}
 
-	private static File getOtherSound() {
+	private  File getOtherSound() {
 		// TODO Auto-generated method stub
 		return null;
 	}
 	private static String[] successSounds =
 	{
-		"Resources/GeneralSuccess.mp3",
-		"Resources/GeneralSuccess2.mp3",
-		"Resources/ButtersSuccess2.mp3",
-		"Resources/ButtersSuccess.mp3",
-		"Resources/CartmanSuccess.mp3",
-		"Resources/BRAINKEEPSJACKINGOFFcm.mp3"
+		"GeneralSuccess.mp3",
+		"GeneralSuccess2.mp3",
+		"ButtersSuccess2.mp3",
+		"ButtersSuccess.mp3",
+		"CartmanSuccess.mp3",
+		"BRAINKEEPSJACKINGOFFcm.mp3"
 		
 	};
+	private static String[] successSoundsCensored =
+	{
+		"GeneralSuccess.mp3",
+		//"GeneralSuccess2.mp3",
+		"ButtersSuccess2.mp3",
+		"ButtersSuccess.mp3",
+		//"CartmanSuccess.mp3",
+		//"BRAINKEEPSJACKINGOFFcm.mp3"
+			
+	};
 	private static String[] failureSounds =
-		{
-			"Resources/GeneralFail.mp3",
-			"Resources/KyleFail.mp3",
-			"Resources/KyleFail2.mp3",
-			"Resources/CartmanFailure.mp3",
-			"Resources/ButtersFailure.mp3",
-			"Resources/ButtersFailure2.mp3",
-			"Resources/StanFails.mp3",
-			"Resources/FailSOB.mp3",
-		};
+	{
+		"GeneralFailure.mp3",
+		"GeneralFail.mp3",
+		"KyleFail.mp3",
+		"KyleFail2.mp3",
+		"CartmanFailure.mp3",
+		"ButtersFailure.mp3",
+		"ButtersFailure2.mp3",
+		"StanFails.mp3",
+		"FailSOB.mp3",
+	};
+	private static String[] failureSoundsCensored =
+	{
+		"GeneralFail.mp3",
+		"KyleFail.mp3",
+		//"KyleFail2.mp3",
+		//"CartmanFailure.mp3",
+		"ButtersFailure.mp3",
+		"ButtersFailure2.mp3",
+		"StanFails.mp3",
+		//"FailSOB.mp3",
+	};
 }
