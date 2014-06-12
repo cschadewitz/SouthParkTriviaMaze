@@ -10,6 +10,7 @@
 package southparktriviamaze;
 
 import java.awt.BorderLayout;
+import java.awt.Dialog;
 import java.awt.FlowLayout;
 
 import javax.swing.JButton;
@@ -19,6 +20,7 @@ import javax.swing.border.EmptyBorder;
 import javax.swing.JTextPane;
 import javax.swing.GroupLayout;
 import javax.swing.GroupLayout.Alignment;
+
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
 import java.awt.Color;
@@ -43,6 +45,8 @@ public class UserHelp extends JDialog {
 		try {
 			UserHelp dialog = new UserHelp();
 			dialog.setDefaultCloseOperation(JDialog.DISPOSE_ON_CLOSE);
+			dialog.setModalityType(Dialog.ModalityType.DOCUMENT_MODAL);
+			dialog.setModal(true);
 			dialog.setVisible(true);
 		} catch (Exception e) {
 			e.printStackTrace();

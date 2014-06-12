@@ -4,6 +4,7 @@ import java.awt.EventQueue;
 
 import javafx.application.Platform;
 
+import javax.swing.JOptionPane;
 import javax.swing.SwingUtilities;
 
 import java.sql.SQLException;
@@ -19,6 +20,7 @@ public class GameCore {
 	private QuestionDisplay qd = new QuestionDisplay();
 	private MediaPair media;
 	private Character playerCharacter = Character.Butters;
+	private int mapSize = 10;
 	private Runnable playEffect = new Runnable() {
 		@Override
 		public void run() {
@@ -29,7 +31,7 @@ public class GameCore {
 	{
 
 		try {
-			map = new Maze(10, 10);
+			map = new Maze(mapSize, mapSize);
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -147,7 +149,11 @@ public class GameCore {
 			//Error
 			break;
 		}
-		//if(player.getRow() == )
+		if(player.convertToCondensed().getColumn() == mapSize - 1 && player.convertToCondensed().getRow() == mapSize - 1)
+		{
+			JOptionPane.showMessageDialog(null, "You Win!", "Congradulations", JOptionPane.INFORMATION_MESSAGE);
+			window.NewGame();
+		}
 	}
 
 }

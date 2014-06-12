@@ -53,10 +53,10 @@ public class SpecialEffects {
 		switch(media)
 		{
 		case Success: sound = new File(successSounds[successCount]);
-			successCount = (successCount + 1) % successSounds.length - 1;
+			successCount = (successCount + 1) % successSounds.length;
 			break;
 		case Failure: sound = new File(failureSounds[failureCount]);
-		failureCount = (failureCount + 1) % failureSounds.length - 1;
+		failureCount = (failureCount + 1) % failureSounds.length;
 
 			break;
 		default: sound = null;

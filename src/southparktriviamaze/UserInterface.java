@@ -62,11 +62,13 @@ import java.awt.GridBagLayout;
 
 public class UserInterface {
 	private static GameCore core;
+	private static String[] cheats;
 	
 	public static void main(String[] args) {
 		// TODO Auto-generated method stub
 		//System.out.println("HELLO WORLD");
 		UserInterface window;
+		cheats = args;
 		//UpdateMaze upDateMazeData;
 		try {	
 			
@@ -94,17 +96,18 @@ public class UserInterface {
 	private JButton btnMoveRight;
 	private JButton btnMoveLeft;
 	private JButton btnMoveUp;
-	private JButton btnSave;
 	private JButton btnHelp;
 	private JButton btnQuit;
-	private JButton btnTest;
+	private JButton btnNewGame;
 	private JLabel imag;
 	private JPanel panelSound = new JPanel();
 	private final JFXPanel fxSound = new JFXPanel();
 	private MazeConversion mapConverter;
+	private JPanel mazePanel;
+	private SpecialEffects effects;
 	protected void setMedia(MediaPair media)
 	{
-		Scene scene = SpecialEffects.createScene(media);
+		Scene scene = effects.createScene(media);
 		fxSound.setScene(scene);
 	}
 	private UIKeyPressed key = new UIKeyPressed();
@@ -115,6 +118,7 @@ public class UserInterface {
 	 */
 	public UserInterface() {
 		initialize();
+		effects = new SpecialEffects();
 		//QuestionDisplay.askQuestion();
 	}
 	
@@ -159,33 +163,34 @@ public class UserInterface {
 		
 		
 		//=====================================================================
-		final JButton btnNewGame = new JButton("New Game");
-		btnSave = new JButton("Save/Load");
+		btnNewGame = new JButton("New Game");
 		btnHelp = new JButton("HELP");
-		final JButton btnQuitGame = new JButton("Quit Game");
-		btnTest = new JButton("TEST");
+		btnHelp.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				UserHelp.help();
+			}
+		});
+		btnQuit = new JButton("QUIT");
+		btnQuit.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				frame.setVisible(false);
+				frame.dispose();
+			}
+		});
 				
 		SpringLayout sl_imag = new SpringLayout();
 		sl_imag.putConstraint(SpringLayout.WEST, btnNewGame, 0, SpringLayout.WEST, frame.getContentPane());
-		sl_imag.putConstraint(SpringLayout.NORTH, btnTest, 6, SpringLayout.SOUTH, btnQuitGame);
-		sl_imag.putConstraint(SpringLayout.EAST, btnTest, 0, SpringLayout.EAST, btnNewGame);
-		sl_imag.putConstraint(SpringLayout.NORTH, btnQuitGame, 6, SpringLayout.SOUTH, btnHelp);
-		sl_imag.putConstraint(SpringLayout.EAST, btnQuitGame, 0, SpringLayout.EAST, btnNewGame);
-		sl_imag.putConstraint(SpringLayout.NORTH, btnHelp, 6, SpringLayout.SOUTH, btnSave);
+		sl_imag.putConstraint(SpringLayout.NORTH, btnQuit, 6, SpringLayout.SOUTH, btnHelp);
+		sl_imag.putConstraint(SpringLayout.EAST, btnQuit, 0, SpringLayout.EAST, btnNewGame);
 		sl_imag.putConstraint(SpringLayout.EAST, btnHelp, 0, SpringLayout.EAST, btnNewGame);
-		sl_imag.putConstraint(SpringLayout.EAST, btnSave, 0, SpringLayout.EAST, btnNewGame);
-		sl_imag.putConstraint(SpringLayout.WEST, btnTest, 0, SpringLayout.WEST, frame.getContentPane());
-		sl_imag.putConstraint(SpringLayout.WEST, btnQuitGame, 0, SpringLayout.WEST, frame.getContentPane());
+		sl_imag.putConstraint(SpringLayout.WEST, btnQuit, 0, SpringLayout.WEST, frame.getContentPane());
+		sl_imag.putConstraint(SpringLayout.NORTH, btnHelp, 6, SpringLayout.SOUTH, btnNewGame);
 		sl_imag.putConstraint(SpringLayout.WEST, btnHelp, 0, SpringLayout.WEST, frame.getContentPane());
-		sl_imag.putConstraint(SpringLayout.NORTH, btnSave, 6, SpringLayout.SOUTH, btnNewGame);
-		sl_imag.putConstraint(SpringLayout.WEST, btnSave, 0, SpringLayout.WEST, frame.getContentPane());
 		sl_imag.putConstraint(SpringLayout.NORTH, btnNewGame, 35, SpringLayout.NORTH, frame.getContentPane());
 		frame.getContentPane().setLayout(sl_imag);
 		frame.getContentPane().add(btnNewGame);
-		frame.getContentPane().add(btnSave);
 		frame.getContentPane().add(btnHelp);
-		frame.getContentPane().add(btnQuitGame);
-		frame.getContentPane().add(btnTest);
+		frame.getContentPane().add(btnQuit);
 		//=========================Panel start up================================
 		panel = new JPanel();
 		sl_imag.putConstraint(SpringLayout.EAST, panel, -100, SpringLayout.EAST, imag);
@@ -239,7 +244,7 @@ public class UserInterface {
 
 		panel.setBounds(1920/2 - 325, 1080/2 - 335, 1380, 670);
 		
-		final JButton btnMoveUp = new JButton("UP");
+		btnMoveUp = new JButton("UP");
 		sl_imag.putConstraint(SpringLayout.SOUTH, panel, -17, SpringLayout.NORTH, btnMoveUp);
 		sl_imag.putConstraint(SpringLayout.EAST, btnMoveUp, -97, SpringLayout.EAST, frame.getContentPane());
 		sl_imag.putConstraint(SpringLayout.WEST, btnMoveUp, -182, SpringLayout.EAST, frame.getContentPane());
@@ -247,12 +252,12 @@ public class UserInterface {
 		frame.getContentPane().add(btnMoveUp);
 		btnMoveUp.setVisible(false);
 		
-		final JButton btnMoveLeft = new JButton("LEFT");
+		btnMoveLeft = new JButton("LEFT");
 
 		frame.getContentPane().add(btnMoveLeft);
 		btnMoveLeft.setVisible(false);
 		
-		final JButton btnMoveRight = new JButton("RIGHT");
+		btnMoveRight = new JButton("RIGHT");
 		
 		sl_imag.putConstraint(SpringLayout.WEST, btnMoveLeft, -93, SpringLayout.WEST, btnMoveRight);
 		sl_imag.putConstraint(SpringLayout.EAST, btnMoveLeft, -8, SpringLayout.WEST, btnMoveRight);
@@ -268,7 +273,7 @@ public class UserInterface {
 		panelSound.setVisible(false);
 		panelSound.add(fxSound);
 		
-		JPanel mazePanel = new JPanel();
+		mazePanel = new JPanel();
 		mazePanel.setBounds(0, 0, 750, 745);
 		panel.add(mazePanel);
 		mapConverter = new MazeConversion(core.getMaze(), 1);
@@ -280,7 +285,7 @@ public class UserInterface {
 		
 		
 		
-		final JButton btnMoveDown = new JButton("DOWN");
+		btnMoveDown = new JButton("DOWN");
 
 		sl_imag.putConstraint(SpringLayout.SOUTH, btnMoveRight, -5, SpringLayout.NORTH, btnMoveDown);
 		sl_imag.putConstraint(SpringLayout.SOUTH, btnMoveLeft, -5, SpringLayout.NORTH, btnMoveDown);
@@ -297,31 +302,6 @@ public class UserInterface {
 		sl_imag.putConstraint(SpringLayout.SOUTH, lblKennysQuest, -1, SpringLayout.NORTH, btnNewGame);
 		lblKennysQuest.setFont(new Font("Pristina", Font.BOLD, 28));
 		frame.getContentPane().add(lblKennysQuest);
-		
-		btnTest.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent arg0) {
-				System.out.println("test button still works!!!");	
-				
-				
-				txtrTest.setText("5103030111011101\n"
-								+"2141114111411141\n"
-								+"0303030111030301\n"
-								+"0000011110000000\n"
-								+"0001110011100011\n"
-								+"0011000001000000\n"
-								+"0110000001111111\n");
-				
-				}
-		});
-		
-
-		//========================================================
-		//--------------Quit Game---------------------------------
-		btnQuitGame.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent arg0) {
-				System.exit(0);
-			}
-		});
 		//========================================================
 		//-------------New Game----------------------------------
 		btnNewGame.addActionListener(new ActionListener()
@@ -333,8 +313,8 @@ public class UserInterface {
 				if(btnNewGame.getText().compareTo("New Game") == 0)
 				{
 				btnNewGame.setText("Menu");
-				btnSave.setVisible(false);
 				btnHelp.setVisible(false);
+				btnQuit.setVisible(false);
 				panel.setVisible(true);
 				
 				btnMoveUp.setVisible(true);
@@ -348,8 +328,8 @@ public class UserInterface {
 				else if(btnNewGame.getText().compareTo("Resume") == 0)
 				{
 					btnNewGame.setText("Menu");
-					btnSave.setVisible(false);
 					btnHelp.setVisible(false);
+					btnQuit.setVisible(false);
 				
 					btnMoveUp.setVisible(true);
 					btnMoveDown.setVisible(true);
@@ -363,8 +343,8 @@ public class UserInterface {
 				else
 				{
 					btnNewGame.setText("Resume");
-					btnSave.setVisible(true);
 					btnHelp.setVisible(true);
+					btnQuit.setVisible(true);
 					panel.setVisible(false);
 					
 					btnMoveUp.setVisible(false);
@@ -432,6 +412,43 @@ public class UserInterface {
 			btnMoveLeft.setVisible(true);;
 			btnMoveUp.setVisible(true);
 			return;
+		}
+		
+		public void NewGame()
+		{
+			try {	
+				
+				core = new GameCore(cheats);
+				core.setWindow(this);
+				core.startGame();
+
+				
+				
+				txtrTest.invalidate();
+
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
+			btnNewGame.setText("New Game");
+			mazePanel.remove(mapConverter);
+			mapConverter = new MazeConversion(core.getMaze(), 1);
+			mazePanel.add(mapConverter);
+			mapConverter.setConvertedMaze(mapConverter.convertedMaze());
+			mapConverter.setVisible(true);
+			mapConverter.setPreferredSize(new Dimension(735, 735));
+			mapConverter.setBounds(5, 0, 735, 735);
+			mapConverter.repaint();
+			mapConverter.invalidate();
+			btnHelp.setVisible(true);
+			btnQuit.setVisible(true);
+			panel.setVisible(false);
+			
+			btnMoveUp.setVisible(false);
+			btnMoveDown.setVisible(false);
+			btnMoveLeft.setVisible(false);
+			btnMoveRight.setVisible(false);
+
+			key.setCore(null);
 		}
 		
 		
