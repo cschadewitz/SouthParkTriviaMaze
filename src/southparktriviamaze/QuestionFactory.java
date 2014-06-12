@@ -1,4 +1,4 @@
-/* QuestionFactory.cs
+/* QuestionFactory.java
  * Author: Casey Schadewitz
  * Revision: 1
  * Rev. Author: N/A
