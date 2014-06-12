@@ -1,4 +1,12 @@
-	package southparktriviamaze;
+/* MazeConversion.java
+ * Author: Chris Purta
+ * Revision: N/A
+ * Rev. Author: N/A
+ * Description: This class is used to convert the
+ * maze into a displayable form and displays it.
+ * 
+ */
+package southparktriviamaze;
 
 import java.awt.Color;
 import java.awt.Graphics;
@@ -14,13 +22,10 @@ import javax.imageio.ImageIO;
 import javax.swing.ImageIcon;
 //import javax.swing.JFrame;
 import javax.swing.JPanel;
-//import javax.swing.Timer;
+
 	
-	public class MazeConversion extends JPanel /*implements ActionListener, KeyListener*/{
+	public class MazeConversion extends JPanel{
 		
-		/**
-		 * 
-		 */
 		private static final long serialVersionUID = 1L;
 		private static final int CORNER = 1;
 		private static final int ROOM = 0;
@@ -32,44 +37,28 @@ import javax.swing.JPanel;
 		private static final int pixelWidth = 35, pixelLength = 35;
 		
 		private Image room, wall, lockedDoor, unlockedDoor, player;
-		
-		//private Timer timer = new Timer(100, this);
 		private Maze maze;
 		private int[][] array;
 		private int playerX, playerY/*, deltaX, deltaY*/;
+		
+		//Sets the maze reference
+		//Parameters:
+		//Maze maze reference to maze
 		public void setMaze(Maze maze)
 		{
 			this.maze = maze;
 		}
 		
-//		public static void main(String[] args)
-//		{
-//			Maze maze = null;
-//			try {
-//				maze = new Maze(10, 10);
-//			} catch (Exception e) {
-//				e.printStackTrace();
-//			}
-//			MazeConversion mC = new MazeConversion(maze);
-//						
-//			JFrame frame = new JFrame();
-//	        frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-//	        frame.setSize(800, 800);
-//	        frame.add(mC);
-//	        frame.setVisible(true);
-//	        frame.setLocationRelativeTo(null);
-//		}
-		
+
+		//Initializes a new MazeConversion object
+		//Parameters:
+		//Maze m reference to the maze
+		//int playerNum integer value representing a character
 		public MazeConversion(Maze m, int playerNum) {
-//			this.timer.start();
 			this.maze = m;
 			this.playerX = 1;
 			this.playerY = 1;
-			convertMazeToChar();			
-			
-//			addKeyListener(this);
-//			setFocusable(true);
-//			setFocusTraversalKeysEnabled(false);
+			convertMazeToChar();
 			
 			try {
 				this.room = new ImageIcon(ImageIO.read(new File("Room.png"))).getImage();
@@ -107,16 +96,23 @@ import javax.swing.JPanel;
 			
 		}//end mazeConversion
 		
+		//Sets the converted maze array
+		//Parameters:
+		//int[][] a sets the convertedMaze to the table of a
 		public void setConvertedMaze(int[][] a)
 		{
 			this.array = a;
 		}
 		
+		//Returns the converted maze array
+		//Returns:
+		//int[][] reference to maze array
 		public int[][] convertedMaze()
 		{
 			return array;
 		}
 	
+		//Converts the maze to a converted maze array
 		private void convertMazeToChar() {
 			this.array = new int[2 * maze.getRows() + 1][2 * maze.getCols() + 1];
 			this.array = initializeIntArray();
@@ -125,6 +121,7 @@ import javax.swing.JPanel;
 			this.array[this.playerX][this.playerY] = PLAYER;
 		}
 	
+		//Tears down walls to properly display
 		private void tearDownWallsToDoors() {
 			for(int i = 1; i < array.length; i++)
 				for(int j = 1; j < array[i].length; j++)
@@ -161,6 +158,9 @@ import javax.swing.JPanel;
 				}//end for j
 		}
 	
+		//Initializes an int array for converted maze array
+		//Returns:
+		//int[][] converted maze array
 		private int[][] initializeIntArray() {
 			int [][] temp = new int[2 * maze.getRows() + 1][2 * maze.getCols() + 1];
 			
@@ -188,6 +188,7 @@ import javax.swing.JPanel;
 			return temp;
 		}
 		
+		//Prints the map to the console
 		public void printCharMaze()
 		{
 			for(int i = 0; i < array.length; i++)
@@ -201,6 +202,7 @@ import javax.swing.JPanel;
 			System.out.println();
 		}//end printCharMaze
 		
+		//Repaints the display
 		public void paintComponent(Graphics g)
 		{
 			//pack();
@@ -226,58 +228,6 @@ import javax.swing.JPanel;
 			
 		}//end paintComponent
 
-//		@Override
-//		public void keyTyped(KeyEvent e) {
-//			
-//		}
-//
-//		@Override
-//		public void keyPressed(KeyEvent e) {
-//			int keyCode = e.getKeyCode();
-//			
-//			if(keyCode == KeyEvent.VK_UP && this.playerY > 1)//Move UP
-//			{
-//				this.deltaX = 0;
-//				this.deltaY = -2;
-//			}
-//			
-//			if(keyCode == KeyEvent.VK_DOWN && this.playerY < this.array[this.array.length - 1].length - 2)//Move DOWN
-//			{
-//				this.deltaX = 0;
-//				this.deltaY = 2;
-//			}
-//			
-//			if(keyCode == KeyEvent.VK_RIGHT && this.playerX < this.array[playerX].length - 2)//Move RIGHT
-//			{
-//				this.deltaX = 2;
-//				this.deltaY = 0;
-//			}
-//			
-//			if(keyCode == KeyEvent.VK_LEFT && this.playerX > 1)//Move LEFT
-//			{
-//				this.deltaX = -2;
-//				this.deltaY = 0;
-//			}
-//			
-//		}
-//
-//		@Override
-//		public void keyReleased(KeyEvent e) {
-//			this.deltaX = 0;
-//			this.deltaY = 0;
-//		}
-//
-//		@Override
-//		public void actionPerformed(ActionEvent e) {
-//			this.array[this.playerY][this.playerX] = ROOM;
-//			this.array[(this.playerY + this.playerY + deltaY)/2][(this.playerX + this.playerX + deltaX)/2] = UNLOCKEDDOOR;
-//			
-//			this.playerX += deltaX;
-//			this.playerY += deltaY;
-//			
-//			this.array[this.playerY][this.playerX] = PLAYER;
-//						
-//			repaint();
-//		}
+//		
 	
 	}
