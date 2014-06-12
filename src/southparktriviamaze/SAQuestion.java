@@ -1,3 +1,11 @@
+/* SAQuestion.java
+ * Author: Casey Schadewitz
+ * Revision: N/A
+ * Rev. Author: N/A
+ * Description: This class represents a 
+ * short answer choice question.
+ * 
+ */
 package southparktriviamaze;
 
 import java.util.ArrayList;
@@ -11,6 +19,14 @@ public class SAQuestion implements Question {
 	private List<String> variations;
 	private int questionType = 2;
 	
+	//Initializes a new short answer choice question
+	//Parameters:
+	//String columnQuestionText  Text of the question
+	//String columnAnswer  Answer to the question
+	//String columnChoiceA  First variation of answer 
+	//String columnChoiceB  Second variation of answer 
+	//String columnChoiceC  Third variation of answer
+	//String columnChoiceD  Fourth variation of answer
 	public SAQuestion(String columnQuestionText, String columnAnswer, String columnChoiceA, String columnChoiceB, String columnChoiceC, String columnChoiceD){
 		variations = new ArrayList<String>();
 		this.questionText = columnQuestionText;
@@ -24,14 +40,22 @@ public class SAQuestion implements Question {
 		if(columnChoiceD != null)
 			this.variations.add(columnChoiceD);
 	}	
+	
+	//Inherited from Question interface 
+	//See Question interface for details
 	@Override
 	public int getQuestionType() {
 		return questionType;
 	}
+	
+	//Inherited from Question interface 
+	//See Question interface for details
 	@Override
 	public String getQuestionText() {
 		return questionText;
 	}
+	//Inherited from Question interface 
+	//See Question interface for details
 	@Override
 	public List<String> getChoices() {
 		

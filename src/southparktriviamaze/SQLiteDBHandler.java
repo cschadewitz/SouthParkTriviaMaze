@@ -1,3 +1,11 @@
+/* SQLiteDBHandler.java
+ * Author: Casey Schadewitz
+ * Revision: N/A
+ * Rev. Author: N/A
+ * Description: This class that handles 
+ * the connection to the question DB
+ * 
+ */
 package southparktriviamaze;
 
 import java.sql.*;
@@ -14,6 +22,7 @@ public class SQLiteDBHandler implements SQLProxy {
 	Random rand = new Random();
 	private int countOfQuestions = 0;
 	private static Question currentQuestion;
+	//TESTER MAIN
 	public static void main( String args[] )
 	{
 		SQLiteDBHandler db = new SQLiteDBHandler();
@@ -22,6 +31,8 @@ public class SQLiteDBHandler implements SQLProxy {
 		System.out.println("WIN");
 		
 	}
+	
+	//Initializes a new SQLiteDBHandler
 	public SQLiteDBHandler()
 	{
 		Connection conn = null;
@@ -49,6 +60,9 @@ public class SQLiteDBHandler implements SQLProxy {
 		} 
 		
 	}
+	
+	//Inherited from SQLProxy interface 
+	//See SQLProxy interface for details
 	@Override
 	public Question getRandomQuestion() {
 		if(questionIDs.isEmpty())
@@ -82,6 +96,9 @@ public class SQLiteDBHandler implements SQLProxy {
 		}
 		return null;
 	}
+	//Creates a Connection to DB
+	//Returns:
+	//Connection connection to DB
 	private Connection getConnection() throws ClassNotFoundException,
 			SQLException {
 		Connection conn;
@@ -91,6 +108,8 @@ public class SQLiteDBHandler implements SQLProxy {
 		return conn;
 	}
 
+	//Inherited from SQLProxy interface 
+	//See SQLProxy interface for details
 	@Override
 	public Question getRandomQuestion(String category) {
 		// TODO Auto-generated method stub

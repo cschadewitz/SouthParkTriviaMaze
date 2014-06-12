@@ -1,3 +1,12 @@
+/* GameCore.java
+ * Author: Casey Schadewitz
+ * Revision: N/A
+ * Rev. Author: N/A
+ * Description: This class is used to act as a mediator
+ * between many of the main classes. This class handles 
+ * user input received from the UserInterface.
+ * 
+ */
 package southparktriviamaze;
 
 import java.awt.EventQueue;
@@ -21,12 +30,18 @@ public class GameCore {
 	private MediaPair media;
 	private Character playerCharacter = Character.Butters;
 	private int mapSize = 10;
+	
+	//This Runnable is used to make an async call to the UserInterface to play a sound
 	private Runnable playEffect = new Runnable() {
 		@Override
 		public void run() {
 			window.setMedia(media);
 		}
 	};
+	
+	//Initialized a new GameCore and all supporting classes
+	//Parameters:
+	//String[] cheats used to indicated whether the game is censored
 	public GameCore(String[]cheats)
 	{
 
@@ -39,6 +54,10 @@ public class GameCore {
 		questionFactory = new RandomQuestionFactory();
 	}
 	
+	//Initialized a new GameCore, sets the UserInterface reference and builds all supporting classes
+	//Parameters:
+	//String[] cheats used to indicated whether the game is censored
+	//UserInterface userWndow: reference to the calling interface
 	public GameCore(UserInterface userWindow, String[] cheats)
 	{
 		window = userWindow;
@@ -46,20 +65,29 @@ public class GameCore {
 		questionFactory = new RandomQuestionFactory();
 		
 	}
+	
+	//Sets the UserInterface reference
+	//Parameters:
+	//UserInterface userWndow: reference to the calling interface
 	public void setWindow(UserInterface userWindow)
 	{
 		this.window = userWindow;
 	}
+	
+	//Gets the reference the the Maze
 	public Maze getMaze()
 	{
 		return map;
 	}
 	
+	//Called to play opening sound
 	public void playOpening()
 	{
 		media = new MediaPair(Character.Narrator, MediaType.Opening);
 		Platform.runLater(playEffect);
 	}
+	
+	//Called to begin game
 	public void startGame()
 	{
 		
@@ -67,6 +95,10 @@ public class GameCore {
 		window.mazeupdate(map, player, player);
 	}
 	
+	//Called to make a move
+	//This class takes a direction, checks what is in that direction and 
+	//asks a question, moves the player, and does nothing as necessary
+	//Direction direction: used to indicated the direction of travel
 	public void move(Direction direction)
 	{
 		Location destination = player.neighbor(direction);

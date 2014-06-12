@@ -13,18 +13,40 @@ import java.sql.SQLException;
 
 public abstract class QuestionFactory {
 	
-	//Generates a question
+	//Generates a random question
 	//Returns:
 	//Question Result of the question generation
 	//Throws:
 	//SQLException
 	protected abstract Question generateQuestion() throws SQLException;
+	
+	//Generates a random question
+	//Parameters:
+	//String category category of question to ask
+	//Returns:
+	//Question Result of the question generation
+	//Throws:
+	//SQLException
 	protected abstract Question generateQuestion(String category) throws SQLException;
+	
 	protected SQLProxy dbProxy;
+	
+	//Get a question
+	//Returns:
+	//Question Result of the question generation
+	//Throws:
+	//SQLException
 	public Question getQuestion() throws SQLException
 	{
 		return generateQuestion();
 	}
+	//Get a question
+	//Parameters:
+	//String category category of question to ask
+	//Returns:
+	//Question Result of the question generation
+	//Throws:
+	//SQLException
 	public Question getQuestion(String category) throws SQLException
 	{
 		return generateQuestion(category);
