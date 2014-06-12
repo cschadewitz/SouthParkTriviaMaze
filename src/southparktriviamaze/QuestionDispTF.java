@@ -18,6 +18,7 @@ import javax.swing.border.EmptyBorder;
 import javax.swing.JTextField;
 import javax.swing.GroupLayout;
 import javax.swing.GroupLayout.Alignment;
+import javax.swing.JTextPane;
 import javax.swing.LayoutStyle.ComponentPlacement;
 
 import java.awt.event.ActionListener;
@@ -38,7 +39,7 @@ public class QuestionDispTF extends JDialog
 {
 	private static final long serialVersionUID = 1L;
 	private final JPanel contentPanel = new JPanel();
-	private JTextField questionTextField;
+	private JTextPane questionTextField;
 	private String finalAnswer = "Not Good";
 	private final ButtonGroup buttonGroup = new ButtonGroup();
 	private JButton btnTrue = null;
@@ -55,18 +56,18 @@ public class QuestionDispTF extends JDialog
  */
 	public QuestionDispTF(String question) 
 	{
-		setBounds(100, 100, 450, 300);
+		setBounds(100, 100, 400, 300);
 		getContentPane().setLayout(new BorderLayout());
 		contentPanel.setBackground(Color.GRAY);	
-		contentPanel.setBorder(new LineBorder(Color.YELLOW));
+		//contentPanel.setBorder(new LineBorder(Color.YELLOW));
 		contentPanel.setLocation(800, 300);
 		setUndecorated(true);
 		getContentPane().add(contentPanel, BorderLayout.CENTER);
 		{
-			questionTextField = new JTextField();
+			questionTextField = new JTextPane();
 			questionTextField.setForeground(Color.YELLOW);
 			questionTextField.setBackground(Color.GRAY);
-			questionTextField.setColumns(10);
+			//questionTextField.setColumns(10);
 			questionTextField.setEditable(false);
 			questionTextField.setText(question);
 		}

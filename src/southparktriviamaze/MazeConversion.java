@@ -1,5 +1,6 @@
 	package southparktriviamaze;
 
+import java.awt.Color;
 import java.awt.Graphics;
 import java.awt.Image;
 //import java.awt.event.ActionEvent;
@@ -26,8 +27,9 @@ import javax.swing.JPanel;
 		private static final int WALL = 1;
 		private static final int LOCKEDDOOR = 2;
 		private static final int UNLOCKEDDOOR = 3;
+		private static final int VERTUNLOCKEDDOOR = 4;
 		private static final int PLAYER = 5;
-		private static final int pixelWidth = 25, pixelLength = 25;
+		private static final int pixelWidth = 35, pixelLength = 35;
 		
 		private Image room, wall, lockedDoor, unlockedDoor, player;
 		
@@ -63,7 +65,7 @@ import javax.swing.JPanel;
 			this.maze = m;
 			this.playerX = 1;
 			this.playerY = 1;
-			convertMazeToChar();
+			convertMazeToChar();			
 			
 //			addKeyListener(this);
 //			setFocusable(true);
@@ -135,13 +137,13 @@ import javax.swing.JPanel;
 							this.array[i - 1][j] = LOCKEDDOOR;
 						
 						if(neighboringRooms[0] && this.maze.northDoorUnlocked(i/2, j/2))//North unlocked
-							this.array[i - 1][j] = UNLOCKEDDOOR;
+							this.array[i - 1][j] = VERTUNLOCKEDDOOR;
 						
 						if(neighboringRooms[1] && !this.maze.southDoorUnlocked(i/2, j/2))//South locked
 							this.array[i + 1][j] = LOCKEDDOOR;
 						
 						if(neighboringRooms[1] && this.maze.southDoorUnlocked(i/2, j/2))//South unlocked
-							this.array[i + 1][j] = UNLOCKEDDOOR;
+							this.array[i + 1][j] = VERTUNLOCKEDDOOR;
 						
 						if(neighboringRooms[2] && !this.maze.eastDoorUnlocked(i/2, j/2))//East locked
 							this.array[i][j + 1] = LOCKEDDOOR;
@@ -201,8 +203,9 @@ import javax.swing.JPanel;
 		
 		public void paintComponent(Graphics g)
 		{
+			//pack();
 			super.paintComponent(g);
-			final int OFFSET = 30;
+			final int OFFSET = 0;
 			
 			for(int i = 0; i < this.array.length; i++)
 				for(int j = 0; j < this.array[i].length; j++)
@@ -214,6 +217,8 @@ import javax.swing.JPanel;
 					if(this.array[i][j] == LOCKEDDOOR)
 						g.drawImage(lockedDoor, j * pixelLength + OFFSET, i * pixelWidth + OFFSET, null);
 					if(this.array[i][j] == UNLOCKEDDOOR)
+						g.drawImage(unlockedDoor, j * pixelLength + OFFSET, i * pixelWidth + OFFSET, null);
+					if(this.array[i][j] == VERTUNLOCKEDDOOR)
 						g.drawImage(unlockedDoor, j * pixelLength + OFFSET, i * pixelWidth + OFFSET, null);
 					if(this.array[i][j] == PLAYER)
 						g.drawImage(player, j * pixelLength + OFFSET, i * pixelWidth + OFFSET, null);

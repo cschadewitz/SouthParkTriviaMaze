@@ -29,7 +29,7 @@ public class GameCore {
 	{
 
 		try {
-			map = new Maze(4, 4);
+			map = new Maze(10, 10);
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -56,7 +56,7 @@ public class GameCore {
 	public void startGame()
 	{
 		try {
-			map = new Maze(4, 4);
+			//map = new Maze(10, 10);
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();

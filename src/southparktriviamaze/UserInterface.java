@@ -209,9 +209,9 @@ public class UserInterface {
 		 GraphicsEnvironment genv = GraphicsEnvironment.getLocalGraphicsEnvironment();
 		 genv.registerFont(mazeFont);
 		 // makesure to derive the size
-		 mazeFont = mazeFont.deriveFont(35f);
+		 mazeFont = mazeFont.deriveFont(24f);
 		 txtrTest.setFont((mazeFont));
-		 txtrTest.setBackground(Color.DARK_GRAY);
+		 txtrTest.setBackground(Color.WHITE);
 		 txtrTest.setForeground(Color.BLACK);
 		 
 		 }
@@ -228,8 +228,8 @@ public class UserInterface {
 		 txtrTest.setEditable(false);
 		 //txtrTest.set
 		 panel.add(txtrTest);
-		 panel.setOpaque(true);
-		 txtrTest.setBounds(1920/2 + 50, 1080/2 - 500, 300, 300);
+		 panel.setOpaque(false);
+		 txtrTest.setBounds(1920/2 - 210, 1080/2 - 500, 310, 310);
 		 
 		sl_imag.putConstraint(SpringLayout.EAST, btnNewGame, -21, SpringLayout.WEST, panel);
 		sl_imag.putConstraint(SpringLayout.NORTH, panel, 35, SpringLayout.NORTH, frame.getContentPane());
@@ -237,7 +237,7 @@ public class UserInterface {
 		frame.getContentPane().add(panel);
 		panel.setLayout(null);
 
-		panel.setBounds(1920/2 - 325, 1080/2 - 335, 1050, 670);
+		panel.setBounds(1920/2 - 325, 1080/2 - 335, 1380, 670);
 		
 		final JButton btnMoveUp = new JButton("UP");
 		sl_imag.putConstraint(SpringLayout.SOUTH, panel, -17, SpringLayout.NORTH, btnMoveUp);
@@ -261,7 +261,7 @@ public class UserInterface {
 		frame.getContentPane().add(btnMoveRight);
 		btnMoveRight.setVisible(false);
 
-		panel.setBounds(1920/2 - 325, 1080/2 - 335, 650, 670);
+		panel.setBounds(1920/2 - 335, 1080/2 - 335, 1380, 670);
 		panelSound.setBackground(new Color(255, 255, 255));
 		panelSound.setBounds(523, 13, 18, 18);
 		panel.add(panelSound);
@@ -269,12 +269,15 @@ public class UserInterface {
 		panelSound.add(fxSound);
 		
 		JPanel mazePanel = new JPanel();
-		mazePanel.setBounds(12, 13, 600, 600);
+		mazePanel.setBounds(0, 0, 750, 745);
 		panel.add(mazePanel);
 		mapConverter = new MazeConversion(core.getMaze(), 1);
 		mazePanel.add(mapConverter);
+		
 		mapConverter.setVisible(true);
-		mapConverter.setPreferredSize(new Dimension(600, 600));
+		mapConverter.setPreferredSize(new Dimension(735, 735));
+		mapConverter.setBounds(5, 0, 735, 735);
+		
 		
 		
 		final JButton btnMoveDown = new JButton("DOWN");
@@ -288,11 +291,11 @@ public class UserInterface {
 		frame.getContentPane().add(btnMoveDown);
 		btnMoveDown.setVisible(false);
 		
-		JLabel lblKennysQuest = new JLabel("Kenny's Quest");
+		JLabel lblKennysQuest = new JLabel("The Coon's Quest");
 		lblKennysQuest.setForeground(new Color(128, 128, 0));
 		sl_imag.putConstraint(SpringLayout.WEST, lblKennysQuest, 10, SpringLayout.WEST, frame.getContentPane());
 		sl_imag.putConstraint(SpringLayout.SOUTH, lblKennysQuest, -1, SpringLayout.NORTH, btnNewGame);
-		lblKennysQuest.setFont(new Font("Pristina", Font.BOLD, 24));
+		lblKennysQuest.setFont(new Font("Pristina", Font.BOLD, 28));
 		frame.getContentPane().add(lblKennysQuest);
 		
 		btnTest.addActionListener(new ActionListener() {
@@ -354,7 +357,7 @@ public class UserInterface {
 					btnMoveRight.setVisible(true);
 					
 					panel.setVisible(true);
-
+					frame.requestFocusInWindow();
 					key.setCore(core);
 				}
 				else
@@ -432,18 +435,24 @@ public class UserInterface {
 		}
 		
 		
-		public void mazeupdate(Maze maze, Location player, Location destiniation)
+		public void mazeupdate(Maze maze, Location player, Location destination)
 		{
 			int[][] array;
 			
 			mapConverter.setMaze(maze);
 			array = mapConverter.convertedMaze();
+			
 			array[player.getRow()][ player.getColumn()] = 0;
-			array[destiniation.getRow()][destiniation.getColumn()] = 5;
-			mapUpdate(array);
+			array[destination.getRow()][destination.getColumn()] = 5;
+			if(!(player.getRow() == destination.getRow() && player.getColumn() == destination.getColumn()))
+				array[(player.getRow() + destination.getRow())/2][(player.getColumn()+destination.getColumn())/2] = 3;
+			
 			mapConverter.printCharMaze();
 			mapConverter.setConvertedMaze(array);
 			mapConverter.repaint();
+			if((player.getRow() != destination.getRow()) && player.getColumn() == destination.getColumn())
+				array[(player.getRow() + destination.getRow())/2][(player.getColumn()+destination.getColumn())/2] = 4;
+			mapUpdate(array);
 			
 		}
 		
