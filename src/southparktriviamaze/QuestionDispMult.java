@@ -9,21 +9,14 @@
  */
 package southparktriviamaze;
 
-import java.awt.EventQueue;
 import java.awt.Toolkit;
-
 import javax.swing.JDialog;
-import javax.swing.JTextField;
-
-import java.awt.BorderLayout;
-
 import javax.swing.GroupLayout;
 import javax.swing.GroupLayout.Alignment;
 import javax.swing.JButton;
 import javax.swing.JTextPane;
 import javax.swing.LayoutStyle.ComponentPlacement;
 import javax.swing.JLabel;
-
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
 import java.util.Random;
@@ -31,6 +24,7 @@ import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
 import java.awt.Color;
 
+@SuppressWarnings("serial")
 public class QuestionDispMult extends JDialog {
 
 	private String finalAnswer = "Not Good";
@@ -341,7 +335,6 @@ private String[] mix(String[] org)
 
 
 Random generator = new Random(); 
-int ran = generator.nextInt(4);
 String[] mixed= new String[4];
 int[] nums = new int[4];
 nums[0] = generator.nextInt(4);

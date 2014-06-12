@@ -1,40 +1,28 @@
 /*Question DisplayTF
- * Author: Olin L. Anderson
- * Revision: 1
- * Rev. Author:
- * Description: displays a dialog box with a question and two buttons one true and one false. after a buton has been pressed the String finaAnswer
- * is set to the buton which was pressed and the visibility of the dialog box is set to false. if the getAns method is called the finalAnswer string
- * is returned.
+ //* Author: Olin L. Anderson
+ //* Revision: 1
+ //* Rev. Author:
+ //* Description: displays a dialog box with a question and two buttons one true and one false. after a buton has been pressed the String finaAnswer
+ //* is set to the buton which was pressed and the visibility of the dialog box is set to false. if the getAns method is called the finalAnswer string
+// * is returned.
  */
 package southparktriviamaze;
 import java.awt.BorderLayout;
-import java.awt.FlowLayout;
 import java.awt.Toolkit;
-
 import javax.swing.JButton;
 import javax.swing.JDialog;
 import javax.swing.JPanel;
-import javax.swing.border.EmptyBorder;
-import javax.swing.JTextField;
 import javax.swing.GroupLayout;
 import javax.swing.GroupLayout.Alignment;
 import javax.swing.JTextPane;
 import javax.swing.LayoutStyle.ComponentPlacement;
-
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
-import java.awt.event.FocusListener;
 import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
 import java.awt.Color;
 import java.awt.Font;
-
-import javax.swing.border.LineBorder;
 import javax.swing.ButtonGroup;
-
-import java.awt.event.FocusAdapter;
-import java.awt.event.FocusEvent;
-
 public class QuestionDispTF extends JDialog
 {
 	private static final long serialVersionUID = 1L;
@@ -46,12 +34,12 @@ public class QuestionDispTF extends JDialog
 	private JButton btnFalse = null;
 
 /*
- * Initializes QuestonDispTF with the parameter String question
- * parameters:
- * String question the Question which will be displayed to the screen in the dialog box
- * returns:
- * none
- * throws:
+// * Initializes QuestonDispTF with the parameter String question
+// * parameters:
+// * String question the Question which will be displayed to the screen in the dialog box
+// * returns:
+// * none
+// * throws:
  * 
  */
 	public QuestionDispTF(String question) 
@@ -59,7 +47,6 @@ public class QuestionDispTF extends JDialog
 		setBounds(100, 100, 400, 300);
 		getContentPane().setLayout(new BorderLayout());
 		contentPanel.setBackground(Color.GRAY);	
-		//contentPanel.setBorder(new LineBorder(Color.YELLOW));
 		contentPanel.setLocation(800, 300);
 		setUndecorated(true);
 		getContentPane().add(contentPanel, BorderLayout.CENTER);
@@ -67,7 +54,6 @@ public class QuestionDispTF extends JDialog
 			questionTextField = new JTextPane();
 			questionTextField.setForeground(Color.YELLOW);
 			questionTextField.setBackground(Color.GRAY);
-			//questionTextField.setColumns(10);
 			questionTextField.setEditable(false);
 			questionTextField.setText(question);
 		}
@@ -76,15 +62,14 @@ public class QuestionDispTF extends JDialog
 		setLocation(x, y);		
 		btnTrue = new JButton("True");
 		
-		/* changes the focus in the dialog box or sets the finalAnswer Sting to 
-		 * true of false and sets visibility of dialog to false
-		 * parameters:
-		 * KeyEvent e the integer code for which key was pressed
-		 * returns
-		 * none
-		 * throws:
-		 * 
-		 */
+//		/* changes the focus in the dialog box or sets the finalAnswer Sting to 
+//		 * true of false and sets visibility of dialog to false
+//		 * parameters:
+//		 * KeyEvent e the integer code for which key was pressed
+//		 * returns
+//		 * none
+//		 * throws:
+
 btnTrue.addKeyListener(new KeyAdapter()
 {
 	@Override
@@ -109,11 +94,11 @@ btnTrue.addKeyListener(new KeyAdapter()
 		btnTrue.setForeground(Color.YELLOW);
 		btnTrue.setBackground(Color.GRAY);
 		/*
-		 * sets the visibility of the dialog to false when button is pressed and the finalAnswerString to false
-		 * parameters:
-		 * ActionEvent e when the button is pressed
-		 * returns 
-		 * void
+//		 * sets the visibility of the dialog to false when button is pressed and the finalAnswerString to false
+//		 * parameters:
+///		 * ActionEvent e when the button is pressed
+//		 * returns 
+//		 * void
 		 * 
 		 */
 		btnTrue.addActionListener(new ActionListener()
@@ -128,12 +113,12 @@ btnTrue.addKeyListener(new KeyAdapter()
 		btnFalse = new JButton("False");
 		
 		/* changes the focus in the dialog box or sets the finalAnswer Sting to 
-		 * true of false and sets visibility of dialog to false
-		 * parameters:
-		 * KeyEvent e the integer code for which key was pressed
-		 * returns
-		 * none
-		 * throws:
+//		 * true of false and sets visibility of dialog to false
+//		 * parameters:
+//		 * KeyEvent e the integer code for which key was pressed
+//		 * returns
+//		 * none
+//		 * throws:
 		 * 
 		 */
 btnFalse.addKeyListener(new KeyAdapter() 
@@ -161,11 +146,11 @@ btnFalse.addKeyListener(new KeyAdapter()
 		btnFalse.setFont(new Font("Tahoma", Font.BOLD, 12));
 		btnFalse.setBackground(Color.GRAY);
 		/*
-		 * sets the visibility of the dialog to false when button is pressed and the finalAnswerString to false
-		 * parameters:
-		 * ActionEvent e when the button is pressed
-		 * returns 
-		 * void
+//		 * sets the visibility of the dialog to false when button is pressed and the finalAnswerString to false
+//		 * parameters:
+//		 * ActionEvent e when the button is pressed
+//		 * returns 
+//		 * void
 		 * 
 		 */
 		btnFalse.addActionListener(new ActionListener() 
@@ -205,11 +190,11 @@ btnFalse.addKeyListener(new KeyAdapter()
 	}
 	
 	/*
-	 * returns the finalAnswer String 
-	 * parameters:
-	 * none
-	 * returns:
-	 * String finalAnswer the users answer to the question
+//	 * returns the finalAnswer String 
+//	 * parameters:
+//	 * none
+//	 * returns:
+//	 * String finalAnswer the users answer to the question
 	 */
 	public String getAns()
 	{

@@ -1,38 +1,28 @@
-/*QuestiondisplayShort
- * Author: Olin L. Anderson
- * Revision: 1
- * Rev. Author:
- * Description: displays a dialog with a question and a field for writing the answer, once the answer has been submitted the visibility f the dialog is set to false
- * the getAns method is called and returns the String finalAnswer which was set when the submit button was pressed.
- */
+///*QuestiondisplayShort
+// * Author: Olin L. Anderson
+// * Revision: 1
+// * Rev. Author:
+ //* Description: displays a dialog with a question and a field for writing the answer, once the answer has been submitted the visibility f the dialog is set to false
+// * the getAns method is called and returns the String finalAnswer which was set when the submit button was pressed.
+// */
 //
 package southparktriviamaze;
 
-import java.awt.EventQueue;
+
 import java.awt.Toolkit;
 
 import javax.swing.JDialog;
 import javax.swing.JButton;
-
-import java.awt.BorderLayout;
-
 import javax.swing.GroupLayout;
 import javax.swing.GroupLayout.Alignment;
-
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
-
 import javax.swing.JTextField;
 import javax.swing.JTextPane;
 import javax.swing.LayoutStyle.ComponentPlacement;
 import javax.swing.JLabel;
-import javax.swing.border.LineBorder;
-
 import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
-import java.awt.event.FocusAdapter;
-import java.awt.event.FocusEvent;
-import java.awt.event.WindowAdapter;
 import java.awt.Color;
 import java.awt.Font;
 
@@ -44,11 +34,11 @@ public class QuestionDispShort extends JDialog
 	private JTextPane questionTextField;
 	
 
-	/*Initializes the QuestionDisplayShort class with the String Question set as the displayed question
-	 * parameters:
-	 * String question is the question which will be displayed to the user
-	 * 
-	 */
+	///*Initializes the QuestionDisplayShort class with the String Question set as the displayed question
+	// * parameters:
+	// * String question is the question which will be displayed to the user
+	// * 
+	// */
 	public QuestionDispShort(String question)
 	{
 		getContentPane().setForeground(new Color(255, 255, 0));
@@ -65,13 +55,13 @@ public class QuestionDispShort extends JDialog
 		answerTextField.setBackground(Color.GRAY);
 		answerTextField.setForeground(Color.YELLOW);
 		/* 
-		 * sets the finalAnswer tring to the user input and sets the visibility of the dialog to false
-		 * parameters:
-		 * KeyEvent arg0 a KeyEvent integer representing which key was pressed
-		 * returns
-		 * void
-		 * throws 
-		 */
+		 //* sets the finalAnswer tring to the user input and sets the visibility of the dialog to false
+		 //* parameters:
+		 //* KeyEvent arg0 a KeyEvent integer representing which key was pressed
+		 //* returns
+		 //* void
+		 //* throws 
+		// */
 		answerTextField.addKeyListener(new KeyAdapter() 
 		{
 			@Override
@@ -96,12 +86,12 @@ public class QuestionDispShort extends JDialog
 		btnSubmit.setBackground(Color.GRAY);
 		btnSubmit.setForeground(Color.YELLOW);
 		/*
-		 * if the button is pressed the finalAnswer String is set to the userinPut and the visibility is set to fase
-		 * parameters:
-		 * ActionListener ActionEvent e the button being clicked
-		 *	returns 
-		 *	void
-		 */
+//		 * if the button is pressed the finalAnswer String is set to the userinPut and the visibility is set to fase
+//		 * parameters:
+//		 * ActionListener ActionEvent e the button being clicked
+//		 *	returns 
+//		 *	void
+//		 */
 		btnSubmit.addActionListener(new ActionListener()
 		{
 			public void actionPerformed(ActionEvent e)
@@ -151,14 +141,14 @@ public class QuestionDispShort extends JDialog
 		pack();
 		answerTextField.requestFocusInWindow();
 		
-		/*returns the finalAnswer string in the class
-		 * Parameters:
-		 * none
-		 * Returns:
-		 * String finalAnswer the users answer to the question displayed in the dialog box
-		 * throws:
-		 * 
-		 */
+//		/*returns the finalAnswer string in the class
+//		 * Parameters:
+//		 * none
+//		 * Returns:
+//		 * String finalAnswer the users answer to the question displayed in the dialog box
+//		 * throws:
+//		 * 
+//		 */
 	}
 	public String getAns()
 	{
